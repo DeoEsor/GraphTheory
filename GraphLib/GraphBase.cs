@@ -78,6 +78,7 @@ namespace GraphLib
 				gr.DrawArc(darkGoldPen, (V1.x - 2 * R), (V1.y - 2 * R), 2 * R, 2 * R, 90, 270);
 				point = new PointF(V1.x - (int)(2.75 * R), V1.y - (int)(2.75 * R));
 				gr.DrawString(((char)('a' + numberE)).ToString(), fo, br, point);
+				
 				drawVertex(V1.x, V1.y, (E.v1 + 1).ToString());
 			}
 			else

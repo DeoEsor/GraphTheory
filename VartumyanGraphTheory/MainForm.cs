@@ -281,6 +281,42 @@ namespace VartumyanGraphTheory
             }
         }
 
+
+        private void SaveAdj(object sender, EventArgs e)
+        {
+            AMatrix = new int[V.Count, V.Count];
+            G.fillAdjacencyMatrix(V.Count, E, AMatrix);
+            string sOut = "    ";
+            for (int i = 0; i < V.Count; i++)
+                sOut += (i + 1) + " ";
+            listBoxMatrix.Items.Add(sOut);
+            for (int i = 0; i < V.Count; i++)
+            {
+                sOut = (i + 1) + " | ";
+                for (int j = 0; j < V.Count; j++)
+                    sOut += AMatrix[i, j] + " ";
+                listBoxMatrix.Items.Add(sOut);
+            }
+            SaveFileDialog savedialog = new SaveFileDialog();
+            savedialog.Title = "Сохранить матрицу cмежности как...";
+            savedialog.OverwritePrompt = true;
+            savedialog.CheckPathExists = true;
+            savedialog.Filter = "Image Files(*.txt)|*.txt";
+            savedialog.ShowHelp = true;
+            if (savedialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    System.IO.File.WriteAllText(savedialog.FileName, sOut);
+                }
+                catch
+                {
+                    MessageBox.Show("Невозможно сохранить файл", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
         //создание матрицы инцидентности и вывод в листбокс
         private void createIncAndOut()
         {
@@ -303,6 +339,39 @@ namespace VartumyanGraphTheory
             }
             else
                 listBoxMatrix.Items.Clear();
+        }
+
+        public void SaveInc(object sender, EventArgs e)
+        {
+            IMatrix = new int[V.Count, E.Count];
+            G.fillIncidenceMatrix(V.Count, E, IMatrix);
+            string sOut = "    ";
+            for (int i = 0; i < E.Count; i++)
+                sOut += (char)('a' + i) + " ";
+            for (int i = 0; i < V.Count; i++)
+            {
+                sOut = (i + 1) + " | ";
+                for (int j = 0; j < E.Count; j++)
+                    sOut += IMatrix[i, j] + " ";
+            }
+            SaveFileDialog savedialog = new SaveFileDialog();
+            savedialog.Title = "Сохранить матрицу инцидентности как...";
+            savedialog.OverwritePrompt = true;
+            savedialog.CheckPathExists = true;
+            savedialog.Filter = "Image Files(*.txt)|*.txt";
+            savedialog.ShowHelp = true;
+            if (savedialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    System.IO.File.WriteAllText(savedialog.FileName, sOut);
+                }
+                catch
+                {
+                    MessageBox.Show("Невозможно сохранить файл", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         //поиск элементарных цепей
@@ -435,13 +504,13 @@ namespace VartumyanGraphTheory
                 savedialog.Title = "Сохранить картинку как...";
                 savedialog.OverwritePrompt = true;
                 savedialog.CheckPathExists = true;
-                savedialog.Filter = "Image Files(*.BMP)|*.BMP|Image Files(*.JPG)|*.JPG|Image Files(*.GIF)|*.GIF|Image Files(*.PNG)|*.PNG|All files (*.*)|*.*";
+                savedialog.Filter = "Image Files(*.PNG)|*.PNG";
                 savedialog.ShowHelp = true;
                 if (savedialog.ShowDialog() == DialogResult.OK)
                 {
                     try
                     {
-                        sheet.Image.Save(savedialog.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+                        sheet.Image.Save(savedialog.FileName, System.Drawing.Imaging.ImageFormat.Png);
                     }
                     catch
                     {
