@@ -1,0 +1,6 @@
+C:\Users\Rulia\source\repos\GraphTheory\GraphLib\bin\Debug\GraphLib.dll
+C:\Users\Rulia\source\repos\GraphTheory\GraphLib\bin\Debug\GraphLib.pdb
+C:\Users\Rulia\source\repos\GraphTheory\GraphLib\obj\Debug\GraphLib.csproj.AssemblyReference.cache
+C:\Users\Rulia\source\repos\GraphTheory\GraphLib\obj\Debug\GraphLib.csproj.CoreCompileInputs.cache
+C:\Users\Rulia\source\repos\GraphTheory\GraphLib\obj\Debug\GraphLib.dll
+C:\Users\Rulia\source\repos\GraphTheory\GraphLib\obj\Debug\GraphLib.pdb

@@ -1,0 +1,6 @@
+C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.csproj.AssemblyReference.cache
+C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.aboutForm.resources
+C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.MainForm.resources
+C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.Properties.Resources.resources
+C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.csproj.GenerateResource.cache
+C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.csproj.CoreCompileInputs.cache
