@@ -257,7 +257,7 @@ namespace VartumyanGraphTheory
                 {
                     G.clearSheet();
                     G.drawALLGraph(V, E);
-                    sheet.Image = G.Bitmap(;
+                    sheet.Image = G.Bitmap;
                 }
             }
         }

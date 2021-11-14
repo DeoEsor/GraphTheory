@@ -4,3 +4,11 @@ C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\obj\Debug\Vartumyan
 C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.Properties.Resources.resources
 C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.csproj.GenerateResource.cache
 C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.csproj.CoreCompileInputs.cache
+C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\bin\Debug\VartumyanGraphTheory.exe.config
+C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\bin\Debug\VartumyanGraphTheory.exe
+C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\bin\Debug\VartumyanGraphTheory.pdb
+C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\bin\Debug\GraphLib.dll
+C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\bin\Debug\GraphLib.pdb
+C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.csproj.CopyComplete
+C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.exe
+C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.pdb
