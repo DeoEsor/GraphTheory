@@ -496,6 +496,12 @@ namespace VartumyanGraphTheory
             FormAbout.ShowDialog();
         }
 
+        private void aboutProg_Click(object sender, EventArgs e)
+        {
+            AboutProgram FormAbout = new AboutProgram();
+            FormAbout.ShowDialog();
+        }
+
         private void saveButton_Click(object sender, EventArgs e)
         {
             if (sheet.Image != null)

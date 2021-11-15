@@ -29,17 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.listBoxMatrix = new System.Windows.Forms.ListBox();
-            this.cycleButton = new System.Windows.Forms.Button();
-            this.chainButton = new System.Windows.Forms.Button();
-            this.selectButton = new System.Windows.Forms.Button();
-            this.buttonInc = new System.Windows.Forms.Button();
-            this.buttonAdj = new System.Windows.Forms.Button();
-            this.deleteALLButton = new System.Windows.Forms.Button();
-            this.deleteButton = new System.Windows.Forms.Button();
-            this.drawEdgeButton = new System.Windows.Forms.Button();
-            this.drawVertexButton = new System.Windows.Forms.Button();
-            this.sheet = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,8 +42,21 @@
             this.обАвторахToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            ((System.ComponentModel.ISupportInitialize)(this.sheet)).BeginInit();
+            this.задачиТеорииГрафовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cycleButton = new System.Windows.Forms.Button();
+            this.chainButton = new System.Windows.Forms.Button();
+            this.selectButton = new System.Windows.Forms.Button();
+            this.buttonInc = new System.Windows.Forms.Button();
+            this.buttonAdj = new System.Windows.Forms.Button();
+            this.deleteALLButton = new System.Windows.Forms.Button();
+            this.deleteButton = new System.Windows.Forms.Button();
+            this.drawEdgeButton = new System.Windows.Forms.Button();
+            this.drawVertexButton = new System.Windows.Forms.Button();
+            this.sheet = new System.Windows.Forms.PictureBox();
+            this.матрицыИнцидентностиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.матрицыСмежностиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sheet)).BeginInit();
             this.SuspendLayout();
             // 
             // listBoxMatrix
@@ -62,6 +66,101 @@
             this.listBoxMatrix.Name = "listBoxMatrix";
             this.listBoxMatrix.Size = new System.Drawing.Size(217, 251);
             this.listBoxMatrix.TabIndex = 6;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.файлToolStripMenuItem,
+            this.оПрограммеToolStripMenuItem,
+            this.задачиТеорииГрафовToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(969, 24);
+            this.menuStrip1.TabIndex = 16;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // файлToolStripMenuItem
+            // 
+            this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.импортToolStripMenuItem,
+            this.сохранитьToolStripMenuItem,
+            this.обАвторахToolStripMenuItem,
+            this.выходToolStripMenuItem});
+            this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
+            this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.файлToolStripMenuItem.Text = "Файл";
+            // 
+            // импортToolStripMenuItem
+            // 
+            this.импортToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.матрицыИнцидентностиToolStripMenuItem,
+            this.матрицыСмежностиToolStripMenuItem});
+            this.импортToolStripMenuItem.Name = "импортToolStripMenuItem";
+            this.импортToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.импортToolStripMenuItem.Text = "Импорт";
+            // 
+            // сохранитьToolStripMenuItem
+            // 
+            this.сохранитьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.матрицуИнцидентностиToolStripMenuItem,
+            this.матрицуСмежностиToolStripMenuItem,
+            this.pNGToolStripMenuItem});
+            this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сохранитьToolStripMenuItem.Text = "Сохранить как";
+            // 
+            // матрицуИнцидентностиToolStripMenuItem
+            // 
+            this.матрицуИнцидентностиToolStripMenuItem.Name = "матрицуИнцидентностиToolStripMenuItem";
+            this.матрицуИнцидентностиToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.матрицуИнцидентностиToolStripMenuItem.Text = "Матрицу инцидентности";
+            this.матрицуИнцидентностиToolStripMenuItem.Click += new System.EventHandler(this.SaveInc);
+            // 
+            // матрицуСмежностиToolStripMenuItem
+            // 
+            this.матрицуСмежностиToolStripMenuItem.Name = "матрицуСмежностиToolStripMenuItem";
+            this.матрицуСмежностиToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.матрицуСмежностиToolStripMenuItem.Text = "Матрицу смежности";
+            this.матрицуСмежностиToolStripMenuItem.Click += new System.EventHandler(this.SaveAdj);
+            // 
+            // pNGToolStripMenuItem
+            // 
+            this.pNGToolStripMenuItem.Name = "pNGToolStripMenuItem";
+            this.pNGToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.pNGToolStripMenuItem.Text = "PNG";
+            this.pNGToolStripMenuItem.Click += new System.EventHandler(this.saveButton_Click);
+            // 
+            // обАвторахToolStripMenuItem
+            // 
+            this.обАвторахToolStripMenuItem.Name = "обАвторахToolStripMenuItem";
+            this.обАвторахToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.обАвторахToolStripMenuItem.Text = "Об авторах";
+            this.обАвторахToolStripMenuItem.Click += new System.EventHandler(this.about_Click);
+            // 
+            // выходToolStripMenuItem
+            // 
+            this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.выходToolStripMenuItem.Text = "Выход";
+            // 
+            // оПрограммеToolStripMenuItem
+            // 
+            this.оПрограммеToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
+            this.оПрограммеToolStripMenuItem.Text = "О программе";
+            this.оПрограммеToolStripMenuItem.Click += new System.EventHandler(this.aboutProg_Click);
+            // 
+            // задачиТеорииГрафовToolStripMenuItem
+            // 
+            this.задачиТеорииГрафовToolStripMenuItem.Name = "задачиТеорииГрафовToolStripMenuItem";
+            this.задачиТеорииГрафовToolStripMenuItem.Size = new System.Drawing.Size(143, 20);
+            this.задачиТеорииГрафовToolStripMenuItem.Text = "Задачи теории графов";
             // 
             // cycleButton
             // 
@@ -163,88 +262,17 @@
             this.sheet.TabStop = false;
             this.sheet.MouseClick += new System.Windows.Forms.MouseEventHandler(this.sheet_MouseClick);
             // 
-            // contextMenuStrip1
+            // матрицыИнцидентностиToolStripMenuItem
             // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            this.матрицыИнцидентностиToolStripMenuItem.Name = "матрицыИнцидентностиToolStripMenuItem";
+            this.матрицыИнцидентностиToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.матрицыИнцидентностиToolStripMenuItem.Text = "Матрицы инцидентности";
             // 
-            // menuStrip1
+            // матрицыСмежностиToolStripMenuItem
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.файлToolStripMenuItem,
-            this.оПрограммеToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(969, 24);
-            this.menuStrip1.TabIndex = 16;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // файлToolStripMenuItem
-            // 
-            this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.импортToolStripMenuItem,
-            this.сохранитьToolStripMenuItem,
-            this.обАвторахToolStripMenuItem,
-            this.выходToolStripMenuItem});
-            this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
-            this.файлToolStripMenuItem.Text = "Файл";
-            // 
-            // импортToolStripMenuItem
-            // 
-            this.импортToolStripMenuItem.Name = "импортToolStripMenuItem";
-            this.импортToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.импортToolStripMenuItem.Text = "Импорт";
-            // 
-            // сохранитьToolStripMenuItem
-            // 
-            this.сохранитьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.матрицуИнцидентностиToolStripMenuItem,
-            this.матрицуСмежностиToolStripMenuItem,
-            this.pNGToolStripMenuItem});
-            this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.сохранитьToolStripMenuItem.Text = "Сохранить как";
-            // 
-            // матрицуИнцидентностиToolStripMenuItem
-            // 
-            this.матрицуИнцидентностиToolStripMenuItem.Name = "матрицуИнцидентностиToolStripMenuItem";
-            this.матрицуИнцидентностиToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            this.матрицуИнцидентностиToolStripMenuItem.Text = "Матрицу инцидентности";
-            this.матрицуИнцидентностиToolStripMenuItem.Click += new System.EventHandler(this.SaveInc);
-            // 
-            // матрицуСмежностиToolStripMenuItem
-            // 
-            this.матрицуСмежностиToolStripMenuItem.Name = "матрицуСмежностиToolStripMenuItem";
-            this.матрицуСмежностиToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            this.матрицуСмежностиToolStripMenuItem.Text = "Матрицу смежности";
-            this.матрицуСмежностиToolStripMenuItem.Click += new System.EventHandler(this.SaveAdj);
-            // 
-            // pNGToolStripMenuItem
-            // 
-            this.pNGToolStripMenuItem.Name = "pNGToolStripMenuItem";
-            this.pNGToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            this.pNGToolStripMenuItem.Text = "PNG";
-            this.pNGToolStripMenuItem.Click += new System.EventHandler(this.saveButton_Click);
-            // 
-            // обАвторахToolStripMenuItem
-            // 
-            this.обАвторахToolStripMenuItem.Name = "обАвторахToolStripMenuItem";
-            this.обАвторахToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.обАвторахToolStripMenuItem.Text = "Об авторах";
-            // 
-            // выходToolStripMenuItem
-            // 
-            this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.выходToolStripMenuItem.Text = "Выход";
-            // 
-            // оПрограммеToolStripMenuItem
-            // 
-            this.оПрограммеToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
-            this.оПрограммеToolStripMenuItem.Text = "О программе";
+            this.матрицыСмежностиToolStripMenuItem.Name = "матрицыСмежностиToolStripMenuItem";
+            this.матрицыСмежностиToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.матрицыСмежностиToolStripMenuItem.Text = "Матрицы смежности";
             // 
             // MainForm
             // 
@@ -263,11 +291,12 @@
             this.Controls.Add(this.drawEdgeButton);
             this.Controls.Add(this.drawVertexButton);
             this.Controls.Add(this.sheet);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "Теория графов";
-            ((System.ComponentModel.ISupportInitialize)(this.sheet)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sheet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -297,6 +326,9 @@
         private System.Windows.Forms.ToolStripMenuItem матрицуСмежностиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pNGToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem обАвторахToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem задачиТеорииГрафовToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem матрицыИнцидентностиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem матрицыСмежностиToolStripMenuItem;
     }
 }
 

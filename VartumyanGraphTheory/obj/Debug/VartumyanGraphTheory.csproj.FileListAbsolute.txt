@@ -12,3 +12,4 @@ C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\bin\Debug\GraphLib.
 C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.csproj.CopyComplete
 C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.exe
 C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.pdb
+C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.AboutProgram.resources
