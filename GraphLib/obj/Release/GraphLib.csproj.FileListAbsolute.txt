@@ -1,0 +1,5 @@
+C:\Users\nickj\Desktop\some_code\GraphTheory\GraphLib\bin\Release\GraphLib.dll
+C:\Users\nickj\Desktop\some_code\GraphTheory\GraphLib\bin\Release\GraphLib.pdb
+C:\Users\nickj\Desktop\some_code\GraphTheory\GraphLib\obj\Release\GraphLib.csproj.CoreCompileInputs.cache
+C:\Users\nickj\Desktop\some_code\GraphTheory\GraphLib\obj\Release\GraphLib.dll
+C:\Users\nickj\Desktop\some_code\GraphTheory\GraphLib\obj\Release\GraphLib.pdb

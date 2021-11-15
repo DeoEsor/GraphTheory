@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using GraphLib;
+using System.Security;
 
 namespace VartumyanGraphTheory
 {
@@ -289,13 +290,13 @@ namespace VartumyanGraphTheory
             string sOut = "    ";
             for (int i = 0; i < V.Count; i++)
                 sOut += (i + 1) + " ";
-            listBoxMatrix.Items.Add(sOut);
+            sOut += "\n";
             for (int i = 0; i < V.Count; i++)
             {
-                sOut = (i + 1) + " | ";
+                sOut += (i + 1) + " | ";
                 for (int j = 0; j < V.Count; j++)
                     sOut += AMatrix[i, j] + " ";
-                listBoxMatrix.Items.Add(sOut);
+                sOut += "\n";
             }
             SaveFileDialog savedialog = new SaveFileDialog();
             savedialog.Title = "Сохранить матрицу cмежности как...";
@@ -348,11 +349,13 @@ namespace VartumyanGraphTheory
             string sOut = "    ";
             for (int i = 0; i < E.Count; i++)
                 sOut += (char)('a' + i) + " ";
+            sOut += "\n";
             for (int i = 0; i < V.Count; i++)
             {
-                sOut = (i + 1) + " | ";
+                sOut += (i + 1) + " | ";
                 for (int j = 0; j < E.Count; j++)
                     sOut += IMatrix[i, j] + " ";
+                sOut += "\n";
             }
             SaveFileDialog savedialog = new SaveFileDialog();
             savedialog.Title = "Сохранить матрицу инцидентности как...";
@@ -525,6 +528,64 @@ namespace VartumyanGraphTheory
                     }
                 }
             }
+        }
+
+        private void матрицыСмежностиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog opendialog = new OpenFileDialog();
+            opendialog.Title = "Импорт как: матрица смежности";
+            opendialog.CheckFileExists = true;
+            opendialog.CheckPathExists = true;
+            opendialog.Filter = "Text files (*.txt)|*.txt";
+            opendialog.ShowHelp = true;
+
+            if (opendialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    listBoxMatrix.Items.Clear();
+                    var sr = new StreamReader(opendialog.FileName);
+                    while (!sr.EndOfStream)
+                        listBoxMatrix.Items.Add(sr.ReadLine());
+                }
+                catch (SecurityException ex)
+                {
+                    MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
+                    $"Details:\n\n{ex.StackTrace}");
+                }
+            }
+        }
+
+        private void матрицыИнцидентностиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+             
+            OpenFileDialog opendialog = new OpenFileDialog();
+            opendialog.Title = "Импорт как: матрица инцидентности";
+            opendialog.CheckFileExists = true;
+            opendialog.CheckPathExists = true;
+            opendialog.Filter = "Text files (*.txt)|*.txt";
+            opendialog.ShowHelp = true;
+
+            if (opendialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    listBoxMatrix.Items.Clear();
+                    var sr = new StreamReader(opendialog.FileName);
+                    while (!sr.EndOfStream)
+                        listBoxMatrix.Items.Add(sr.ReadLine());
+                    
+                }
+                catch (SecurityException ex)
+                {
+                    MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
+                    $"Details:\n\n{ex.StackTrace}");
+                }
+            }
+        }
+        private void parse_input()
+        { 
+        
         }
     }
 }

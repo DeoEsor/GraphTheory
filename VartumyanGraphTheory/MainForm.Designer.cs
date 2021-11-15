@@ -35,6 +35,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.импортToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.матрицыИнцидентностиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.матрицыСмежностиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.матрицуИнцидентностиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.матрицуСмежностиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,8 +55,6 @@
             this.drawEdgeButton = new System.Windows.Forms.Button();
             this.drawVertexButton = new System.Windows.Forms.Button();
             this.sheet = new System.Windows.Forms.PictureBox();
-            this.матрицыИнцидентностиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.матрицыСмежностиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sheet)).BeginInit();
             this.SuspendLayout();
@@ -103,6 +103,20 @@
             this.импортToolStripMenuItem.Name = "импортToolStripMenuItem";
             this.импортToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.импортToolStripMenuItem.Text = "Импорт";
+            // 
+            // матрицыИнцидентностиToolStripMenuItem
+            // 
+            this.матрицыИнцидентностиToolStripMenuItem.Name = "матрицыИнцидентностиToolStripMenuItem";
+            this.матрицыИнцидентностиToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.матрицыИнцидентностиToolStripMenuItem.Text = "Матрицы инцидентности";
+            this.матрицыИнцидентностиToolStripMenuItem.Click += new System.EventHandler(this.матрицыИнцидентностиToolStripMenuItem_Click);
+            // 
+            // матрицыСмежностиToolStripMenuItem
+            // 
+            this.матрицыСмежностиToolStripMenuItem.Name = "матрицыСмежностиToolStripMenuItem";
+            this.матрицыСмежностиToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.матрицыСмежностиToolStripMenuItem.Text = "Матрицы смежности";
+            this.матрицыСмежностиToolStripMenuItem.Click += new System.EventHandler(this.матрицыСмежностиToolStripMenuItem_Click);
             // 
             // сохранитьToolStripMenuItem
             // 
@@ -261,18 +275,6 @@
             this.sheet.TabIndex = 0;
             this.sheet.TabStop = false;
             this.sheet.MouseClick += new System.Windows.Forms.MouseEventHandler(this.sheet_MouseClick);
-            // 
-            // матрицыИнцидентностиToolStripMenuItem
-            // 
-            this.матрицыИнцидентностиToolStripMenuItem.Name = "матрицыИнцидентностиToolStripMenuItem";
-            this.матрицыИнцидентностиToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
-            this.матрицыИнцидентностиToolStripMenuItem.Text = "Матрицы инцидентности";
-            // 
-            // матрицыСмежностиToolStripMenuItem
-            // 
-            this.матрицыСмежностиToolStripMenuItem.Name = "матрицыСмежностиToolStripMenuItem";
-            this.матрицыСмежностиToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
-            this.матрицыСмежностиToolStripMenuItem.Text = "Матрицы смежности";
             // 
             // MainForm
             // 
