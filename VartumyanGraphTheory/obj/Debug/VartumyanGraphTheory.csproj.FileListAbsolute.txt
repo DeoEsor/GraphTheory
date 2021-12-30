@@ -1,4 +1,3 @@
-C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.csproj.AssemblyReference.cache
 C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.aboutForm.resources
 C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.MainForm.resources
 C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.Properties.Resources.resources
@@ -28,3 +27,5 @@ C:\Users\nickj\Desktop\some_code\GraphTheory\VartumyanGraphTheory\obj\Debug\Vart
 C:\Users\nickj\Desktop\some_code\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.csproj.CopyComplete
 C:\Users\nickj\Desktop\some_code\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.exe
 C:\Users\nickj\Desktop\some_code\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.pdb
+C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.csprojAssemblyReference.cache
+C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.Forms.MatrixInputForm.resources

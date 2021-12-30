@@ -66,34 +66,55 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="aboutForm.cs">
+    <Compile Include="Forms\aboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="aboutForm.Designer.cs">
+    <Compile Include="Forms\aboutForm.Designer.cs">
       <DependentUpon>aboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AboutProgram.cs">
+    <Compile Include="Forms\AboutProgram.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AboutProgram.Designer.cs">
+    <Compile Include="Forms\AboutProgram.Designer.cs">
       <DependentUpon>AboutProgram.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.cs">
+    <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MatrixInputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MatrixInputForm.Designer.cs">
+      <DependentUpon>MatrixInputForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="aboutForm.resx">
+    <Compile Include="UserContols\Edge.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserContols\Edge.Designer.cs">
+      <DependentUpon>Edge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserContols\Vertex.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserContols\Vertex.Designer.cs">
+      <DependentUpon>Vertex.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\aboutForm.resx">
       <DependentUpon>aboutForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AboutProgram.resx">
+    <EmbeddedResource Include="Forms\AboutProgram.resx">
       <DependentUpon>AboutProgram.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MatrixInputForm.resx">
+      <DependentUpon>MatrixInputForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -105,6 +126,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UserContols\Vertex.resx">
+      <DependentUpon>Vertex.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -149,9 +173,6 @@
     <None Include="Resources\cycle.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="emblema_mai.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\GraphLib\GraphLib.csproj">
       <Project>{96f6e9f3-60e8-4f98-bd27-47c29a807c82}</Project>
       <Name>GraphLib</Name>
@@ -168,6 +189,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\emblema_mai.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

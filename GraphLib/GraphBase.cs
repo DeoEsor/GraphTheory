@@ -7,14 +7,28 @@ using System.Threading.Tasks;
 
 namespace GraphLib
 {
+	/// <summary>
+	/// Vertex representation
+	/// </summary>
 	public class Vertex
 	{
 		public int x, y;
+		private List<Edge> _edges;
 
 		public Vertex(int x, int y)
 		{
 			this.x = x;
 			this.y = y;
+		}
+
+		public List<Edge> Edges
+		{
+			get => _edges;
+		}
+
+		public void AddEdge(Edge e)
+		{
+			_edges.Add(e);
 		}
 	}
 
@@ -29,56 +43,64 @@ namespace GraphLib
 		}
 	}
 
-	public class DrawGraph
+	public static class DrawGraph
 	{
-		Bitmap bitmap;
-		Pen blackPen = new Pen(Color.Black);
-		Pen redPen = new Pen(Color.Red);
-		Pen darkGoldPen = new Pen(Color.DarkGoldenrod);
-		Graphics gr;
-		Font fo = new Font("Arial", 15);
-		Brush br = Brushes.Black;
-		PointF point;
-		public int R = 20; //радиус окружности вершины
+		private static Bitmap bitmap;
+		private static Pen blackPen = new Pen(Color.Black);
+		private static Pen redPen = new Pen(Color.Red);
+		private static Pen darkGoldPen = new Pen(Color.DarkGoldenrod);
+		private static Graphics gr;
+		private static Font fo = new Font("Arial", 15);
+		private static Brush br = Brushes.Black;
+		private static PointF point;
+		public static int R = 20; //радиус окружности вершины
 
-		public DrawGraph(int width, int height)
+		static DrawGraph()
 		{
-			bitmap = new Bitmap(width, height);
+			bitmap = new Bitmap(100, 100);
 			gr = Graphics.FromImage(bitmap);
-			clearSheet();
+			СlearSheet();
 			blackPen.Width = 2;
 			redPen.Width = 2;
 			darkGoldPen.Width = 2;
 		}
 
-		public Bitmap Bitmap
+		public static Bitmap Bitmap
 		{
 			get => bitmap;
-			private set => bitmap = value;
+			set
+			{
+				bitmap = value;	
+				gr = Graphics.FromImage(bitmap);
+			}
 		}
 
-		public void clearSheet() =>
-			gr.Clear(Color.White);
-
-		public void drawVertex(int x, int y, string number)
+		public static void СlearSheet()
 		{
-			gr.FillEllipse(Brushes.White, (x - R), (y - R), 2 * R, 2 * R);
-			gr.DrawEllipse(blackPen, (x - R), (y - R), 2 * R, 2 * R);
+			gr.Clear(Color.White);
+		}
+
+		public static void drawVertex(int x, int y, string number)
+		{
+			gr.FillEllipse(Brushes.White, x - R, y - R, 2 * R, 2 * R);
+			gr.DrawEllipse(blackPen, x - R, y - R, 2 * R, 2 * R);
 			point = new PointF(x - 9, y - 9);
 			gr.DrawString(number, fo, br, point);
 		}
 
-		public void drawSelectedVertex(int x, int y) =>
-			gr.DrawEllipse(redPen, (x - R), (y - R), 2 * R, 2 * R);
+		public static void drawSelectedVertex(int x, int y)
+		{
+			gr.DrawEllipse(redPen, x - R, y - R, 2 * R, 2 * R);
+		}
 
-		public void drawEdge(Vertex V1, Vertex V2, Edge E, int numberE)
+		public static void drawEdge(Vertex V1, Vertex V2, Edge E, int numberE)
 		{
 			if (E.v1 == E.v2)
 			{
-				gr.DrawArc(darkGoldPen, (V1.x - 2 * R), (V1.y - 2 * R), 2 * R, 2 * R, 90, 270);
+				gr.DrawArc(darkGoldPen, V1.x - 2 * R, V1.y - 2 * R, 2 * R, 2 * R, 90, 270);
 				point = new PointF(V1.x - (int)(2.75 * R), V1.y - (int)(2.75 * R));
 				gr.DrawString(((char)('a' + numberE)).ToString(), fo, br, point);
-				
+
 				drawVertex(V1.x, V1.y, (E.v1 + 1).ToString());
 			}
 			else
@@ -91,14 +113,13 @@ namespace GraphLib
 			}
 		}
 
-		public void drawALLGraph(List<Vertex> V, List<Edge> E)
+		public static void drawALLGraph(List<Vertex> V, List<Edge> E)
 		{
 			//рисуем ребра
-			for (int i = 0; i < E.Count; i++)
-			{
+			for (var i = 0; i < E.Count; i++)
 				if (E[i].v1 == E[i].v2)
 				{
-					gr.DrawArc(darkGoldPen, (V[E[i].v1].x - 2 * R), (V[E[i].v1].y - 2 * R), 2 * R, 2 * R, 90, 270);
+					gr.DrawArc(darkGoldPen, V[E[i].v1].x - 2 * R, V[E[i].v1].y - 2 * R, 2 * R, 2 * R, 90, 270);
 					point = new PointF(V[E[i].v1].x - (int)(2.75 * R), V[E[i].v1].y - (int)(2.75 * R));
 					gr.DrawString(((char)('a' + i)).ToString(), fo, br, point);
 				}
@@ -108,36 +129,44 @@ namespace GraphLib
 					point = new PointF((V[E[i].v1].x + V[E[i].v2].x) / 2, (V[E[i].v1].y + V[E[i].v2].y) / 2);
 					gr.DrawString(((char)('a' + i)).ToString(), fo, br, point);
 				}
-			}
+
 			//рисуем вершины
-			for (int i = 0; i < V.Count; i++)
-			{
+			for (var i = 0; i < V.Count; i++)
 				drawVertex(V[i].x, V[i].y, (i + 1).ToString());
-			}
 		}
 
-		//заполняет матрицу смежности
-		public void fillAdjacencyMatrix(int numberV, List<Edge> E, int[,] matrix)
+		/// <summary>
+		/// заполняет матрицу смежности
+		/// </summary>
+		/// <param name="numberV"></param>
+		/// <param name="E"></param>
+		/// <param name="matrix"></param>
+		public static void fillAdjacencyMatrix(int numberV, List<Edge> E, int[,] matrix)
 		{
-			for (int i = 0; i < numberV; i++)
-				for (int j = 0; j < numberV; j++)
+			for (var i = 0; i < numberV; i++)
+				for (var j = 0; j < numberV; j++)
 					matrix[i, j] = 0;
 
-			for (int i = 0; i < E.Count; i++)
+			for (var i = 0; i < E.Count; i++)
 			{
 				matrix[E[i].v1, E[i].v2] = 1;
 				matrix[E[i].v2, E[i].v1] = 1;
 			}
 		}
-
-		//заполняет матрицу инцидентности
-		public void fillIncidenceMatrix(int numberV, List<Edge> E, int[,] matrix)
+		
+		/// <summary>
+		/// заполняет матрицу инцидентности
+		/// </summary>
+		/// <param name="numberV"></param>
+		/// <param name="E"></param>
+		/// <param name="matrix"></param>
+		public static void fillIncidenceMatrix(int numberV, List<Edge> E, int[,] matrix)
 		{
-			for (int i = 0; i < numberV; i++)
-				for (int j = 0; j < E.Count; j++)
+			for (var i = 0; i < numberV; i++)
+				for (var j = 0; j < E.Count; j++)
 					matrix[i, j] = 0;
 
-			for (int i = 0; i < E.Count; i++)
+			for (var i = 0; i < E.Count; i++)
 			{
 				matrix[E[i].v1, i] = 1;
 				matrix[E[i].v2, i] = 1;
