@@ -1,124 +1,142 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-    <PropertyGroup>
-        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{E7B89119-6B77-41CD-822C-C419473D6E81}</ProjectGuid>
-        <OutputType>WinExe</OutputType>
-        <RootNamespace>GraphDesktop</RootNamespace>
-        <AssemblyName>GraphDesktop</AssemblyName>
-        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-        <FileAlignment>512</FileAlignment>
-        <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-        <WarningLevel>4</WarningLevel>
-        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-        <PlatformTarget>AnyCPU</PlatformTarget>
-        <DebugSymbols>true</DebugSymbols>
-        <DebugType>full</DebugType>
-        <Optimize>false</Optimize>
-        <OutputPath>bin\Debug\</OutputPath>
-        <DefineConstants>DEBUG;TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-        <PlatformTarget>AnyCPU</PlatformTarget>
-        <DebugType>pdbonly</DebugType>
-        <Optimize>true</Optimize>
-        <OutputPath>bin\Release\</OutputPath>
-        <DefineConstants>TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-    </PropertyGroup>
-    <ItemGroup>
-        <Reference Include="Syncfusion.Compression.Base, Version=19.4460.0.40, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89">
-          <HintPath>..\packages\Syncfusion.Compression.Base.19.4.0.40\lib\net46\Syncfusion.Compression.Base.dll</HintPath>
-          <Private>True</Private>
-        </Reference>
-        <Reference Include="Syncfusion.Licensing, Version=19.4460.0.40, Culture=neutral, PublicKeyToken=632609b4d040f6b4">
-          <HintPath>..\packages\Syncfusion.Licensing.19.4.0.40\lib\net46\Syncfusion.Licensing.dll</HintPath>
-          <Private>True</Private>
-        </Reference>
-        <Reference Include="Syncfusion.Pdf.Base, Version=19.4460.0.40, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89">
-          <HintPath>..\packages\Syncfusion.Pdf.Wpf.19.4.0.40\lib\net46\Syncfusion.Pdf.Base.dll</HintPath>
-          <Private>True</Private>
-        </Reference>
-        <Reference Include="Syncfusion.PdfViewer.WPF, Version=19.4460.0.40, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89">
-          <HintPath>..\packages\Syncfusion.PdfViewer.WPF.19.4.0.40\lib\net46\Syncfusion.PdfViewer.WPF.dll</HintPath>
-          <Private>True</Private>
-        </Reference>
-        <Reference Include="Syncfusion.Shared.Wpf, Version=19.4460.0.40, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89">
-          <HintPath>..\packages\Syncfusion.Shared.WPF.19.4.0.40\lib\net46\Syncfusion.Shared.WPF.dll</HintPath>
-          <Private>True</Private>
-        </Reference>
-        <Reference Include="System" />
-        <Reference Include="System.Core" />
-        <Reference Include="System.Data" />
-        <Reference Include="System.Xml" />
-        <Reference Include="System.Xaml">
-            <RequiredTargetFramework>4.0</RequiredTargetFramework>
-        </Reference>
-        <Reference Include="System.Xml.Linq" />
-        <Reference Include="WindowsBase" />
-        <Reference Include="PresentationCore" />
-        <Reference Include="PresentationFramework" />
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="MainWindow.xaml.cs">
-          <DependentUpon>MainWindow.xaml</DependentUpon>
-          <SubType>Code</SubType>
-        </Compile>
-        <Compile Include="Properties\App.xaml.cs">
-          <DependentUpon>App.xaml</DependentUpon>
-          <SubType>Code</SubType>
-        </Compile>
-        <Compile Include="Properties\AssemblyInfo.cs">
-            <SubType>Code</SubType>
-        </Compile>
-        <Compile Include="Properties\Resources.Designer.cs">
-            <AutoGen>True</AutoGen>
-            <DesignTime>True</DesignTime>
-            <DependentUpon>Resources.resx</DependentUpon>
-        </Compile>
-        <Compile Include="Windows\Tasks.xaml.cs">
-          <DependentUpon>Tasks.xaml</DependentUpon>
-        </Compile>
-        <EmbeddedResource Include="Properties\Resources.resx">
-            <Generator>ResXFileCodeGenerator</Generator>
-            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-    </ItemGroup>
-    <ItemGroup>
-        <None Include="App.config" />
-        <None Include="packages.config" />
-        <None Include="Resources\chain.jpg" />
-        <None Include="Resources\cursor-game-01.jpg" />
-        <None Include="Resources\cursor.jpg" />
-        <None Include="Resources\cycle.jpg" />
-        <None Include="Resources\delete.jpg" />
-        <None Include="Resources\deleteAll.jpg" />
-        <None Include="Resources\edge.jpg" />
-        <None Include="Resources\vertex.jpg" />
-    </ItemGroup>
-    <ItemGroup>
-      <ApplicationDefinition Include="Properties\App.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <SubType>Designer</SubType>
-      </ApplicationDefinition>
-    </ItemGroup>
-    <ItemGroup>
-      <Page Include="MainWindow.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <SubType>Designer</SubType>
-      </Page>
-      <Page Include="Windows\Tasks.xaml" />
-    </ItemGroup>
-    <ItemGroup>
-      <Content Include="Graphs-labs2019.pdf" />
-      <Content Include="Resources\emblema_mai.ico" />
-    </ItemGroup>
-    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E7B89119-6B77-41CD-822C-C419473D6E81}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>GraphDesktop</RootNamespace>
+    <AssemblyName>GraphDesktop</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Syncfusion.Compression.Base, Version=19.4460.0.40, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89">
+      <HintPath>..\packages\Syncfusion.Compression.Base.19.4.0.40\lib\net46\Syncfusion.Compression.Base.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.Licensing, Version=19.4460.0.40, Culture=neutral, PublicKeyToken=632609b4d040f6b4">
+      <HintPath>..\packages\Syncfusion.Licensing.19.4.0.40\lib\net46\Syncfusion.Licensing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.Pdf.Base, Version=19.4460.0.40, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89">
+      <HintPath>..\packages\Syncfusion.Pdf.Wpf.19.4.0.40\lib\net46\Syncfusion.Pdf.Base.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.PdfViewer.WPF, Version=19.4460.0.40, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89">
+      <HintPath>..\packages\Syncfusion.PdfViewer.WPF.19.4.0.40\lib\net46\Syncfusion.PdfViewer.WPF.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.Shared.Wpf, Version=19.4460.0.40, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89">
+      <HintPath>..\packages\Syncfusion.Shared.WPF.19.4.0.40\lib\net46\Syncfusion.Shared.WPF.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UserContols\Edge.xaml.cs">
+      <DependentUpon>Edge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserContols\GraphCanvas.xaml.cs">
+      <DependentUpon>GraphCanvas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserContols\Vertex.xaml.cs">
+      <DependentUpon>Vertex.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Tasks.xaml.cs">
+      <DependentUpon>Tasks.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="Resources\chain.jpg" />
+    <None Include="Resources\cursor-game-01.jpg" />
+    <None Include="Resources\cursor.jpg" />
+    <None Include="Resources\cycle.jpg" />
+    <None Include="Resources\delete.jpg" />
+    <None Include="Resources\deleteAll.jpg" />
+    <None Include="Resources\edge.jpg" />
+    <None Include="Resources\vertex.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="Properties\App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserContols\Edge.xaml" />
+    <Page Include="UserContols\GraphCanvas.xaml" />
+    <Page Include="UserContols\Vertex.xaml" />
+    <Page Include="Windows\Tasks.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Graphs-labs2019.pdf" />
+    <Content Include="Resources\emblema_mai.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GraphLib\GraphLib.csproj">
+      <Project>{96f6e9f3-60e8-4f98-bd27-47c29a807c82}</Project>
+      <Name>GraphLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

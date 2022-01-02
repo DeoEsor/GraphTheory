@@ -24,4 +24,14 @@ C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\GraphDesktop.pdb
 C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\GraphDesktop_Content.g.cs
 C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\MainWindow.baml
 C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\MainWindow.g.cs
+C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\UserContols\Edge.g.cs
+C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\UserContols\GraphCanvas.g.cs
+C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\UserContols\Vertex.g.cs
+C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\GraphDesktop_MarkupCompile.lref
+C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\bin\Debug\GraphLib.dll
+C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\bin\Debug\GraphLib.pdb
+C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\UserContols\Edge.baml
+C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\UserContols\GraphCanvas.baml
+C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\UserContols\Vertex.baml
 C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\GraphDesktop.csprojAssemblyReference.cache

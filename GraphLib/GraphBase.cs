@@ -9,14 +9,20 @@ namespace GraphLib
 {
 	/// <summary>
 	/// Vertex representation
+	/// Вершина
 	/// </summary>
 	public class Vertex
 	{
+		public int id;
 		public int x, y;
-		private List<Edge> _edges;
+		public List<Edge> _edges;
+		Random random = new Random();
+		
+		public int Weight { get; set; } = 1;
 
-		public Vertex(int x, int y)
+		public Vertex(int id, int x , int y)
 		{
+			this.id = id;
 			this.x = x;
 			this.y = y;
 		}
@@ -32,19 +38,82 @@ namespace GraphLib
 		}
 	}
 
+	/// <summary>
+	/// Ребер
+	/// </summary>
 	public class Edge
 	{
-		public int v1, v2;
+		public int id;
+		public  bool isDirected { get; set; }
+		/// <summary>
+		/// V1 - out vertex (from)
+		/// V2 - in Vertex (to)
+		/// </summary>
+		public Vertex v1, v2;
 
-		public Edge(int v1, int v2)
+		public int Weight { get; set; } = 1;
+
+		public Edge(int id, Vertex v1, Vertex v2)
 		{
+			this.id = id;
 			this.v1 = v1;
 			this.v2 = v2;
 		}
 	}
 
+	public sealed class Graph
+	{
+		public List<Edge> _edges;
+		private int edgeid = 0;
+
+		private int verticalid = 0;
+		public List<Vertex> _vertices;
+		
+		/// <summary>
+		/// заполняет матрицу смежности
+		/// </summary>
+		/// <param name="numberV"></param>
+		/// <param name="E"></param>
+		/// <param name="matrix"></param>
+		public static void fillAdjacencyMatrix(int numberV, List<Edge> E, int[,] matrix)
+		{
+			for (var i = 0; i < numberV; i++)
+				for (var j = 0; j < numberV; j++)
+					matrix[i, j] = 0;
+
+			for (var i = 0; i < E.Count; i++)
+			{
+				matrix[E[i].v1.id, E[i].v2.id] = 1;
+				matrix[E[i].v2.id, E[i].v1.id] = 1;
+			}
+		}
+		
+		/// <summary>
+		/// заполняет матрицу инцидентности
+		/// </summary>
+		/// <param name="numberV"></param>
+		/// <param name="E"></param>
+		/// <param name="matrix"></param>
+		public static void fillIncidenceMatrix(int numberV, List<Edge> E, int[,] matrix)
+		{
+			for (var i = 0; i < numberV; i++)
+				for (var j = 0; j < E.Count; j++)
+					matrix[i, j] = 0;
+
+			for (var i = 0; i < E.Count; i++)
+			{
+				matrix[E[i].v1.id, i] = 1;
+				matrix[E[i].v2.id, i] = 1;
+			}
+		}
+
+		public void CreateVertex(int x,int y) => _vertices.Add(new Vertex(verticalid++, x, y));
+		public void CreateEdge(Vertex x,Vertex y) => _edges.Add(new Edge(edgeid++, x, y));
+	}
+
 	public static class DrawGraph
 	{
+		private static Graph _graph;
 		private static Bitmap bitmap;
 		private static Pen blackPen = new Pen(Color.Black);
 		private static Pen redPen = new Pen(Color.Red);
@@ -75,10 +144,7 @@ namespace GraphLib
 			}
 		}
 
-		public static void СlearSheet()
-		{
-			gr.Clear(Color.White);
-		}
+		public static void СlearSheet() =>  gr.Clear(Color.White);
 
 		public static void drawVertex(int x, int y, string number)
 		{
@@ -88,11 +154,9 @@ namespace GraphLib
 			gr.DrawString(number, fo, br, point);
 		}
 
-		public static void drawSelectedVertex(int x, int y)
-		{
-			gr.DrawEllipse(redPen, x - R, y - R, 2 * R, 2 * R);
-		}
+		public static void drawSelectedVertex(int x, int y) =>  gr.DrawEllipse(redPen, x - R, y - R, 2 * R, 2 * R);
 
+		/*
 		public static void drawEdge(Vertex V1, Vertex V2, Edge E, int numberE)
 		{
 			if (E.v1 == E.v2)
@@ -111,68 +175,7 @@ namespace GraphLib
 				drawVertex(V1.x, V1.y, (E.v1 + 1).ToString());
 				drawVertex(V2.x, V2.y, (E.v2 + 1).ToString());
 			}
-		}
-
-		public static void drawALLGraph(List<Vertex> V, List<Edge> E)
-		{
-			//рисуем ребра
-			for (var i = 0; i < E.Count; i++)
-				if (E[i].v1 == E[i].v2)
-				{
-					gr.DrawArc(darkGoldPen, V[E[i].v1].x - 2 * R, V[E[i].v1].y - 2 * R, 2 * R, 2 * R, 90, 270);
-					point = new PointF(V[E[i].v1].x - (int)(2.75 * R), V[E[i].v1].y - (int)(2.75 * R));
-					gr.DrawString(((char)('a' + i)).ToString(), fo, br, point);
-				}
-				else
-				{
-					gr.DrawLine(darkGoldPen, V[E[i].v1].x, V[E[i].v1].y, V[E[i].v2].x, V[E[i].v2].y);
-					point = new PointF((V[E[i].v1].x + V[E[i].v2].x) / 2, (V[E[i].v1].y + V[E[i].v2].y) / 2);
-					gr.DrawString(((char)('a' + i)).ToString(), fo, br, point);
-				}
-
-			//рисуем вершины
-			for (var i = 0; i < V.Count; i++)
-				drawVertex(V[i].x, V[i].y, (i + 1).ToString());
-		}
-
-		/// <summary>
-		/// заполняет матрицу смежности
-		/// </summary>
-		/// <param name="numberV"></param>
-		/// <param name="E"></param>
-		/// <param name="matrix"></param>
-		public static void fillAdjacencyMatrix(int numberV, List<Edge> E, int[,] matrix)
-		{
-			for (var i = 0; i < numberV; i++)
-				for (var j = 0; j < numberV; j++)
-					matrix[i, j] = 0;
-
-			for (var i = 0; i < E.Count; i++)
-			{
-				matrix[E[i].v1, E[i].v2] = 1;
-				matrix[E[i].v2, E[i].v1] = 1;
-			}
-		}
-		
-		/// <summary>
-		/// заполняет матрицу инцидентности
-		/// </summary>
-		/// <param name="numberV"></param>
-		/// <param name="E"></param>
-		/// <param name="matrix"></param>
-		public static void fillIncidenceMatrix(int numberV, List<Edge> E, int[,] matrix)
-		{
-			for (var i = 0; i < numberV; i++)
-				for (var j = 0; j < E.Count; j++)
-					matrix[i, j] = 0;
-
-			for (var i = 0; i < E.Count; i++)
-			{
-				matrix[E[i].v1, i] = 1;
-				matrix[E[i].v2, i] = 1;
-			}
-		}
-
+		}*/
 
 	}
 }
