@@ -16,10 +16,9 @@ namespace GraphDesktop.UserContols
 		public GraphLib.Vertex Model { get; set; }
 		
 		public string NameVertex { get; set; }
-		
-		private void Button_MouseEnter_1(object sender, MouseEventArgs e)
+		private void PopupOpen(object sender, RoutedEventArgs e)
 		{
-			popup.IsOpen = !popup.IsOpen;
+			popup.IsOpen = true;
 		}
 	}
 }

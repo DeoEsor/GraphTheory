@@ -9,30 +9,42 @@
              DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
         <Button Content="{Binding  NameVertex}" 
-                MouseEnter="Button_MouseEnter_1"
-                >
+                Click="PopupOpen">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="250"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Popup x:Name="popup">
-            <StackPanel>
+        <Popup x:Name="popup" Focusable="True" Placement="Relative">
+            <StackPanel Background="Bisque">
                 <Expander Header="Show me">                 
-                    <TextBlock Text="YA HUYNYA"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Вес : "/>
+                        <TextBlock Grid.Row = "1" Text="Ребра : "/>
+                        <TextBlock Grid.Column = "1" 
+                                   Text="{Binding Model.Weight,
+                                   TargetNullValue = 0 }"/>
+                        <ListBox 
+                            Grid.Row = "1" Grid.Column="1"
+                            ItemsSource="{Binding Model.Edges}"/>
+                    </Grid>
                 </Expander>
-                <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Open file</TextBlock>
-                <TextBlock>
-                    Search your computer or local network
-                    <LineBreak />
-                    for a file and open it for editing.
-                </TextBlock>
-                <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
-                <WrapPanel>
-                    <Image Source="/WpfTutorialSamples;component/Images/help.png" Margin="0,0,5,0" />
-                    <TextBlock FontStyle="Italic">Press F1 for more help</TextBlock>
-                </WrapPanel>
+                <UniformGrid Columns="3">
+                    <Button Content="New Edge" />
+                    <Button Content="Delete Edge" />
+                    <Button Content="Delete" />
+                </UniformGrid>
             </StackPanel>
         </Popup>
     </Grid>
