@@ -133,7 +133,7 @@ namespace VartumyanGraphTheory
                         if (selected1 == -1)
                         {
                             
-                            DrawGraph.drawSelectedVertex(V[i].x, V[i].y);
+                            DrawGraph.DrawSelectedVertex(V[i].x, V[i].y);
                             selected1 = i;
                             sheet.Image = DrawGraph.Bitmap;
                             createAdjAndOut();
@@ -151,7 +151,7 @@ namespace VartumyanGraphTheory
             if (drawVertexButton.Enabled == false)
             {
                 V.Add(new Vertex(e.X, e.Y));
-                DrawGraph.drawVertex(e.X, e.Y, V.Count.ToString());
+                DrawGraph.DrawVertex(e.X, e.Y, V.Count.ToString());
                 sheet.Image = DrawGraph.Bitmap;
             }
             //нажата кнопка "рисовать ребро"
@@ -165,14 +165,14 @@ namespace VartumyanGraphTheory
                         {
                             if (selected1 == -1)
                             {
-                                DrawGraph.drawSelectedVertex(V[i].x, V[i].y);
+                                DrawGraph.DrawSelectedVertex(V[i].x, V[i].y);
                                 selected1 = i;
                                 sheet.Image = DrawGraph.Bitmap;
                                 break;
                             }
                             if (selected2 == -1)
                             {
-                                DrawGraph.drawSelectedVertex(V[i].x, V[i].y);
+                                DrawGraph.DrawSelectedVertex(V[i].x, V[i].y);
                                 selected2 = i;
                                 E.Add(new Edge(selected1, selected2));
                                 DrawGraph.drawEdge(V[selected1], V[selected2], E[E.Count - 1], E.Count - 1);
@@ -189,7 +189,7 @@ namespace VartumyanGraphTheory
                     if ((selected1 != -1) &&
                         (Math.Pow((V[selected1].x - e.X), 2) + Math.Pow((V[selected1].y - e.Y), 2) <= DrawGraph.R * DrawGraph.R))
                     {
-                        DrawGraph.drawVertex(V[selected1].x, V[selected1].y, (selected1 + 1).ToString());
+                        DrawGraph.DrawVertex(V[selected1].x, V[selected1].y, (selected1 + 1).ToString());
                         selected1 = -1;
                         sheet.Image = DrawGraph.Bitmap;
                     }
@@ -206,15 +206,15 @@ namespace VartumyanGraphTheory
                     {
                         for (int j = 0; j < E.Count; j++)
                         {
-                            if ((E[j].v1 == i) || (E[j].v2 == i))
+                            if ((E[j].V1 == i) || (E[j].V2 == i))
                             {
                                 E.RemoveAt(j);
                                 j--;
                             }
                             else
                             {
-                                if (E[j].v1 > i) E[j].v1--;
-                                if (E[j].v2 > i) E[j].v2--;
+                                if (E[j].V1 > i) E[j].V1--;
+                                if (E[j].V2 > i) E[j].V2--;
                             }
                         }
                         V.RemoveAt(i);
@@ -227,10 +227,10 @@ namespace VartumyanGraphTheory
                 {
                     for (int i = 0; i < E.Count; i++)
                     {
-                        if (E[i].v1 == E[i].v2) //если это петля
+                        if (E[i].V1 == E[i].V2) //если это петля
                         {
-                            if ((Math.Pow((V[E[i].v1].x - DrawGraph.R - e.X), 2) + Math.Pow((V[E[i].v1].y - DrawGraph.R - e.Y), 2) <= ((DrawGraph.R + 2) * (DrawGraph.R + 2))) &&
-                                (Math.Pow((V[E[i].v1].x - DrawGraph.R - e.X), 2) + Math.Pow((V[E[i].v1].y - DrawGraph.R - e.Y), 2) >= ((DrawGraph.R - 2) * (DrawGraph.R - 2))))
+                            if ((Math.Pow((V[E[i].V1].x - DrawGraph.R - e.X), 2) + Math.Pow((V[E[i].V1].y - DrawGraph.R - e.Y), 2) <= ((DrawGraph.R + 2) * (DrawGraph.R + 2))) &&
+                                (Math.Pow((V[E[i].V1].x - DrawGraph.R - e.X), 2) + Math.Pow((V[E[i].V1].y - DrawGraph.R - e.Y), 2) >= ((DrawGraph.R - 2) * (DrawGraph.R - 2))))
                             {
                                 E.RemoveAt(i);
                                 flag = true;
@@ -239,11 +239,11 @@ namespace VartumyanGraphTheory
                         }
                         else //не петля
                         {
-                            if (((e.X - V[E[i].v1].x) * (V[E[i].v2].y - V[E[i].v1].y) / (V[E[i].v2].x - V[E[i].v1].x) + V[E[i].v1].y) <= (e.Y + 4) &&
-                                ((e.X - V[E[i].v1].x) * (V[E[i].v2].y - V[E[i].v1].y) / (V[E[i].v2].x - V[E[i].v1].x) + V[E[i].v1].y) >= (e.Y - 4))
+                            if (((e.X - V[E[i].V1].x) * (V[E[i].V2].y - V[E[i].V1].y) / (V[E[i].V2].x - V[E[i].V1].x) + V[E[i].V1].y) <= (e.Y + 4) &&
+                                ((e.X - V[E[i].V1].x) * (V[E[i].V2].y - V[E[i].V1].y) / (V[E[i].V2].x - V[E[i].V1].x) + V[E[i].V1].y) >= (e.Y - 4))
                             {
-                                if ((V[E[i].v1].x <= V[E[i].v2].x && V[E[i].v1].x <= e.X && e.X <= V[E[i].v2].x) ||
-                                    (V[E[i].v1].x >= V[E[i].v2].x && V[E[i].v1].x >= e.X && e.X >= V[E[i].v2].x))
+                                if ((V[E[i].V1].x <= V[E[i].V2].x && V[E[i].V1].x <= e.X && e.X <= V[E[i].V2].x) ||
+                                    (V[E[i].V1].x >= V[E[i].V2].x && V[E[i].V1].x >= e.X && e.X >= V[E[i].V2].x))
                                 {
                                     E.RemoveAt(i);
                                     flag = true;
@@ -405,15 +405,15 @@ namespace VartumyanGraphTheory
             }
             for (int w = 0; w < E.Count; w++)
             {
-                if (color[E[w].v2] == 1 && E[w].v1 == u)
+                if (color[E[w].V2] == 1 && E[w].V1 == u)
                 {
-                    DFSchain(E[w].v2, endV, E, color, s + "-" + (E[w].v2 + 1).ToString());
-                    color[E[w].v2] = 1;
+                    DFSchain(E[w].V2, endV, E, color, s + "-" + (E[w].V2 + 1).ToString());
+                    color[E[w].V2] = 1;
                 }
-                else if (color[E[w].v1] == 1 && E[w].v2 == u)
+                else if (color[E[w].V1] == 1 && E[w].V2 == u)
                 {
-                    DFSchain(E[w].v1, endV, E, color, s + "-" + (E[w].v1 + 1).ToString());
-                    color[E[w].v1] = 1;
+                    DFSchain(E[w].V1, endV, E, color, s + "-" + (E[w].V1 + 1).ToString());
+                    color[E[w].V1] = 1;
                 }
             }
         }
@@ -475,19 +475,19 @@ namespace VartumyanGraphTheory
             {
                 if (w == unavailableEdge)
                     continue;
-                if (color[E[w].v2] == 1 && E[w].v1 == u)
+                if (color[E[w].V2] == 1 && E[w].V1 == u)
                 {
                     List<int> cycleNEW = new List<int>(cycle);
-                    cycleNEW.Add(E[w].v2 + 1);
-                    DFScycle(E[w].v2, endV, E, color, w, cycleNEW);
-                    color[E[w].v2] = 1;
+                    cycleNEW.Add(E[w].V2 + 1);
+                    DFScycle(E[w].V2, endV, E, color, w, cycleNEW);
+                    color[E[w].V2] = 1;
                 }
-                else if (color[E[w].v1] == 1 && E[w].v2 == u)
+                else if (color[E[w].V1] == 1 && E[w].V2 == u)
                 {
                     List<int> cycleNEW = new List<int>(cycle);
-                    cycleNEW.Add(E[w].v1 + 1);
-                    DFScycle(E[w].v1, endV, E, color, w, cycleNEW);
-                    color[E[w].v1] = 1;
+                    cycleNEW.Add(E[w].V1 + 1);
+                    DFScycle(E[w].V1, endV, E, color, w, cycleNEW);
+                    color[E[w].V1] = 1;
                 }
             }
         }

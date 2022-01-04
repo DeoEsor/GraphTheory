@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace GraphDesktop.UserContols
 {
@@ -9,9 +10,9 @@ namespace GraphDesktop.UserContols
 			InitializeComponent();
 		}
 
-		public GraphLib.Edge Model;
+		public GraphLib.Edge Model { get; set; }
 		
-		public string Name { get; set; }
+		public string EdgeName { get; set; }
 	}
 }
 

@@ -6,7 +6,43 @@
              xmlns:local="clr-namespace:GraphDesktop.UserContols"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        
+    <Grid
+        MouseUp="UIElement_OnMouseUp"
+        HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Canvas 
+            Width="300"
+            Height="300">
+    </Canvas>
+        <Popup x:Name="popup">
+            <StackPanel Background="Bisque">
+                <Expander Header="Show me">                 
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Вес : "/>
+                        <TextBlock Grid.Row = "1" Text="Ребра : "/>
+                        <TextBlock Grid.Column = "1" 
+                                   Text="{Binding Model.Weight,
+                                   TargetNullValue = 0 }"/>
+                        <ListBox 
+                            Grid.Row = "1" Grid.Column="1"
+                            ItemsSource="{Binding Model.Edges}"/>
+                    </Grid>
+                </Expander>
+                <UniformGrid Columns="3">
+                    <Button Content="New Edge" />
+                    <Button Content="Delete Edge" />
+                    <Button Content="Delete" />
+                </UniformGrid>
+            </StackPanel>
+        </Popup>
     </Grid>
 </UserControl>

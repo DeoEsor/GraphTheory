@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:usercontols="clr-namespace:GraphDesktop.UserContols" xmlns:System="http://schemas.microsoft.com/winfx/2009/xaml"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        
+        Icon="/Resources/emblema_mai.ico"
         Background="Black"
         Title="Теория графов" Height="350" Width="600">
     <Grid>
@@ -41,16 +41,14 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <!--- Canvas -->
-                <Grid 
-                        Margin="10"
-                        Grid.Row="0" Grid.RowSpan="4" Height="Auto" Width="350" 
-                        Background="Black" Grid.Column="0">
-                    <usercontols:Vertex>
-                        <usercontols:Vertex.NameVertex>
-                            <system:String> ya huynya</system:String>
-                        </usercontols:Vertex.NameVertex>
-                    </usercontols:Vertex>
-                </Grid>
+                <usercontols:GraphCanvas 
+                    BorderBrush="Azure"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    BorderThickness="5"
+                    Height="Auto" Width="Auto" Background="Cornsilk" Grid.RowSpan="4">
+                    
+                </usercontols:GraphCanvas>
                 <Menu
                         Padding="25,0,0,0"
                         HorizontalAlignment="Center"

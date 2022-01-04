@@ -34,4 +34,5 @@ C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\GeneratedInternal
 C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\UserContols\Edge.baml
 C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\UserContols\GraphCanvas.baml
 C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\UserContols\Vertex.baml
-C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\GraphDesktop.csprojAssemblyReference.cache
+C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\GraphDesktop.csproj.AssemblyReference.cache
+C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\bin\Debug\Resources\emblema_mai.ico

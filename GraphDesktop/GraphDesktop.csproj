@@ -130,7 +130,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Graphs-labs2019.pdf" />
-    <Content Include="Resources\emblema_mai.ico" />
+    <Content Include="Resources\emblema_mai.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GraphLib\GraphLib.csproj">
