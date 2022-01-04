@@ -18,7 +18,14 @@ namespace GraphDesktop.UserContols
 		public string NameVertex { get; set; }
 		private void PopupOpen(object sender, RoutedEventArgs e)
 		{
-			popup.IsOpen = true;
+			if (!popup.IsOpen)
+				popup.IsOpen = true;
+			else
+			{
+				//Redraw popup window
+				popup.IsOpen = false;
+				popup.IsOpen = true;
+			}
 		}
 	}
 }

@@ -16,9 +16,9 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Popup x:Name="popup" Focusable="True" Placement="Relative">
+        <Popup x:Name="popup" StaysOpen="False" Focusable="True" Placement="MousePoint">
             <StackPanel Background="Bisque">
-                <Expander Header="Show me">                 
+                <Expander Header="Show Data">                 
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
