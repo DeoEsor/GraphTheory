@@ -3,10 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:syncfusion="clr-namespace:Syncfusion.Windows.PdfViewer;assembly=Syncfusion.PdfViewer.WPF"
         mc:Ignorable="d"
         Title="Tasks" Height="450" Width="800">
     <Grid>
-        <syncfusion:PdfViewerControl x:Name="PdfViewerControl" Loaded="PdfViewerControl_OnLoaded" />
+        
     </Grid>
 </Window>

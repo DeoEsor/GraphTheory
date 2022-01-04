@@ -1,15 +1,12 @@
 ﻿using System.Windows;
-using System.Xml.Linq;
 
 namespace GraphDesktop.Windows
 {
-	public partial class Tasks : Window
+	public partial class AboutAuthors : Window
 	{
-		public Tasks()
+		public AboutAuthors()
 		{
 			InitializeComponent();
-			
-			
 		}
 	}
 }

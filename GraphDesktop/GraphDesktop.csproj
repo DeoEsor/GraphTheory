@@ -34,26 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Syncfusion.Compression.Base, Version=19.4460.0.40, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89">
-      <HintPath>..\packages\Syncfusion.Compression.Base.19.4.0.40\lib\net46\Syncfusion.Compression.Base.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Syncfusion.Licensing, Version=19.4460.0.40, Culture=neutral, PublicKeyToken=632609b4d040f6b4">
-      <HintPath>..\packages\Syncfusion.Licensing.19.4.0.40\lib\net46\Syncfusion.Licensing.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Syncfusion.Pdf.Base, Version=19.4460.0.40, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89">
-      <HintPath>..\packages\Syncfusion.Pdf.Wpf.19.4.0.40\lib\net46\Syncfusion.Pdf.Base.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Syncfusion.PdfViewer.WPF, Version=19.4460.0.40, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89">
-      <HintPath>..\packages\Syncfusion.PdfViewer.WPF.19.4.0.40\lib\net46\Syncfusion.PdfViewer.WPF.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Syncfusion.Shared.Wpf, Version=19.4460.0.40, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89">
-      <HintPath>..\packages\Syncfusion.Shared.WPF.19.4.0.40\lib\net46\Syncfusion.Shared.WPF.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -92,6 +72,12 @@
     <Compile Include="UserContols\Vertex.xaml.cs">
       <DependentUpon>Vertex.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\AboutAuthors.xaml.cs">
+      <DependentUpon>AboutAuthors.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AboutProgram.xaml.cs">
+      <DependentUpon>AboutProgram.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Tasks.xaml.cs">
       <DependentUpon>Tasks.xaml</DependentUpon>
     </Compile>
@@ -102,7 +88,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
     <None Include="Resources\chain.jpg" />
     <None Include="Resources\cursor-game-01.jpg" />
     <None Include="Resources\cursor.jpg" />
@@ -126,6 +111,8 @@
     <Page Include="UserContols\Edge.xaml" />
     <Page Include="UserContols\GraphCanvas.xaml" />
     <Page Include="UserContols\Vertex.xaml" />
+    <Page Include="Windows\AboutAuthors.xaml" />
+    <Page Include="Windows\AboutProgram.xaml" />
     <Page Include="Windows\Tasks.xaml" />
   </ItemGroup>
   <ItemGroup>

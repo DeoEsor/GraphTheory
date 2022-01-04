@@ -19,5 +19,19 @@ namespace GraphDesktop
 
 			tasksWindow.Show();
 		}
+		
+		private void AboutAuthors(object sender, RoutedEventArgs e)
+		{
+			AboutAuthors aboutAuthors = new AboutAuthors();
+			
+			aboutAuthors.Show();
+		}
+		
+		private void AboutProgramm(object sender, RoutedEventArgs e)
+		{
+			AboutProgram aboutProgram = new AboutProgram();
+			
+			aboutProgram.Show();
+		}
 	}
 }

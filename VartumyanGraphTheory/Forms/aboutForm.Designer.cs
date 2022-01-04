@@ -21,7 +21,6 @@
         }
 
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -37,6 +36,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
+
             // 
             // label1
             // 
@@ -44,10 +44,11 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(156, 132);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(271, 18);
+            this.label1.Size = new System.Drawing.Size(16, 18);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Для лабораторных по теории графов";
+            this.label1.Text = "c";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+
             // 
             // label2
             // 
@@ -59,6 +60,7 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Автор:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+
             // 
             // label3
             // 
@@ -70,6 +72,7 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Вартумян Валерий Давидович\r\nЮрьев Николай Геннадьевич\r\n";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+
             // 
             // label5
             // 
@@ -80,6 +83,7 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "2021 год";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+
             // 
             // label4
             // 
@@ -91,6 +95,7 @@
             this.label4.TabIndex = 5;
             this.label4.Text = "Группа М8о-310Б-19";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+
             // 
             // label6
             // 
@@ -100,9 +105,9 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(535, 36);
             this.label6.TabIndex = 6;
-            this.label6.Text = "Факультет №8  «Информационные технологии и прикладная математика» \r\n(«Прикладная " +
-    "математика и физика»)";
+            this.label6.Text = "Факультет №8  «Информационные технологии и прикладная математика» \r\n(«Прикладная " + "математика и физика»)";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+
             // 
             // label7
             // 
@@ -114,6 +119,7 @@
             this.label7.TabIndex = 7;
             this.label7.Text = "Московский Авиационный институт\r\n(Национальный исследовательский университет)";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+
             // 
             // aboutForm
             // 
@@ -132,7 +138,6 @@
             this.Text = "О авторе(ах)";
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
