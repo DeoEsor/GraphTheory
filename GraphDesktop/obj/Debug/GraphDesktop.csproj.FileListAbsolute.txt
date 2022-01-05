@@ -30,4 +30,4 @@ C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\Windows\AboutAuth
 C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\Windows\AboutProgram.g.cs
 C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\Windows\AboutAuthors.baml
 C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\Windows\AboutProgram.baml
-C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\GraphDesktop.csprojAssemblyReference.cache
+C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\GraphDesktop.csproj.AssemblyReference.cache

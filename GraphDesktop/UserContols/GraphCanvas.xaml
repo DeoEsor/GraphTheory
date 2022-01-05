@@ -11,11 +11,13 @@
     <Canvas
             MouseLeftButtonDown="UIElement_OnMouseUp"
             x:Name="Canvas"
+            Background="Aquamarine"
             Width="500"
             Height="300">
         <Popup x:Name="Popup"
                StaysOpen="False" 
                Focusable="True" 
+               PlacementTarget="{Binding ElementName=Canvas}"
                Placement="MousePoint">
             <StackPanel Background="Bisque">
                 <Expander Header="Show me">                 
@@ -30,8 +32,10 @@
                             <RowDefinition />
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        <TextBlock Text="Вершины : "/>
-                        <TextBlock Grid.Row = "1" Text="Ребра : "/>
+                        <TextBlock 
+                                    Text="Вершины : "/>
+                        <TextBlock Grid.Row = "1" 
+                                    Text="Ребра : "/>
                         <ListBox 
                             Grid.Row = "0" Grid.Column="1"
                             ItemsSource="{Binding Model.Vertices}"/>
@@ -41,7 +45,7 @@
                     </Grid>
                 </Expander>
                 <UniformGrid Columns="3">
-                    <Button Content="New Vertex" MouseLeftButtonDown="AddElement"/>
+                    <Button Content="New Vertex" Click="AddElement"/>
                     <Button />
                     <Button Content="Clear" Click="Clear"/>
                 </UniformGrid>

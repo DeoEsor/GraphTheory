@@ -1,4 +1,6 @@
 ﻿using System.Drawing;
+using System.Dynamic;
+using System.Runtime.CompilerServices;
 namespace GraphLib
 {
 	/// <summary>
@@ -12,8 +14,8 @@ namespace GraphLib
 		/// V1 - out vertex (from)
 		/// V2 - in Vertex (to)
 		/// </summary>
-		public Vertex StartVertex; 
-		public Vertex EndVertex;
+		public Vertex StartVertex { get; set; }
+		public Vertex EndVertex { get; set; }
 		
 		public Point StartPoint { get => StartVertex.Point; }
 		public Point EndPoint { get => EndVertex.Point; }
@@ -26,5 +28,7 @@ namespace GraphLib
 			this.StartVertex = v1;
 			this.EndVertex = v2;
 		}
+
+		public bool IsIn(Vertex sender) => sender == EndVertex;
 	}
 }

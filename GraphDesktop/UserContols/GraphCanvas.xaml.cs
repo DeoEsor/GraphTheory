@@ -2,12 +2,15 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Shapes;
+using GraphLib;
 
 namespace GraphDesktop.UserContols
 {
 	public partial class GraphCanvas : UserControl
 	{
-		public GraphLib.Graph Model { get; set; }
+		public GraphLib.Graph Model { get; set; }= new Graph();
+
+		Point mouselastpos;
 		
 		public GraphCanvas()
 		{
@@ -16,6 +19,7 @@ namespace GraphDesktop.UserContols
 
 		private void UIElement_OnMouseUp(object sender, MouseButtonEventArgs e)
 		{
+			mouselastpos = e.GetPosition(Canvas);
 			if (!Popup.IsOpen)
 				Popup.IsOpen = true;
 			else
@@ -35,19 +39,21 @@ namespace GraphDesktop.UserContols
 		}
 
 
-		public void AddElement(object sender, MouseButtonEventArgs e)
+		public void AddElement(object sender, RoutedEventArgs e)
 		{
 			Popup.IsOpen = false;
 			Vertex vertex = new Vertex
 			{
-				Height = Canvas.Height / 10,
-				Width = Canvas.Width / 10,
-				Model = Model.CreateVertex((int)Mouse.GetPosition(this).X, 
-											(int)Mouse.GetPosition(this).Y)
+				Height = 50,
+				Width = 50,
+				Model = Model.CreateVertex((int)Mouse.GetPosition(Canvas).X, 
+											(int)Mouse.GetPosition(Canvas).Y)
 			};
-			
+			vertex.EdgesListBox.ItemsSource = vertex.Model.Edges;
 			vertex.NameVertex = vertex.Model.Id.ToString();
+
 			vertex.MouseMove += OnMouseMove;
+
 			Canvas.SetLeft(vertex, Mouse.GetPosition(this).X);
 			Canvas.SetTop(vertex, Mouse.GetPosition(this).Y);
 			Canvas.Children.Add(vertex);

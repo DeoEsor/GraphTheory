@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
 namespace GraphLib
 {
@@ -12,7 +13,7 @@ namespace GraphLib
 		public int Id;
 		public Point Point { get; set; }
 		
-		private List<Edge> _edges;
+		private ObservableCollection<Edge> _edges;
 		Random _random = new Random();
 		
 		public int Weight { get; set; } = 1;
@@ -23,7 +24,7 @@ namespace GraphLib
 			this.Point = point;
 		}
 
-		public List<Edge> Edges
+		public ObservableCollection<Edge> Edges
 		{
 			get => _edges;
 		}

@@ -9,7 +9,7 @@
              DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
         <Button 
-            Content="{Binding  NameVertex}" 
+            Content="{Binding NameVertex}" 
                 Click="PopupOpen">
             <Button.Resources>
                 <Style TargetType="Border">
@@ -21,8 +21,8 @@
             <StackPanel Background="Bisque">
                 <UniformGrid Columns="2">
                     <TextBlock Text="Имя : "/>
-                    <TextBox
-                        Text="{Binding NameVertex, Mode=OneWayToSource}"
+                    <TextBox Focusable="True"
+                        Text="{Binding NameVertex, Mode=TwoWay}"
                         />
                 </UniformGrid>
                 
@@ -43,7 +43,7 @@
                         <TextBlock Grid.Column = "1" 
                                    Text="{Binding Model.Weight,
                                    TargetNullValue = 0 }"/>
-                        <ListBox 
+                        <ListBox x:Name="EdgesListBox"
                             Grid.Row = "1" Grid.Column="1"
                             ItemsSource="{Binding Model.Edges}"/>
                     </Grid>

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,10 +13,10 @@ namespace GraphLib
 		private int _edgeid = 0;
 		
 		private int _verticalid = 0;
-		
-		public List<Edge> Edges { get; internal set; }
-		
-		public List<Vertex> Vertices { get; internal set; }
+
+		public ObservableCollection<Edge> Edges { get; internal set; } = new ObservableCollection<Edge>();
+
+		public ObservableCollection<Vertex> Vertices { get; internal set; } = new ObservableCollection<Vertex>();
 		
 		/// <summary>
 		/// заполняет матрицу смежности
