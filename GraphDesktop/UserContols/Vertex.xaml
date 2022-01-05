@@ -9,8 +9,11 @@
              DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
         <Button 
-            Content="{Binding NameVertex}" 
-                Click="PopupOpen">
+            Click="PopupOpen">
+            <Button.Content>
+                <TextBlock
+                    Text="{Binding NameVertex}"/>
+            </Button.Content>
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="250"/>
