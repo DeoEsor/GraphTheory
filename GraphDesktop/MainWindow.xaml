@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Icon="/Resources/emblema_mai.ico"
         Background="Black"
-        Title="Теория графов" Height="350" Width="600">
+        Title="Теория графов" Height="Auto" Width="Auto">
     <Grid>
         <Menu>
             <Menu.ItemsPanel>
@@ -40,22 +40,24 @@
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
+                
+                <usercontols:GraphCanvas 
+                    BorderBrush="Azure"
+                    HorizontalAlignment="Stretch"
+                    BorderThickness="5"
+                    Height="Auto" Background="Cornsilk" Grid.RowSpan="4">
+                    
+                </usercontols:GraphCanvas>
+                <!--- Canvas -->
+                <!--
+                
                 <Grid Grid.ColumnSpan="1" RowSpan="4" Height="Auto"
                       Width="300" Background="Azure">
                     <usercontols:Vertex NameVertex="Aboba">
                         
                     </usercontols:Vertex>
                 </Grid>
-                <!--- Canvas -->
-                <!--
-                <usercontols:GraphCanvas 
-                    BorderBrush="Azure"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    BorderThickness="5"
-                    Height="Auto" Width="Auto" Background="Cornsilk" Grid.RowSpan="4">
-                    
-                </usercontols:GraphCanvas>!-->
+                !-->
                 <Menu
                         Padding="25,0,0,0"
                         HorizontalAlignment="Center"

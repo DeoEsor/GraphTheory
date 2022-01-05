@@ -20,7 +20,7 @@ namespace GraphLib
 
 		public int Weight { get; set; } = 1;
 
-		public Edge(int id, Vertex v1, Vertex v2)
+		internal Edge(int id, Vertex v1, Vertex v2)
 		{
 			this.Id = id;
 			this.StartVertex = v1;

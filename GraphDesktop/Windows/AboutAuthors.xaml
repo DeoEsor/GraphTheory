@@ -5,13 +5,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:GraphDesktop.Windows"
         mc:Ignorable="d"
-        Title="О авторах" Height="600" Width="500"
+        Title="О авторах" Height="600" Width="800"
+        MinHeight="600" MinWidth="800"
         Icon="../Resources/emblema_mai.ico">
     <Grid Background="#2c3136">
         <Grid.Resources>
             <Style TargetType="TextBlock">
                 <Setter Property="Language"
                         Value="Ru"/>
+                <Setter Property="FontFamily"
+                        Value="Helvetica"/>
                 <Setter Property="FontSize"
                         Value="14" />
                 <Setter Property="TextAlignment"
@@ -33,7 +36,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         
-        <TextBlock>
+        <TextBlock Padding="25">
             Московский Авиационный институт&#10;
             (Национальный исследовательский университет)
         </TextBlock>
@@ -57,16 +60,30 @@
             Авторы:
         </TextBlock>
         
-        <TextBlock Grid.Row = "5">
-            Вартумян Валерий Давидович &#10;
-            Юрьев Николай Геннадьевич &#10;
-            Таскина Анастасия Павловна &#10;
-            <TextBlock.ToolTip>
+        <UniformGrid   Grid.Row = "5"
+                       Rows = "4">
+            <TextBlock 
+                TextAlignment="Center">
+                Вартумян Валерий Давидович
+            </TextBlock>
+            <TextBlock
+                TextAlignment="Center">
+                Юрьев Николай Геннадьевич
+            </TextBlock>
+            <TextBlock
+                TextAlignment="Center">
+                Таскина Анастасия Павловна
+            </TextBlock>
+            <TextBlock
+                TextAlignment="Center">
+                Познанский Григорий Дмитриевич
+            </TextBlock>
+            <UniformGrid.ToolTip>
                 <Grid Background="#495561"></Grid>
-            </TextBlock.ToolTip>
-        </TextBlock>
+            </UniformGrid.ToolTip>
+        </UniformGrid>
         
-        <TextBlock Grid.Row = "6">
+        <TextBlock Padding="50" Grid.Row = "6">
             Москва 2021-2022 г.
         </TextBlock>
     </Grid>

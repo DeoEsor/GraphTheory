@@ -5,15 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:GraphDesktop.UserContols"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid
-        MouseUp="UIElement_OnMouseUp"
-        HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-    <Canvas 
-            Width="300"
+             d:DesignHeight="300" d:DesignWidth="300"
+             DataContext="{Binding 
+                            RelativeSource={RelativeSource Self}}">
+    <Canvas
+            MouseLeftButtonDown="UIElement_OnMouseUp"
+            x:Name="Canvas"
+            Width="500"
             Height="300">
-    </Canvas>
-        <Popup x:Name="popup">
+        <Popup x:Name="Popup"
+               StaysOpen="False" 
+               Focusable="True" 
+               Placement="MousePoint">
             <StackPanel Background="Bisque">
                 <Expander Header="Show me">                 
                     <Grid>
@@ -27,22 +30,22 @@
                             <RowDefinition />
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        <TextBlock Text="Вес : "/>
+                        <TextBlock Text="Вершины : "/>
                         <TextBlock Grid.Row = "1" Text="Ребра : "/>
-                        <TextBlock Grid.Column = "1" 
-                                   Text="{Binding Model.Weight,
-                                   TargetNullValue = 0 }"/>
+                        <ListBox 
+                            Grid.Row = "0" Grid.Column="1"
+                            ItemsSource="{Binding Model.Vertices}"/>
                         <ListBox 
                             Grid.Row = "1" Grid.Column="1"
                             ItemsSource="{Binding Model.Edges}"/>
                     </Grid>
                 </Expander>
                 <UniformGrid Columns="3">
-                    <Button Content="New Edge" />
-                    <Button Content="Delete Edge" />
-                    <Button Content="Delete" />
+                    <Button Content="New Vertex" MouseLeftButtonDown="AddElement"/>
+                    <Button />
+                    <Button Content="Clear" Click="Clear"/>
                 </UniformGrid>
             </StackPanel>
         </Popup>
-    </Grid>
+    </Canvas>
 </UserControl>

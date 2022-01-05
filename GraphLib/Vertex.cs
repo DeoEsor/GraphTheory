@@ -17,7 +17,7 @@ namespace GraphLib
 		
 		public int Weight { get; set; } = 1;
 
-		public Vertex(int id, Point point)
+		internal Vertex(int id, Point point)
 		{
 			this.Id = id;
 			this.Point = point;

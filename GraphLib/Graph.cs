@@ -13,9 +13,9 @@ namespace GraphLib
 		
 		private int _verticalid = 0;
 		
-		public List<Edge> Edges;
+		public List<Edge> Edges { get; internal set; }
 		
-		public List<Vertex> Vertices;
+		public List<Vertex> Vertices { get; internal set; }
 		
 		/// <summary>
 		/// заполняет матрицу смежности
@@ -55,8 +55,26 @@ namespace GraphLib
 			}
 		}
 
-		public void CreateVertex(int x,int y) => Vertices.Add(new Vertex(_verticalid++,new Point(x, y)));
-		public void CreateEdge(Vertex x,Vertex y) => Edges.Add(new Edge(_edgeid++, x, y));
+		public Vertex CreateVertex(int x, int y)
+		{
+			Vertex result;
+			Vertices.Add(result = new Vertex(_verticalid++,new Point(x, y)));
+			return result;
+		}
+		public Edge CreateEdge(Vertex x, Vertex y)
+		{
+			Edge res;
+			Edges.Add(res = new Edge(_edgeid++, x, y));
+			return res;
+		}
+
+		public void ClearGraph()
+		{
+			Edges.Clear(); 
+			Vertices.Clear();
+			_edgeid = 0;
+			_verticalid = 0;
+		}
 	}
 
 }
