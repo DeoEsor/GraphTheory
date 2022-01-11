@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace GraphLib
 
 	public sealed class Graph
 	{
+		public string Name { get; set; } = "Unnamed"; 
+			
 		private int _edgeid = 0;
 		
 		private int _verticalid = 0;

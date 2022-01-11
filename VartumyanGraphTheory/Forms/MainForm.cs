@@ -15,6 +15,7 @@ namespace VartumyanGraphTheory
 {
     public partial class MainForm : Form
     {
+        /*
         List<Vertex> V;
         List<Edge> E;
         int[,] AMatrix; //матрица смежности
@@ -587,5 +588,6 @@ namespace VartumyanGraphTheory
         { 
         
         }
+        */
     }
 }

@@ -6,50 +6,66 @@
              xmlns:local="clr-namespace:GraphDesktop.UserContols"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
+             Height="Auto"
+             Width="Auto"
              DataContext="{Binding 
-                            RelativeSource={RelativeSource Self}}">
+                            RelativeSource={RelativeSource Self}}"
+             Focusable="True"
+             GotFocus="GraphCanvas_OnGotFocus"
+             LostFocus="GraphCanvas_OnLostFocus">
     <Canvas
             MouseLeftButtonDown="UIElement_OnMouseUp"
-            x:Name="Canvas"
-            Background="Aquamarine"
-            Width="500"
-            Height="300">
+            x:Name="Canvas" 
+            Background="{Binding ElementName=ColorPicker, 
+                            Path=ChosenColor
+                        }"
+            Width="Auto"
+            Height="Auto">
         <Popup x:Name="Popup"
                StaysOpen="False" 
                Focusable="True" 
                PlacementTarget="{Binding ElementName=Canvas}"
                Placement="MousePoint">
-            <StackPanel Background="Bisque">
-                <Expander Header="Show me">                 
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <TextBlock 
-                                    Text="Вершины : "/>
-                        <TextBlock Grid.Row = "1" 
-                                    Text="Ребра : "/>
-                        <ListBox 
-                            Grid.Row = "0" Grid.Column="1"
-                            ItemsSource="{Binding Model.Vertices}"/>
-                        <ListBox 
-                            Grid.Row = "1" Grid.Column="1"
-                            ItemsSource="{Binding Model.Edges}"/>
-                    </Grid>
-                </Expander>
-                <UniformGrid Columns="3">
-                    <Button Content="New Vertex" Click="AddElement"/>
-                    <Button />
-                    <Button Content="Clear" Click="Clear"/>
-                </UniformGrid>
-            </StackPanel>
+            <Border BorderBrush="Honeydew" BorderThickness="2,2,2,2">
+                <StackPanel Background="{Binding ElementName=ColorPicker, 
+                            Path=ChosenColor
+                            }">
+                    <UniformGrid Columns="2">
+                        <Label Content="Граф : " />
+                        <Label Content="{Binding Model.Name}"/>
+                    </UniformGrid>
+                    <Expander Header="Show me">                 
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock 
+                                        Text="Вершины : "/>
+                            <TextBlock Grid.Row = "1" Grid.Column="0"
+                                       Text="Ребра : "/>
+                            <ListBox 
+                                Grid.Row = "0" Grid.Column="1"
+                                ItemsSource="{Binding Model.Vertices}"/>
+                            <ListBox 
+                                Grid.Row = "1" Grid.Column="1"
+                                ItemsSource="{Binding Model.Edges}"/>
+                        </Grid>
+                    </Expander>
+                    <local:ColorPicker x:Name="ColorPicker" ChosenColor="Aquamarine"/>
+                    <UniformGrid Columns="3">
+                        <Button Content="New Vertex" Click="AddElement"/>
+                        <Button />
+                        <Button Content="Clear" Click="Clear"/>
+                    </UniformGrid>
+                </StackPanel>
+            </Border>
         </Popup>
     </Canvas>
 </UserControl>

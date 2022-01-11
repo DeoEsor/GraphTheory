@@ -7,56 +7,82 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <UserControl.Resources>
+        <Brush x:Key="DefaultBack"> DarkMagenta </Brush>
+    </UserControl.Resources>
     <Grid>
         <Button 
-            Click="PopupOpen">
-            <Button.Content>
-                <TextBlock
-                    Text="{Binding NameVertex}"/>
-            </Button.Content>
+            x:Name="Button"
+            Content="{Binding Model.Name}"
+            Click="PopupOpen"
+             Background="{Binding ElementName=ColorPicker, 
+                            Path=ChosenColor
+                        }"
+            >
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="250"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Popup x:Name="popup" StaysOpen="False" Focusable="True" Placement="MousePoint">
-            <StackPanel Background="Bisque">
-                <UniformGrid Columns="2">
-                    <TextBlock Text="Имя : "/>
-                    <TextBox Focusable="True"
-                        Text="{Binding NameVertex, Mode=TwoWay}"
-                        />
-                </UniformGrid>
+        <Popup
+            x:Name="popup" StaysOpen="False" Focusable="True" Placement="MousePoint"
+            GotFocus="Popup_OnGotFocus"
+            LostFocus="Popup_OnLostFocus">
+            <Border BorderBrush="Honeydew" CornerRadius="2,2,2,2" BorderThickness="2,2,2,2">
                 
-                <Expander Header="Show Data">                 
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <TextBlock Text="Вес : "/>
-                        <TextBlock Grid.Row = "1" Text="Ребра : "/>
-                        <TextBlock Grid.Column = "1" 
-                                   Text="{Binding Model.Weight,
-                                   TargetNullValue = 0 }"/>
-                        <ListBox x:Name="EdgesListBox"
-                            Grid.Row = "1" Grid.Column="1"
-                            ItemsSource="{Binding Model.Edges}"/>
-                    </Grid>
-                </Expander>
-                <UniformGrid Columns="3">
-                    <Button Content="New Edge" />
-                    <Button Content="Delete Edge" />
-                    <Button Content="Delete" />
-                </UniformGrid>
-            </StackPanel>
+                <StackPanel
+                        
+                        Background="{Binding ElementName=ColorPicker, 
+                            Path=ChosenColor
+                            }">
+                    <UniformGrid Columns="2">
+                        <Label Content="Вершина: " />
+                        <Label Content="{Binding Model.Name}"/>
+                    </UniformGrid>
+                    <UniformGrid Columns="2">
+                        <TextBlock Text="Имя : "/>
+                        <TextBox Focusable="True"
+                            Text="{Binding NameVertex, Mode=TwoWay}"
+                            />
+                    </UniformGrid>
+                    
+                    <Expander Header="Show Data">                 
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Вес : "/>
+                            <TextBlock Grid.Row = "1" Text="Ребра : "/>
+                            <TextBlock Grid.Column = "1" 
+                                       Text="{Binding Model.Weight,
+                                       TargetNullValue = 0 }"/>
+                            <ListBox x:Name="EdgesListBox"
+                                     Grid.Row = "1" Grid.Column="1"
+                                ItemsSource="{Binding Model.Edges}"/>
+                        </Grid>
+                    </Expander>
+                    <local:ColorPicker x:Name="ColorPicker" ChosenColor="Bisque"/>
+                    <UniformGrid Columns="3">
+                        <Button Content="New Edge" 
+                                Click="AddEdge"
+                                />
+                        <Button Content="Delete Edge" 
+                                Click="DeleteEdge"
+                                />
+                        <Button Content="Delete" 
+                                Click="Delete"
+                                />
+                    </UniformGrid>
+                </StackPanel>
+            </Border>
         </Popup>
     </Grid>
 </UserControl>

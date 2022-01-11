@@ -13,6 +13,9 @@ namespace GraphDesktop.UserContols
 		public GraphLib.Edge Model { get; set; }
 		
 		public string EdgeName { get; set; }
+
+		public GraphCanvas GraphCanvas;
+		
 	}
 }
 

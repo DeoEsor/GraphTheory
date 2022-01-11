@@ -13,6 +13,7 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <LangVersion>8</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -63,6 +64,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="UserContols\ColorPicker.xaml.cs">
+      <DependentUpon>ColorPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserContols\Edge.xaml.cs">
       <DependentUpon>Edge.xaml</DependentUpon>
     </Compile>
@@ -108,6 +112,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="UserContols\ColorPicker.xaml" />
     <Page Include="UserContols\Edge.xaml" />
     <Page Include="UserContols\GraphCanvas.xaml" />
     <Page Include="UserContols\Vertex.xaml" />
@@ -116,7 +121,9 @@
     <Page Include="Windows\Tasks.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Graphs-labs2019.pdf" />
+    <Content Include="Graphs-labs2019.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\emblema_mai.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -1,6 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Shapes;
 using GraphLib;
 
@@ -8,26 +10,27 @@ namespace GraphDesktop.UserContols
 {
 	public partial class GraphCanvas : UserControl
 	{
-		public GraphLib.Graph Model { get; set; }= new Graph();
+		private bool IsDragging { get; set; }= false;
 
-		Point mouselastpos;
-		
+		private Point lastPosition;
+		public GraphLib.Graph Model { get; set; } = new GraphLib.Graph();
+
+		private UserControl draggedItem;
+
 		public GraphCanvas()
 		{
 			InitializeComponent();
+			ColorPicker.OnChosenColorChanged += () => Canvas.Background = ColorPicker.ChosenColor;
 		}
 
 		private void UIElement_OnMouseUp(object sender, MouseButtonEventArgs e)
 		{
-			mouselastpos = e.GetPosition(Canvas);
+			Vertex.PopupClose();
+
 			if (!Popup.IsOpen)
-				Popup.IsOpen = true;
-			else
-			{
 				//Redraw popup window
 				Popup.IsOpen = false;
-				Popup.IsOpen = true;
-			}
+			Popup.IsOpen = true;
 		}
 
 		public void Clear(object sender, RoutedEventArgs e)
@@ -47,32 +50,58 @@ namespace GraphDesktop.UserContols
 				Height = 50,
 				Width = 50,
 				Model = Model.CreateVertex((int)Mouse.GetPosition(Canvas).X, 
-											(int)Mouse.GetPosition(Canvas).Y)
+											(int)Mouse.GetPosition(Canvas).Y),
+				GraphCanvas = this
 			};
 			vertex.EdgesListBox.ItemsSource = vertex.Model.Edges;
 			vertex.NameVertex = vertex.Model.Id.ToString();
 
-			vertex.MouseMove += OnMouseMove;
+			vertex.PreviewMouseLeftButtonUp += btn_PreviewMouseLeftButtonUp;
+			vertex.PreviewMouseLeftButtonDown += btn_PreviewMouseLeftButtonDown;
+			vertex.PreviewMouseMove += btn_PreviewMouseMove;
 
 			Canvas.SetLeft(vertex, Mouse.GetPosition(this).X);
 			Canvas.SetTop(vertex, Mouse.GetPosition(this).Y);
 			Canvas.Children.Add(vertex);
 		}
-		
-		void OnMouseMove(object sender, MouseEventArgs e)
+
+		#region Drag logic
+
+		private void btn_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
-			if (e.Source is Vertex vertex)
+			if ((sender is Vertex vertex))
 			{
-				if (e.LeftButton == MouseButtonState.Pressed)
-				{
-					Point p = e.GetPosition(Canvas);
-					Canvas.SetLeft(vertex, p.X - vertex.ActualWidth / 2);
-					Canvas.SetTop(vertex, p.Y - vertex.ActualHeight / 2);
-					vertex.CaptureMouse();
-				}
-				else
-					vertex.ReleaseMouseCapture();
+				IsDragging = true;
+				draggedItem = vertex;
+				lastPosition = e.GetPosition(Canvas);
 			}
+		}
+
+		private void btn_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+		{
+			if (!IsDragging)
+				return;
+
+			IsDragging = false;
+		}
+
+		private void btn_PreviewMouseMove(object sender, MouseEventArgs e)
+		{
+			if (!IsDragging) return;
+
+			Point canvasRelativePosition = e.GetPosition(Canvas);
+
+			Canvas.SetTop(draggedItem, canvasRelativePosition.Y - draggedItem.Height / 2);
+			Canvas.SetLeft(draggedItem, canvasRelativePosition.X - draggedItem.Width / 2);
+		}
+  #endregion
+		private void GraphCanvas_OnGotFocus(object sender, RoutedEventArgs e)
+		{
+			//throw new NotImplementedException();
+		}
+		private void GraphCanvas_OnLostFocus(object sender, RoutedEventArgs e)
+		{
+			//throw new NotImplementedException();
 		}
 	}
 }

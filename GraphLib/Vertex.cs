@@ -10,10 +10,11 @@ namespace GraphLib
 	/// </summary>
 	public class Vertex
 	{
+		public string Name { get; set; }
 		public int Id;
 		public Point Point { get; set; }
 		
-		private ObservableCollection<Edge> _edges;
+		private ObservableCollection<Edge> _edges = new ObservableCollection<Edge>();
 		Random _random = new Random();
 		
 		public int Weight { get; set; } = 1;
@@ -22,6 +23,7 @@ namespace GraphLib
 		{
 			this.Id = id;
 			this.Point = point;
+			Name = Id.ToString();
 		}
 
 		public ObservableCollection<Edge> Edges
@@ -32,6 +34,11 @@ namespace GraphLib
 		public void AddEdge(Edge e)
 		{
 			_edges.Add(e);
+		}
+
+		public void Delete()
+        {
+			//TODO
 		}
 	}
 }

@@ -7,9 +7,26 @@
         mc:Ignorable="d"
         Icon="/Resources/emblema_mai.ico"
         Background="Black"
-        Title="Теория графов" Height="Auto" Width="Auto">
+        Title="Теория графов" 
+        Height="Auto" Width="Auto"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        >
     <Grid>
-        <Menu>
+        <Menu Background="#2c3136">
+            <Menu.Resources>
+                <Style TargetType="MenuItem">
+                    <Setter Property="Language"
+                            Value="Ru"/>
+                    <Setter Property="FontFamily"
+                            Value="Helvetica"/>
+                    <Setter Property="FontSize"
+                            Value="14" />
+                    <Setter Property="Foreground"
+                            Value="#8dabc2" />
+                    <Setter Property="FontWeight"
+                            Value="Bold"></Setter>
+                </Style>
+            </Menu.Resources>
             <Menu.ItemsPanel>
                 <ItemsPanelTemplate>
                     <DockPanel HorizontalAlignment="Stretch"
@@ -20,7 +37,6 @@
                 <MenuItem Header="Импорт" />
                 <MenuItem Header="Сохранить как" />
                 <MenuItem Header="Об авторах" Click="AboutAuthors"/>
-                <MenuItem Header="Выход" />
             </MenuItem>
             <MenuItem Header="Задачи теории графов">
                 <MenuItem />
@@ -28,11 +44,14 @@
             <MenuItem Header="Задания"  Click="Tasks"/>
             <MenuItem HorizontalAlignment="Right" Header="О программе"  Click="AboutProgramm"/>
         </Menu>
-        <StackPanel Orientation="Horizontal" Margin="0,25,0,0">
+        <StackPanel
+            Background="#002338"
+            Orientation="Horizontal" Margin="0,25,0,0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="4*"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"
+                                      MinWidth="200"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -41,30 +60,26 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 
-                <usercontols:GraphCanvas 
-                    BorderBrush="Azure"
-                    HorizontalAlignment="Stretch"
-                    BorderThickness="5"
-                    Height="Auto" Background="Cornsilk" Grid.RowSpan="4">
-                    
-                </usercontols:GraphCanvas>
-                <!--- Canvas -->
-                <!--
-                
-                <Grid Grid.ColumnSpan="1" RowSpan="4" Height="Auto"
-                      Width="300" Background="Azure">
-                    <usercontols:Vertex NameVertex="Aboba">
-                        
-                    </usercontols:Vertex>
-                </Grid>
-                !-->
+                <usercontols:GraphCanvas
+                    x:Name="GraphCanvas"
+                    Grid.RowSpan="4"
+                    BorderBrush="Azure" BorderThickness="5"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    MinWidth="700"
+                    Width="Auto"
+                    Height="Auto"
+                    />
                 <Menu
-                        Padding="25,0,0,0"
+                        Background="#002338"
+                        Padding="50,0,0,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Width="100"
+                        Width="Auto"
+                        MinWidth="500"
                         Grid.Row="0"  
-                        Grid.Column="1" >
+                        Grid.Column="1"
+                        Foreground="#8dabc2"
+                        >
                         <MenuItem Header="Вид" >
                             <MenuItem.Icon>
                                 <Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z"/>    
@@ -74,8 +89,12 @@
                         </MenuItem>
                 </Menu>
                 <ListBox
-                    HorizontalAlignment="Center"
-                        Width="150" Height="300" Grid.Column="1"
+                        Padding="100,0,0,0"
+                        HorizontalAlignment="Center"
+                        
+                        Width="Auto"
+                        MinWidth="500"
+                        Height="Auto" Grid.Column="1"
                         Grid.Row="1" Grid.RowSpan="2"/>
 
             </Grid>
