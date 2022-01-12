@@ -45,6 +45,7 @@
     <Compile Include="DrawGraph.cs" />
     <Compile Include="Edge.cs" />
     <Compile Include="Graph.cs" />
+    <Compile Include="GraphTask\BFS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vertex.cs" />
   </ItemGroup>

@@ -30,6 +30,15 @@ namespace GraphLib
 				_gr = Graphics.FromImage(_bitmap);
 			}
 		}
+
+		public static Graph Graph
+        {
+			get => _graph;
+			set
+            {
+				_graph = value;
+            }
+        }
   #endregion
 
 		#region Constructor

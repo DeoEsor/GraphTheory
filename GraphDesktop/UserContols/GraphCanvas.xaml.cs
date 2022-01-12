@@ -1,38 +1,57 @@
-﻿using System;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Shapes;
 using GraphLib;
 
 namespace GraphDesktop.UserContols
 {
-	public partial class GraphCanvas : UserControl
+    public partial class GraphCanvas : UserControl, INotifyPropertyChanged
 	{
-		private bool IsDragging { get; set; }= false;
+		#region Variables && Properties
+
+		public bool IsDragging { get; set; }= false;
 
 		private Point lastPosition;
-		public GraphLib.Graph Model { get; set; } = new GraphLib.Graph();
+		public Graph Model { get; set; } = new Graph();
 
-		private UserControl draggedItem;
+
+		//its mb optimized, but i'm too lazy for it
+		private int[,] _matrix = new int[0,0];
+		public int[,] Matrix
+		{
+			get { return _matrix; }
+			set { _matrix = value; }
+		}
+
+		public UserControl draggedItem;
+  #endregion
 
 		public GraphCanvas()
 		{
 			InitializeComponent();
-			ColorPicker.OnChosenColorChanged += () => Canvas.Background = ColorPicker.ChosenColor;
+			GraphLib.DrawGraph.Graph = Model;
 		}
-
-		private void UIElement_OnMouseUp(object sender, MouseButtonEventArgs e)
+		
+		/// <summary>
+		/// Popup window show
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
 		{
-			Vertex.PopupClose();
+            Vertex.PopupClose();
+
+			draggedItem = null;
 
 			if (!Popup.IsOpen)
-				//Redraw popup window
 				Popup.IsOpen = false;
 			Popup.IsOpen = true;
 		}
 
+		#region Button events
+		
 		public void Clear(object sender, RoutedEventArgs e)
 		{
 			Popup.IsOpen = false;
@@ -40,40 +59,38 @@ namespace GraphDesktop.UserContols
 			
 			Model.ClearGraph();
 		}
-
-
+		
 		public void AddElement(object sender, RoutedEventArgs e)
 		{
 			Popup.IsOpen = false;
-			Vertex vertex = new Vertex
-			{
-				Height = 50,
-				Width = 50,
-				Model = Model.CreateVertex((int)Mouse.GetPosition(Canvas).X, 
-											(int)Mouse.GetPosition(Canvas).Y),
-				GraphCanvas = this
-			};
-			vertex.EdgesListBox.ItemsSource = vertex.Model.Edges;
-			vertex.NameVertex = vertex.Model.Id.ToString();
 
-			vertex.PreviewMouseLeftButtonUp += btn_PreviewMouseLeftButtonUp;
-			vertex.PreviewMouseLeftButtonDown += btn_PreviewMouseLeftButtonDown;
-			vertex.PreviewMouseMove += btn_PreviewMouseMove;
+			var vertex = CreateVertex();
 
 			Canvas.SetLeft(vertex, Mouse.GetPosition(this).X);
 			Canvas.SetTop(vertex, Mouse.GetPosition(this).Y);
 			Canvas.Children.Add(vertex);
 		}
+  #endregion
 
 		#region Drag logic
-
-		private void btn_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+		public void btn_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
-			if ((sender is Vertex vertex))
+			if (sender is Vertex vertex)
 			{
-				IsDragging = true;
-				draggedItem = vertex;
-				lastPosition = e.GetPosition(Canvas);
+				if (draggedItem is Edge edge)
+				{
+					edge.Model.EndVertex = vertex.Model;
+					vertex.Model.Edges.Add(edge.Model);
+					draggedItem = null;
+					IsDragging = false;
+				}
+				
+				else
+				{
+					IsDragging = true;
+					draggedItem = vertex;
+					lastPosition = e.GetPosition(Canvas);
+				}
 			}
 		}
 
@@ -83,25 +100,74 @@ namespace GraphDesktop.UserContols
 				return;
 
 			IsDragging = false;
+			draggedItem = null;
 		}
 
-		private void btn_PreviewMouseMove(object sender, MouseEventArgs e)
+		public void btn_PreviewMouseMove(object sender, MouseEventArgs e)
 		{
+
 			if (!IsDragging) return;
 
-			Point canvasRelativePosition = e.GetPosition(Canvas);
+			if (Mouse.LeftButton == MouseButtonState.Released)
+			{
+				btn_PreviewMouseLeftButtonUp(sender, null);
+				return;
+			}
+			
+			var point = e.GetPosition(Canvas);
 
-			Canvas.SetTop(draggedItem, canvasRelativePosition.Y - draggedItem.Height / 2);
-			Canvas.SetLeft(draggedItem, canvasRelativePosition.X - draggedItem.Width / 2);
+			if (draggedItem is Edge edge)
+			{
+				edge.Model.EndPoint = new System.Drawing.Point(((int)point.X), ((int)point.Y)); ;
+				return;
+			}
+
+			if (draggedItem is Vertex vertex && !vertex.popup.IsOpen )
+			{
+				Canvas.SetTop(draggedItem, point.Y - draggedItem.Height / 2);
+				Canvas.SetLeft(draggedItem, point.X - draggedItem.Width / 2);	
+			}
+
 		}
   #endregion
-		private void GraphCanvas_OnGotFocus(object sender, RoutedEventArgs e)
+
+		#region Local Functions
+
+		Vertex CreateVertex()
 		{
-			//throw new NotImplementedException();
+
+			Vertex vertex1 = new Vertex
+			{
+				Height = 50,
+				Width = 50,
+				Model = Model.CreateVertex((int)Mouse.GetPosition(Canvas).X,
+					(int)Mouse.GetPosition(Canvas).Y),
+				GraphCanvas = this
+			};
+			vertex1.EdgesListBox.ItemsSource = vertex1.Model.Edges;
+			vertex1.NameVertex = vertex1.Model.Id.ToString();
+
+			vertex1.PreviewMouseLeftButtonUp += btn_PreviewMouseLeftButtonUp;
+			vertex1.PreviewMouseLeftButtonDown += btn_PreviewMouseLeftButtonDown;
+			vertex1.PreviewMouseMove += btn_PreviewMouseMove;
+			return vertex1;
 		}
-		private void GraphCanvas_OnLostFocus(object sender, RoutedEventArgs e)
+        #endregion
+
+        private void MatrixChoice_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			//throw new NotImplementedException();
+			if (MatrixChoice.SelectedIndex == 0)
+				Model.MatrixT = Graph.MatrixType.Incidence;
+			else
+				Model.MatrixT = Graph.MatrixType.Adjacency;
+			Model.GetMatrix(Matrix);
+		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		void OnPropertyChanged([CallerMemberName] string propertyName = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 	}
 }

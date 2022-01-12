@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,10 +9,13 @@ using System.Windows.Media;
 
 namespace GraphDesktop.UserContols
 {
-	public partial class Vertex : UserControl
+	public partial class Vertex : UserControl, INotifyPropertyChanged
 	{
 		private GraphCanvas owner;
-		public GraphCanvas GraphCanvas 
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public GraphCanvas GraphCanvas 
 		{
 			get => owner;
 			set
@@ -33,13 +37,19 @@ namespace GraphDesktop.UserContols
 #nullable enable 
 		public static Popup? OpenedPopup { get; set; }= null;
 #nullable disable
-		Point _mouselastpos;
 
 		public GraphLib.Vertex Model { get; set; }
 
 		public UIElementCollection Edges { get; set; }
 
-		public string NameVertex { get => Model.Id.ToString(); set => Model.Name = value; }
+		public string NameVertex { 
+			get => Model?.Name.ToString();
+			set
+			{
+				Model.Name = value;
+				Button.Content = Model.Name;
+			}
+		}
 
 		#region Popup logic
 
@@ -76,27 +86,65 @@ namespace GraphDesktop.UserContols
 		}
 		private void AddEdge(object sender, RoutedEventArgs e)
 		{
-			//TODO
+			popup.IsOpen = false;
+
+			//var edge =
+				CreateEdge();
 		}
 		private void DeleteEdge(object sender, RoutedEventArgs e)
 		{
-			if (EdgesListBox.SelectedItem == null )
+			if (EdgesListBox.SelectedItem == null)
 			{
 				MessageBox.Show("Выберите ребра", "Ошибка удаления ребра", MessageBoxButton.OK, MessageBoxImage.Information);
 				return;
 			}
 
-			var selectedItem = EdgesListBox.SelectedItem as Edge;
-			owner.Canvas.Children.Remove(selectedItem);
-			Model.Edges.Remove(selectedItem.Model); //TODO UID implementation
+			var selectedItem = EdgesListBox.SelectedItem as GraphLib.Edge;
+			selectedItem.Delete();
 
 		}
 		private void Delete(object sender, RoutedEventArgs e)
 		{
 			owner.Canvas.Children.Remove(this);
 
-			//TODO owner.Model.Vertices.Remove();
+			owner.Model.Vertices.Remove(Model);
 		}
+
+		#region Local func
+
+		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+		}
+
+		Edge CreateEdge()
+		{
+
+			Edge edge = new Edge
+			{
+				Height = 50,
+				Width = 50,
+				Model = owner.Model.CreateEdge(Model, null),
+				GraphCanvas = owner,
+			};
+			
+			edge.EdgeName = edge.Model.Id.ToString();
+			
+			Model.Edges.Add(edge.Model);
+			edge.PreviewMouseMove += owner.btn_PreviewMouseMove;
+			edge.PreviewMouseLeftButtonDown += owner.btn_PreviewMouseLeftButtonDown;
+			edge.Model.OnDelete += () =>
+				{
+					edge.GraphCanvas.Model.Edges.Remove(edge.Model);
+					edge.GraphCanvas.Canvas.Children.Remove(edge);
+				};
+
+			owner.IsDragging = true;
+			owner.draggedItem = edge;
+			owner.Canvas.Children.Add(edge);
+			return edge;
+		}
+  #endregion
 	}
 }
 

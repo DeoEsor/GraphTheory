@@ -8,15 +8,45 @@
              d:DesignHeight="300" d:DesignWidth="300"
              DataContext="{Binding 
              RelativeSource={RelativeSource Self}}">
+    <UserControl.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily"
+                    Value="{StaticResource Formular}"/>
+            <Setter Property="FontSize"
+                    Value="14"/>
+            <Setter Property="FontStyle"
+                    Value="Italic"
+            />
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily"
+                    Value="{StaticResource Formular}"/>
+            <Setter Property="FontSize"
+                    Value="14"/>
+            <Setter Property="FontStyle"
+                    Value="Italic"
+            />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontFamily"
+                    Value="{StaticResource Formular}"/>
+            <Setter Property="FontSize"
+                    Value="14"/>
+            <Setter Property="FontStyle"
+                    Value="Italic"
+            />
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Path Stroke="Red">
             <Path.Data>
                 <PathGeometry>
                     <PathFigure
+                        x:Name="Figure"
                         IsClosed="False"
                         StartPoint="{Binding Model.StartPoint}"><!-- нач. точка-->
                         
-                        <ArcSegment
+                        <ArcSegment x:Name="ArcSegment"
                             Size="250,200"
                             Point="{Binding Model.EndPoint}" /><!-- конеч. точка -->
                     </PathFigure>

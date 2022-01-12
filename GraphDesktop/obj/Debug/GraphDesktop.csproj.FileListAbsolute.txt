@@ -33,4 +33,8 @@ C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\Windows\AboutProg
 C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\UserContols\ColorPicker.g.cs
 C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\UserContols\ColorPicker.baml
 C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\bin\Debug\Graphs-labs2019.pdf
-C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\GraphDesktop.csprojAssemblyReference.cache
+C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\bin\Debug\Resources\background.png
+C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\Properties\App.baml
+C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\GraphDesktop.csproj.AssemblyReference.cache
+C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\bin\Debug\Gu.Wpf.DataGrid2D.dll
+C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\bin\Debug\Gu.Wpf.DataGrid2D.xml

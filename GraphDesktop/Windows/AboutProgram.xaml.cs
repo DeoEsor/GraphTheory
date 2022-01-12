@@ -8,6 +8,8 @@ namespace GraphDesktop.Windows
 		{
 			InitializeComponent();
 		}
-	}
+
+        private void Close(object sender, RoutedEventArgs e) => this.Close();
+    }
 }
 

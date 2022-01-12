@@ -17,8 +17,8 @@ namespace GraphDesktop
 
 		void Tasks(object sender, RoutedEventArgs e)
 		{
-			try
-			{
+            try
+            {
 				System.Diagnostics.Process process = new System.Diagnostics.Process();
 				string path = AppDomain.CurrentDomain.BaseDirectory+@"/Graphs-labs2019.pdf";
 				Uri pdf = new Uri(path, UriKind.RelativeOrAbsolute);
@@ -26,8 +26,8 @@ namespace GraphDesktop
 				process.Start();
 				process.WaitForExit();
 			}
-			catch (Exception error)
-			{
+			catch (Exception)
+            {
 				MessageBox.Show("Could not open the file.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
 			}
 		}

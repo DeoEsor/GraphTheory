@@ -6,25 +6,49 @@
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Icon="/Resources/emblema_mai.ico"
-        Background="Black"
         Title="Теория графов" 
-        Height="Auto" Width="Auto"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        >
+        Height="Auto" Width="1234"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily"
+                    Value="{StaticResource Formular}"
+            />
+            <Setter Property="FontStyle"
+                    Value="Italic"
+            />
+            <Setter Property="FontSize"
+                    Value="14"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily"
+                    Value="{StaticResource Formular}"/>
+            <Setter Property="FontSize"
+                    Value="14"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontFamily"
+                    Value="{StaticResource Formular}"/>
+            <Setter Property="FontSize"
+                    Value="14"/>
+            <Setter Property="FontWeight"
+                    Value="Bold"/>
+        </Style>
+    </Window.Resources>
     <Grid>
-        <Menu Background="#2c3136">
+        <Menu Background="#C9535353">
             <Menu.Resources>
                 <Style TargetType="MenuItem">
                     <Setter Property="Language"
                             Value="Ru"/>
                     <Setter Property="FontFamily"
-                            Value="Helvetica"/>
+                    Value="{StaticResource Formular}"/>
                     <Setter Property="FontSize"
-                            Value="14" />
-                    <Setter Property="Foreground"
-                            Value="#8dabc2" />
+                    Value="14"/>
                     <Setter Property="FontWeight"
-                            Value="Bold"></Setter>
+                            Value="Light"/>
+                    <Setter Property="Foreground"
+                            Value="#FFFFFF"/>
                 </Style>
             </Menu.Resources>
             <Menu.ItemsPanel>
@@ -33,71 +57,36 @@
                                VerticalAlignment="Top"/>
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
-            <MenuItem  Header="Файл">
-                <MenuItem Header="Импорт" />
-                <MenuItem Header="Сохранить как" />
-                <MenuItem Header="Об авторах" Click="AboutAuthors"/>
+            <MenuItem  Header="Файл" HorizontalContentAlignment="Center">
+                <MenuItem.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius"
+                                Value="5"/>
+                    </Style>
+                </MenuItem.Resources>
+                <MenuItem Background="#C9535353"  Header="Импорт" />
+                <MenuItem Background="#C9535353" Header="Сохранить как" UseLayoutRounding="False" />
+                <MenuItem Background="#C9535353" Header="Об авторах" Click="AboutAuthors"/>
             </MenuItem>
             <MenuItem Header="Задачи теории графов">
                 <MenuItem />
             </MenuItem>
             <MenuItem Header="Задания"  Click="Tasks"/>
-            <MenuItem HorizontalAlignment="Right" Header="О программе"  Click="AboutProgramm"/>
+            <MenuItem 
+                Margin="2"
+                HorizontalAlignment="Right" Header="О программе"  Click="AboutProgramm"/>
         </Menu>
-        <StackPanel
-            Background="#002338"
-            Orientation="Horizontal" Margin="0,25,0,0">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="4*"/>
-                    <ColumnDefinition Width="2*"
-                                      MinWidth="200"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                
-                <usercontols:GraphCanvas
-                    x:Name="GraphCanvas"
-                    Grid.RowSpan="4"
-                    BorderBrush="Azure" BorderThickness="5"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    MinWidth="700"
-                    Width="Auto"
-                    Height="Auto"
-                    />
-                <Menu
-                        Background="#002338"
-                        Padding="50,0,0,0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Width="Auto"
-                        MinWidth="500"
-                        Grid.Row="0"  
-                        Grid.Column="1"
-                        Foreground="#8dabc2"
-                        >
-                        <MenuItem Header="Вид" >
-                            <MenuItem.Icon>
-                                <Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z"/>    
-                            </MenuItem.Icon>
-                            <RadioButton  Content="Ориентированный"/>
-                            <RadioButton  Content="Мультиграф"/>
-                        </MenuItem>
-                </Menu>
-                <ListBox
-                        Padding="100,0,0,0"
-                        HorizontalAlignment="Center"
-                        
-                        Width="Auto"
-                        MinWidth="500"
-                        Height="Auto" Grid.Column="1"
-                        Grid.Row="1" Grid.RowSpan="2"/>
 
-            </Grid>
-        </StackPanel>
+        <usercontols:GraphCanvas
+                    x:Name="GraphCanvas"
+                    Margin="0,23,0,0"
+                    
+                    HorizontalAlignment="Stretch">
+            
+                <usercontols:GraphCanvas.Background>
+                <ImageBrush Stretch="Fill" ImageSource="./Resources/background.png" AlignmentY="Center" AlignmentX="Center"/>
+            </usercontols:GraphCanvas.Background>
+            
+            </usercontols:GraphCanvas>
     </Grid>
 </Window>

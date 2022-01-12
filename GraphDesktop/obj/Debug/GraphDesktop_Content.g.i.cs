@@ -9,6 +9,7 @@
 //------------------------------------------------------------------------------
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("graphs-labs2019.pdf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/background.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/emblema_mai.ico")]
 
 

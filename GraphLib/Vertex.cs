@@ -1,16 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 namespace GraphLib
 {
 	/// <summary>
 	/// Vertex representation
 	/// Вершина
 	/// </summary>
-	public class Vertex
+	public class Vertex : INotifyPropertyChanged
 	{
-		public string Name { get; set; }
+		private string name;
+		public string Name 
+		{ 
+			get => name;
+			set
+			{
+				name = value;
+				OnPropertyChanged();
+			}
+		}
 		public int Id;
 		public Point Point { get; set; }
 		
@@ -37,8 +48,14 @@ namespace GraphLib
 		}
 
 		public void Delete()
-        {
+		{
 			//TODO
+		}
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 	}
 }
