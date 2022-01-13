@@ -10,34 +10,27 @@ namespace GraphLib
 	/// </summary>
 	public class Edge : INotifyPropertyChanged
 	{
+		#region Properties & Variables
 		public int Id;
 
 		public string name;
 
+		public double Weight { get; set; } = 1;
+
 		public string EdgeName
-        {
+		{
 			get => name;
 			set
-            {
+			{
 				name = value;
 				OnPropertyChanged();
-            }
-        }
-
-		public  bool IsDirected { get; set; }
-		/// <summary>
-		/// V1 - out vertex (from)
-		/// V2 - in Vertex (to)
-		/// </summary>
-		public Vertex StartVertex { get; set; }
-		public Vertex EndVertex { get; set; }
-		
-		public Point StartPoint { get => StartVertex.Point; }
+			}
+		}
 
 		private Point endPoint;
 		public Point EndPoint
 		{
-			get=> endPoint;
+			get => endPoint;
 			set
 			{
 				endPoint = value;
@@ -45,11 +38,21 @@ namespace GraphLib
 			}
 		}
 
+		public bool IsDirected { get; set; }
+		/// <summary>
+		/// V1 - out vertex (from)
+		/// V2 - in Vertex (to)
+		/// </summary>
+		public Vertex StartVertex { get; set; }
+		public Vertex EndVertex { get; set; }
+
+		public Point StartPoint { get => StartVertex.Point; }
+
+		#endregion
+
 		public Action OnPointsChanged;
 
 		public Action OnDelete;
-
-        public int Weight { get; set; } = 1;
 
 		internal Edge(int id, Vertex v1, Vertex v2 = null)
 		{

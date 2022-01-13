@@ -51,9 +51,10 @@ namespace GraphLib
 			_redPen.Width = 2;
 			_darkGoldPen.Width = 2;
 		}
-  #endregion
+		#endregion
 
-		public static void СlearSheet() =>  _gr.Clear(Color.White);
+		#region Methods
+		public static void СlearSheet() => _gr.Clear(Color.White);
 
 		public static void DrawVertex(int x, int y, string number)
 		{
@@ -63,7 +64,7 @@ namespace GraphLib
 			_gr.DrawString(number, _fo, _br, _point);
 		}
 
-		public static void DrawSelectedVertex(int x, int y) =>  _gr.DrawEllipse(_redPen, x - R, y - R, 2 * R, 2 * R);
+		public static void DrawSelectedVertex(int x, int y) => _gr.DrawEllipse(_redPen, x - R, y - R, 2 * R, 2 * R);
 
 
 		public static void drawEdge(Vertex V1, Vertex V2, Edge E, int numberE)
@@ -85,6 +86,7 @@ namespace GraphLib
 				DrawVertex(V2.Point.X, V2.Point.Y, (E.EndVertex.Id + 1).ToString());
 			}
 		}
+		#endregion
 
 	}
 }

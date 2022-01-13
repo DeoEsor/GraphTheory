@@ -13,22 +13,28 @@ namespace GraphLib
 
 	public sealed class Graph : INotifyPropertyChanged
 	{
-
-		public enum MatrixType : sbyte { Adjacency, Incidence }
+        #region Enums
+        public enum MatrixType : sbyte { Adjacency, Incidence }
 
 		public enum GraphType : sbyte { Oriented, NonOriented }
+		#endregion
+
+		#region Variables & Properties
 
 		public MatrixType MatrixT;
 
-		public string Name { get; set; } = "Unnamed"; 
-			
+		public string Name { get; set; } = "Unnamed";
+
 		private int _edgeid = 0;
-		
+
 		private int _verticalid = 0;
 
 		public ObservableCollection<Edge> Edges { get; internal set; } = new ObservableCollection<Edge>();
 
 		public ObservableCollection<Vertex> Vertices { get; internal set; } = new ObservableCollection<Vertex>();
+		#endregion
+
+		#region Methods
 
 		public void GetMatrix(int[,] matrix)
 		{
@@ -61,7 +67,7 @@ namespace GraphLib
 				matrix[Edges[i].EndVertex.Id, Edges[i].StartVertex.Id] = 1;
 			}
 		}
-		
+
 		/// <summary>
 		/// заполняет матрицу инцидентности
 		/// </summary>
@@ -84,7 +90,7 @@ namespace GraphLib
 		public Vertex CreateVertex(int x, int y)
 		{
 			Vertex result;
-			Vertices.Add(result = new Vertex(_verticalid++,new Point(x, y)));
+			Vertices.Add(result = new Vertex(_verticalid++, new Point(x, y)));
 			return result;
 		}
 		public Edge CreateEdge(Vertex x, Vertex y)
@@ -96,11 +102,12 @@ namespace GraphLib
 
 		public void ClearGraph()
 		{
-			Edges.Clear(); 
+			Edges.Clear();
 			Vertices.Clear();
 			_edgeid = 0;
 			_verticalid = 0;
 		}
+		#endregion
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
