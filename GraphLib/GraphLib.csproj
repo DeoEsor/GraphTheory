@@ -42,12 +42,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\EdgeCommand.cs" />
+    <Compile Include="Commands\GraphCommands.cs" />
+    <Compile Include="Commands\VertexCommand.cs" />
+    <Compile Include="Commands\VertexCommands\AddEdge.cs" />
+    <Compile Include="Commands\VertexCommands\DeleteVertex.cs" />
     <Compile Include="DrawGraph.cs" />
     <Compile Include="Edge.cs" />
     <Compile Include="Graph.cs" />
     <Compile Include="GraphTask\BFS.cs" />
+    <Compile Include="History\Caretaker.cs" />
+    <Compile Include="History\Memento.cs" />
+    <Compile Include="History\Originator.cs" />
+    <Compile Include="IGraph.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vertex.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commands\GraphCommands\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

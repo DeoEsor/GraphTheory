@@ -36,7 +36,6 @@ namespace GraphDesktop.UserContols
 			GraphCanvas.Canvas.Children.Remove(this);
 			Model.Delete();
 		}
-		
 	}
 }
 

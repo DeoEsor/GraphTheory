@@ -36,5 +36,3 @@ C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\bin\Debug\Graphs-labs2019.p
 C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\bin\Debug\Resources\background.png
 C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\Properties\App.baml
 C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\obj\Debug\GraphDesktop.csproj.AssemblyReference.cache
-C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\bin\Debug\Gu.Wpf.DataGrid2D.dll
-C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\bin\Debug\Gu.Wpf.DataGrid2D.xml

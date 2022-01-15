@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:GraphDesktop.UserContols"
              mc:Ignorable="d"
+             x:Name="_thisVertex"
              d:DesignHeight="300" d:DesignWidth="300"
              DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <UserControl.Resources>
@@ -49,9 +50,7 @@
             </Button.Resources>
         </Button>
         <Popup
-            x:Name="popup" StaysOpen="False" Focusable="True" Placement="MousePoint"
-            GotFocus="Popup_OnGotFocus"
-            LostFocus="Popup_OnLostFocus">
+            x:Name="popup" StaysOpen="False" Focusable="True" Placement="MousePoint">
             <Border BorderBrush="Honeydew" CornerRadius="2,2,2,2" BorderThickness="2,2,2,2">
 
                 <StackPanel Background="#F9F9F9" Height="450" Width="250"                
@@ -116,7 +115,7 @@
                         <Button 
                             Background="#525252"
                             Height="50"
-                            Click="AddEdge" Margin="0,0,5,0">
+                            Click="OpenContext" Margin="0,0,5,0">
                             <Button.Style>
                                 <Style TargetType="{x:Type Button}">
                                     <Setter Property="Template">
@@ -143,6 +142,21 @@
                                     </Setter>
                                 </Style>
                             </Button.Style>
+                            <Button.ContextMenu>
+                                <ContextMenu x:Name="ContextMenu">
+                                    <MenuItem Header="Вершины" 
+                                              ItemsSource="{Binding GraphCanvas.Model.Vertices}">
+                                        <MenuItem.ItemContainerStyle>
+                                            <Style TargetType="MenuItem">
+                                                <Setter Property="Command" Value="{Binding AddEdgeCommand}"/>
+                                                <Setter Property="Header" Value="{Binding Name}"/>
+                                                <Setter Property="CommandParameter" 
+                                                            Value="{Binding Model}"/>
+                                            </Style>
+                                        </MenuItem.ItemContainerStyle>
+                                    </MenuItem>
+                                </ContextMenu>
+                            </Button.ContextMenu>
                             <Button.Content>
                                 <TextBlock FontSize="11" FontWeight="Medium"
                                            TextAlignment="Center"

@@ -25,10 +25,6 @@ namespace GraphDesktop.UserContols
 			}
 		}
 
-		~Vertex()
-        {
-			//TODO
-        }
 		public Vertex()
 		{
 			InitializeComponent();
@@ -47,7 +43,7 @@ namespace GraphDesktop.UserContols
 			set
 			{
 				Model.Name = value;
-				Button.Content = Model.Name;
+				Button.Content = Model.Name;	
 			}
 		}
 
@@ -80,17 +76,7 @@ namespace GraphDesktop.UserContols
 		
 		private void Popup_OnLostFocus(object sender, RoutedEventArgs e) => OpenedPopup = null;
   #endregion
-		private void Popup_OnGotFocus(object sender, RoutedEventArgs e)
-		{
-			//TODO
-		}
-		private void AddEdge(object sender, RoutedEventArgs e)
-		{
-			popup.IsOpen = false;
 
-			//var edge =
-				CreateEdge();
-		}
 		private void DeleteEdge(object sender, RoutedEventArgs e)
 		{
 			if (EdgesListBox.SelectedItem == null)
@@ -117,14 +103,14 @@ namespace GraphDesktop.UserContols
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 
-		Edge CreateEdge()
+		Edge CreateEdge(GraphLib.Edge edgemodel)
 		{
 
 			Edge edge = new Edge
 			{
 				Height = 50,
 				Width = 50,
-				Model = owner.Model.CreateEdge(Model, null),
+				Model = edgemodel,
 				GraphCanvas = owner,
 			};
 			
@@ -144,7 +130,13 @@ namespace GraphDesktop.UserContols
 			owner.Canvas.Children.Add(edge);
 			return edge;
 		}
-  #endregion
+		#endregion
+
+		private void OpenContext(object sender, RoutedEventArgs e)
+		{
+			ContextMenu.PlacementTarget = this;
+			ContextMenu.IsOpen = true;
+		}
 	}
 }
 

@@ -1,10 +1,13 @@
-﻿using System;
+﻿using GraphLib.Commands.VertexCommands;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
+
 namespace GraphLib
 {
 	/// <summary>
@@ -13,8 +16,8 @@ namespace GraphLib
 	/// </summary>
 	public class Vertex : INotifyPropertyChanged
 	{
-		#region Variables & Properties
-		private string name;
+        #region Variables & Properties
+        private string name;
 		public string Name
 		{
 			get => name;
@@ -24,15 +27,20 @@ namespace GraphLib
 				OnPropertyChanged();
 			}
 		}
+
+		public Vertex Instance {get => this; }
+
+		public Graph Graph { get; set; }
 		public int Id;
 		public Point Point { get; set; }
 
+		public DeleteVertex DeleteVertexCommand { get; private set; }
+
+		public AddEdge AddEdgeCommand { get; private set; }
+
 		private ObservableCollection<Edge> _edges = new ObservableCollection<Edge>();
 
-		public ObservableCollection<Edge> Edges
-		{
-			get => _edges;
-		}
+		public ObservableCollection<Edge> Edges {get => _edges;}
 
 		Random _random = new Random();
 
@@ -40,24 +48,22 @@ namespace GraphLib
 		#endregion
 
 
-		internal Vertex(int id, Point point)
+		internal Vertex(Graph graph ,int id, Point point)
 		{
+			this.Graph = graph;
 			this.Id = id;
 			this.Point = point;
-			Name = Id.ToString();
+            Name = Id.ToString();
+
+			DeleteVertexCommand = new DeleteVertex(Graph, this);
+			AddEdgeCommand= new AddEdge(Graph, this);
+
 			_edges.CollectionChanged += EdgesOnCollectionChanged;
 		}
+
 		private void EdgesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
-			//TODO
-		}
-
-		public void Delete()
-		{
-			foreach(var edge in Edges)
-				edge.Delete();
-
-
+			OnPropertyChanged();
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;

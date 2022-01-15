@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Data;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,12 +18,16 @@ namespace GraphDesktop.UserContols
 		public Graph Model { get; set; } = new Graph();
 
 
-		//its mb optimized, but i'm too lazy for it
-		private int[,] _matrix = new int[0,0];
-		public int[,] Matrix
+        //its mb optimized, but i'm too lazy for it
+        private object _matrix;
+		public object Matrix
 		{
-			get { return _matrix; }
-			set { _matrix = value; }
+			get =>_matrix;
+			set 
+			{ 
+				_matrix = value;
+				OnPropertyChanged();
+			}
 		}
 
 		public UserControl draggedItem;
@@ -48,6 +53,7 @@ namespace GraphDesktop.UserContols
 			if (!Popup.IsOpen)
 				Popup.IsOpen = false;
 			Popup.IsOpen = true;
+			lastPosition = e.GetPosition(Canvas);
 		}
 
 		#region Button events
@@ -77,20 +83,9 @@ namespace GraphDesktop.UserContols
 		{
 			if (sender is Vertex vertex)
 			{
-				if (draggedItem is Edge edge)
-				{
-					edge.Model.EndVertex = vertex.Model;
-					vertex.Model.Edges.Add(edge.Model);
-					draggedItem = null;
-					IsDragging = false;
-				}
-				
-				else
-				{
-					IsDragging = true;
-					draggedItem = vertex;
-					lastPosition = e.GetPosition(Canvas);
-				}
+				IsDragging = true;
+				draggedItem = vertex;
+				lastPosition = e.GetPosition(Canvas);
 			}
 		}
 
@@ -116,12 +111,6 @@ namespace GraphDesktop.UserContols
 			
 			var point = e.GetPosition(Canvas);
 
-			if (draggedItem is Edge edge)
-			{
-				edge.Model.EndPoint = new System.Drawing.Point(((int)point.X), ((int)point.Y)); ;
-				return;
-			}
-
 			if (draggedItem is Vertex vertex && !vertex.popup.IsOpen )
 			{
 				Canvas.SetTop(draggedItem, point.Y - draggedItem.Height / 2);
@@ -135,15 +124,16 @@ namespace GraphDesktop.UserContols
 
 		Vertex CreateVertex()
 		{
+			var model = Model.CreateVertex((int)lastPosition.X, (int)lastPosition.Y);
 
 			Vertex vertex1 = new Vertex
 			{
 				Height = 50,
 				Width = 50,
-				Model = Model.CreateVertex((int)Mouse.GetPosition(Canvas).X,
-					(int)Mouse.GetPosition(Canvas).Y),
+				Model = model,
 				GraphCanvas = this
 			};
+
 			vertex1.EdgesListBox.ItemsSource = vertex1.Model.Edges;
 			vertex1.NameVertex = vertex1.Model.Id.ToString();
 
@@ -160,7 +150,31 @@ namespace GraphDesktop.UserContols
 				Model.MatrixT = Graph.MatrixType.Incidence;
 			else
 				Model.MatrixT = Graph.MatrixType.Adjacency;
-			Model.GetMatrix(Matrix);
+			UpdateMatrix(Model.GetMatrix());
+		}
+
+		void UpdateMatrix(int[,] matrix)
+		{
+			if (matrix.Length == 0) return;
+			var dt = new DataTable();
+			int rows = matrix.GetUpperBound(0) + 1;    // количество строк
+			int columns = matrix.Length / rows;
+
+			for (var i = 0; i < columns; i++)
+				/*
+            {
+				if (Model.MatrixT == Graph.MatrixType.Incidence)
+			}*/
+				dt.Columns.Add(new DataColumn("c" + i, typeof(int)));
+
+			for (var i = 0; i < rows; i++)
+			{
+				var r = dt.NewRow();				
+				for (var j = 0; j < columns; j++)
+					r[j] = matrix[i,j];
+				dt.Rows.Add(r);
+			}
+			this.Matrix = dt.DefaultView;
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;

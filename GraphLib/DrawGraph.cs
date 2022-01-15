@@ -2,7 +2,7 @@
 namespace GraphLib
 {
 	/// <summary>
-	/// Probably move to VE
+	/// Implementation of drawing for WinForms
 	/// </summary>
 	public static class DrawGraph
 	{
