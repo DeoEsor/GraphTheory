@@ -4,8 +4,8 @@ namespace GraphLib
 {
     public interface IGraph
     {
-        ObservableCollection<Edge> Edges { get; }
         string Name { get; set; }
+        ObservableCollection<Edge> Edges { get; }
         ObservableCollection<Vertex> Vertices { get; }
     }
 }

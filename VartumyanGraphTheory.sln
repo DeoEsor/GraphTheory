@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphDesktop", "GraphDeskto
 		{96F6E9F3-60E8-4F98-BD27-47C29A807C82} = {96F6E9F3-60E8-4F98-BD27-47C29A807C82}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphTests", "GraphTests\GraphTests.csproj", "{884979EC-7A10-42C6-8EE5-3F113BB28867}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{E7B89119-6B77-41CD-822C-C419473D6E81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7B89119-6B77-41CD-822C-C419473D6E81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7B89119-6B77-41CD-822C-C419473D6E81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{884979EC-7A10-42C6-8EE5-3F113BB28867}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{884979EC-7A10-42C6-8EE5-3F113BB28867}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{884979EC-7A10-42C6-8EE5-3F113BB28867}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{884979EC-7A10-42C6-8EE5-3F113BB28867}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

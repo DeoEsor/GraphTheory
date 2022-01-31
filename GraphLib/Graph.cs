@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace GraphLib
 {
 
-    public class Graph : INotifyPropertyChanged, IGraph
+    public class Graph : INotifyPropertyChanged, IGraph, ICloneable
     {
         public Caretaker Caretaker { get; set; } = new Caretaker();
 
@@ -30,6 +30,18 @@ namespace GraphLib
         private int _edgeid = 0;
 
         private int _verticalid = 0;
+        private Graph(Graph graph)
+        {
+            this.Name = graph.Name;
+            //TODO
+        }
+        
+        private Graph(string name, params object[] theredata)//TODO
+        {
+            
+        }
+
+        public Graph() {}
 
         public ObservableCollection<Edge> Edges { get; internal set; } = new ObservableCollection<Edge>();
 
@@ -117,6 +129,10 @@ namespace GraphLib
         void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        public object Clone()
+        {
+            return new Graph(this);
         }
     }
 }
