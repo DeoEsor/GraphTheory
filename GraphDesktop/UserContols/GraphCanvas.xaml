@@ -87,7 +87,7 @@
                                 Height="250" Width="Auto"
                                 HeadersVisibility="All"
                                 CanUserAddRows="False" CanUserDeleteRows="False">
-                            <!--<DataGrid.RowHeaderStyle>
+                            <DataGrid.RowHeaderStyle>
                                 <Style TargetType="DataGridRowHeader">
                                     <Setter Property="Width" Value="30"/>
                                     <Setter Property="Template">
@@ -102,7 +102,7 @@
                                         </Setter.Value>
                                     </Setter>
                                 </Style>
-                            </DataGrid.RowHeaderStyle>-->
+                            </DataGrid.RowHeaderStyle>
                         </DataGrid>
                     </Grid>
                     <Grid VerticalAlignment="Stretch" Margin="10,50,10,10" >
@@ -185,8 +185,8 @@
                             <Button.Content>
                                 <TextBlock 
                                             TextAlignment="Center"
-                                           FontWeight="Medium"
-                                           FontSize="11"
+                                            FontWeight="Medium"
+                                            FontSize="11"
                                             Foreground="#FFFFFF" Text="Очистить              граф" TextWrapping="Wrap" />
                             </Button.Content>
                         </Button>
