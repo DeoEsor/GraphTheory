@@ -24,5 +24,9 @@ namespace GraphLib.Commands.VertexCommands
             vertex.Graph.Vertices.Remove(vertex);
 
         }
+        public override void Undo()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

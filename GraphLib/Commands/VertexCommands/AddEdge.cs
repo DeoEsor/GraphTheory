@@ -21,5 +21,9 @@ namespace GraphLib.Commands.VertexCommands
             base.Execute(parameter);
             Graph.CreateEdge(Vertex, vertex);
         }
+        public override void Undo()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

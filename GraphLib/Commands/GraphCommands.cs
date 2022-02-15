@@ -20,5 +20,7 @@ namespace GraphLib.Commands
         {
             Graph.Caretaker.History.Add(Originator.CreateMemento(Graph));
         }
+
+        public abstract void Undo();
     }
 }
