@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using GraphLib;
 
 namespace GraphDesktop.UserContols
 {
@@ -29,7 +30,11 @@ namespace GraphDesktop.UserContols
 		{
 			InitializeComponent();
 			ColorPicker.OnChosenColorChanged += () => Button.Background = ColorPicker.ChosenColor;
+			
 		}
+		
+		
+		
 #nullable enable 
 		public static Popup? OpenedPopup { get; set; }= null;
 #nullable disable
@@ -102,40 +107,20 @@ namespace GraphDesktop.UserContols
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
-
-		Edge CreateEdge(GraphLib.Edge edgemodel)
-		{
-
-			Edge edge = new Edge
-			{
-				Height = 50,
-				Width = 50,
-				Model = edgemodel,
-				GraphCanvas = owner,
-			};
-			
-			edge.EdgeName = edge.Model.Id.ToString();
-			
-			Model.Edges.Add(edge.Model);
-			edge.PreviewMouseMove += owner.btn_PreviewMouseMove;
-			edge.PreviewMouseLeftButtonDown += owner.btn_PreviewMouseLeftButtonDown;
-			edge.Model.OnDelete += () =>
-				{
-					edge.GraphCanvas.Model.Edges.Remove(edge.Model);
-					edge.GraphCanvas.Canvas.Children.Remove(edge);
-				};
-
-			owner.IsDragging = true;
-			owner.draggedItem = edge;
-			owner.Canvas.Children.Add(edge);
-			return edge;
-		}
 		#endregion
 
 		private void OpenContext(object sender, RoutedEventArgs e)
 		{
 			ContextMenu.PlacementTarget = this;
 			ContextMenu.IsOpen = true;
+			popup.IsOpen = true;
+		}
+		
+		private void MenuItem_OnClick(object sender, RoutedEventArgs e)
+		{
+			MenuItem menuItem = e.OriginalSource as MenuItem;
+			GraphLib.Vertex vertex = menuItem.DataContext as GraphLib.Vertex;
+			Model.AddEdgeCommand.Execute(vertex);
 		}
 	}
 }

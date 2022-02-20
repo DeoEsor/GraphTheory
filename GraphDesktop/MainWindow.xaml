@@ -69,7 +69,7 @@
                 <MenuItem Background="#C9535353" Header="Об авторах" Click="AboutAuthors"/>
             </MenuItem>
             <MenuItem Header="Задачи теории графов">
-                <MenuItem />
+                <MenuItem Background="#C9535353" Header="BFS" Click="BFS"/>
             </MenuItem>
             <MenuItem Header="Задания"  Click="Tasks"/>
             <MenuItem 

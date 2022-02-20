@@ -83,6 +83,21 @@ namespace GraphLib
                 matrix[Edges[i].EndVertex.Id, Edges[i].StartVertex.Id] = 1;
             }
         }
+        
+        /// <summary>
+        /// заполняет матрицу смежности
+        /// </summary>
+        /// <param name="numberV"></param>
+        /// <param name="e"></param>
+        /// <param name="matrix"></param>
+        public void ReturnAdjacencyList(out Dictionary<Vertex, List<Vertex>> matrix)
+        {
+            matrix = new Dictionary<Vertex, List<Vertex>>();
+            foreach (var vertex in Vertices)
+                matrix.Add(vertex, vertex.GoingToVertexes);
+            var a =matrix[Vertices[0]][0].EdgeWithVertex(Vertices[0]).Weight;
+
+        }
 
         /// <summary>
         /// заполняет матрицу инцидентности
@@ -111,7 +126,8 @@ namespace GraphLib
         {
             Edge res;
             Edges.Add(res = new Edge(_edgeid++, x, y));
-            x.Edges.Add(res); y.Edges.Add(res);
+            x.Edges.Add(res); 
+            y.Edges.Add(res);
             return res;
         }
 
@@ -134,5 +150,6 @@ namespace GraphLib
         {
             return new Graph(this);
         }
+
     }
 }

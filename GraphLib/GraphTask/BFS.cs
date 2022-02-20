@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 
 namespace GraphLib.GraphTasks
 {
@@ -10,56 +11,50 @@ namespace GraphLib.GraphTasks
         /// g[u][0] = (v, w) u->v (weight w)
         /// Условие - граф невзвешен 
         /// </summary>
-        /// <param name="g"></param>
+        /// <param name="graph"></param>
         /// <param name="s"></param>
         /// <param name="f"></param>
         /// <param name="path"></param>
         /// <returns>есть ли путь</returns>
-        public static bool BFS(List<List<(int, double)>> g, int s, int f, out List<int> path)
+        public static void BFS(Graph _graph, Vertex s, Vertex f, out List<Vertex> path)
         {
-            List<bool> used = new List<bool>(g.Count); // is all false??
-            Queue<int> q = new Queue<int>();
-            q.Enqueue(s);
-            List<double> d = new List<double>(g.Count);
-            List<int> p = new List<int>(g.Count);
+            _graph.ReturnAdjacencyList(out Dictionary<Vertex, List<Vertex>> graph);
+
+            var queue = new Queue<Vertex>();
+            queue.Enqueue(s);
+            (var used,var dist, var paretns) 
+                = ( new Dictionary<Vertex, bool>(), new Dictionary<Vertex, double>(), new Dictionary<Vertex, Vertex>());
+
             used[s] = true;
-            p[s] = -1;
-            while (q.Count != 0)
+            paretns[s] = null;
+
+            while (queue.Count != 0)
             {
-                int v = q.Dequeue();
-                foreach (var edge in g[v])
+                Vertex v = queue.Dequeue();
+                
+                foreach (var to in graph[v])
                 {
-                    int to = edge.Item1;
-                    if (!used[to])
-                    {
-                        used[to] = true;
-                        q.Enqueue(to);
-                        d[to] = d[v] + 1;
-                        p[to] = v;
-                    }
+                    if (used[to]) continue;
+                    
+                    used[to] = true;
+                    queue.Enqueue(to);
+                    dist[to] = dist[v] + v.EdgeWithVertex(to).Weight;//Check
+                    paretns[to] = v;
+                    
                 }
             }
 
             if (!used[f])
-            {
                 path = null;
-                return false;
-            }
             else
             {
-                path = new List<int>();
-                for (int v = f; v != -1; v = p[v])
-                {
+                path = new List<Vertex>();
+                for(Vertex v = f; v != null; v = paretns[v])
                     path.Add(v);
-                }
+                
                 path.Reverse();
-                return true;
             }
-
-        }
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
         }
     }
 }
+

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:GraphDesktop.UserContols"
              mc:Ignorable="d"
-             x:Name="_thisVertex"
+             x:Name="ThisVertex"
              d:DesignHeight="300" d:DesignWidth="300"
              DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <UserControl.Resources>
@@ -145,13 +145,11 @@
                             <Button.ContextMenu>
                                 <ContextMenu x:Name="ContextMenu">
                                     <MenuItem Header="Вершины" 
-                                              ItemsSource="{Binding GraphCanvas.Model.Vertices}">
+                                              ItemsSource="{Binding GraphCanvas.Model.Vertices}"
+                                              Click="MenuItem_OnClick">
                                         <MenuItem.ItemContainerStyle>
                                             <Style TargetType="MenuItem">
-                                                <Setter Property="Command" Value="{Binding AddEdgeCommand}"/>
                                                 <Setter Property="Header" Value="{Binding Name}"/>
-                                                <Setter Property="CommandParameter" 
-                                                            Value="{Binding Model}"/>
                                             </Style>
                                         </MenuItem.ItemContainerStyle>
                                     </MenuItem>

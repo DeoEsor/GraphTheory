@@ -13,7 +13,7 @@ namespace GraphLib.Commands.VertexCommands
         }
 
         public override bool CanExecute(object parameter) => true;
-
+        
         public override void Execute(object parameter)
         {
             if (!(parameter is Vertex vertex)) throw new ArgumentException();
