@@ -40,10 +40,12 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\EdgeCommand.cs" />
     <Compile Include="Commands\GraphCommands.cs" />
+    <Compile Include="Commands\GraphCommands\GraphClearCommand.cs" />
     <Compile Include="Commands\VertexCommand.cs" />
     <Compile Include="Commands\VertexCommands\AddEdge.cs" />
     <Compile Include="Commands\VertexCommands\DeleteVertex.cs" />

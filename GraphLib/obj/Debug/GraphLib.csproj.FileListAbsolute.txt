@@ -9,4 +9,4 @@ C:\Users\nickj\Desktop\some_code\GraphTheory\GraphLib\obj\Debug\GraphLib.csprojA
 C:\Users\nickj\Desktop\some_code\GraphTheory\GraphLib\obj\Debug\GraphLib.csproj.CoreCompileInputs.cache
 C:\Users\nickj\Desktop\some_code\GraphTheory\GraphLib\obj\Debug\GraphLib.dll
 C:\Users\nickj\Desktop\some_code\GraphTheory\GraphLib\obj\Debug\GraphLib.pdb
-C:\Users\Rulia\source\repos\GraphTheory\GraphLib\obj\Debug\GraphLib.csproj.AssemblyReference.cache
+C:\Users\Rulia\source\repos\GraphTheory\GraphLib\obj\Debug\GraphLib.csprojAssemblyReference.cache

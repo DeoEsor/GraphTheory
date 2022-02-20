@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Rulia\source\repos\GraphTheory\GraphDesktop\Properties\App.xaml
-8-1680359193
+9-605401805
 3-2064219340
-12-1751126054
+13373776303
 12-1098486047
-MainWindow.xaml;UserContols\ColorPicker.xaml;UserContols\Edge.xaml;UserContols\GraphCanvas.xaml;UserContols\Vertex.xaml;Windows\AboutAuthors.xaml;Windows\AboutProgram.xaml;Windows\Tasks.xaml;
+MainWindow.xaml;UserContols\AlgorithPathResult.xaml;UserContols\ColorPicker.xaml;UserContols\Edge.xaml;UserContols\GraphCanvas.xaml;UserContols\Vertex.xaml;Windows\AboutAuthors.xaml;Windows\AboutProgram.xaml;Windows\Tasks.xaml;
 
 False
 

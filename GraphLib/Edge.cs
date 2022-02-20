@@ -15,7 +15,15 @@ namespace GraphLib
 
 		public string name;
 
-		public double Weight { get; set; } = 1;
+		public double Weight
+		{
+			get => _weight;
+			set
+			{
+				_weight = value;
+				OnPropertyChanged();
+			}
+		}
 
 		public string EdgeName
 		{
@@ -27,32 +35,49 @@ namespace GraphLib
 			}
 		}
 
-		private Point endPoint;
-		public Point EndPoint
-		{
-			get => endPoint;
-			set
-			{
-				endPoint = value;
-				OnPointsChanged();
-			}
-		}
+		public Point EndPoint => EndVertex.Point;
 
 		public bool IsDirected { get; set; }
 		/// <summary>
 		/// V1 - out vertex (from)
 		/// V2 - in Vertex (to)
 		/// </summary>
-		public Vertex StartVertex { get; set; }
-		public Vertex EndVertex { get; set; }
+		public Vertex StartVertex
+		{
+			get => _startVertex;
+			set
+			{
+				if (_startVertex != null)
+					_startVertex.PropertyChanged -= VertexOnPropertyChanged;
+				_startVertex = value;
+				_startVertex.PropertyChanged += VertexOnPropertyChanged;
+				OnPropertyChanged();
+			}
+		}
+		public Vertex EndVertex
+		{
+			get => _endVertex;
+			set
+			{
+				if (_endVertex != null)
+					_endVertex.PropertyChanged -= VertexOnPropertyChanged;
+				_endVertex = value;
+				_endVertex.PropertyChanged += VertexOnPropertyChanged;
+				OnPropertyChanged();
+			}
+		}
+		public void VertexOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+			=> OnPropertyChanged();
 
-		public Point StartPoint { get => StartVertex.Point; }
+		public Point StartPoint => StartVertex.Point;
 
 		#endregion
 
-		public Action OnPointsChanged;
-
 		public Action OnDelete;
+		private double _weight = 1;
+		private bool _isDirected;
+		private Vertex _startVertex;
+		private Vertex _endVertex;
 
 		internal Edge(int id, Vertex v1, Vertex v2 = null)
 		{

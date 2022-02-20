@@ -4,11 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:GraphDesktop.UserContols"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              DataContext="{Binding 
              RelativeSource={RelativeSource Self}}">
     <UserControl.Resources>
+        <system:String x:Key="NullEdge">Ребро</system:String>
         <Style TargetType="Label">
             <Setter Property="FontFamily"
                     Value="{StaticResource Formular}"/>
@@ -37,21 +39,41 @@
             />
         </Style>
     </UserControl.Resources>
-    <Grid>
-        <Path Stroke="Red">
-            <Path.Data>
-                <PathGeometry>
-                    <PathFigure
-                        x:Name="Figure"
-                        IsClosed="False"
-                        StartPoint="{Binding Model.StartPoint}"><!-- нач. точка-->
-                        
-                        <ArcSegment x:Name="ArcSegment"
-                            Size="250,200"
-                            Point="{Binding Model.EndPoint}" /><!-- конеч. точка -->
-                    </PathFigure>
-                </PathGeometry>
-            </Path.Data>
-        </Path>
+    <Grid ClipToBounds="True">
+            <TextBlock
+                    x:Name="TextBlock"
+                    ClipToBounds="True"
+                    Text="{Binding Model.EdgeName}"
+                    HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+                    TextAlignment="Center"
+                    />
+            <Line Stroke="Black"
+                  StrokeEndLineCap="Triangle"
+                  StrokeLineJoin="Round"
+                  Fill="Black"
+                  x:Name="Line"
+                  ClipToBounds="True"
+                  X1="{Binding
+                Model.StartPoint.X,
+                Mode=OneWay,
+                TargetNullValue=20, FallbackValue=20}"
+                  Y1="{Binding Model.StartPoint.Y,
+                Mode=OneWay,
+                TargetNullValue=20, FallbackValue=20}"
+                  X2="{Binding Model.EndPoint.X,
+                Mode=OneWay,
+                TargetNullValue=50, FallbackValue=50}"
+                  Y2="{Binding Model.EndPoint.Y,
+                Mode=OneWay,
+                TargetNullValue=50, FallbackValue=50}"
+            />
     </Grid>
+        <!--
+        <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Text="{Binding 
+                        Model.EdgeName, 
+                        TargetNullValue=NullEdge}"/>
+        !-->
 </UserControl>

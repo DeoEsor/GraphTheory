@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows;
+using GraphDesktop.UserContols;
 using GraphDesktop.Windows;
+using GraphLib.GraphTasks;
 namespace GraphDesktop
 {
 	/// <summary>
@@ -42,6 +44,14 @@ namespace GraphDesktop
 		private void AboutProgramm(object sender, RoutedEventArgs e)
 		{
 			AboutProgram aboutProgram = new AboutProgram();
+			
+			aboutProgram.Show();
+		}
+
+		private void BFS(object sender, RoutedEventArgs e)
+		{
+			AlgorithPathResult aboutProgram = new AlgorithPathResult(GraphCanvas.Model);
+			aboutProgram.Owner = this;
 			
 			aboutProgram.Show();
 		}

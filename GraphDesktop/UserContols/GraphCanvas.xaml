@@ -47,6 +47,7 @@
     <Canvas
             MouseLeftButtonDown="UIElement_OnMouseDown"
             x:Name="Canvas" 
+            x:FieldModifier="public"
             Background="Transparent"
             Width="Auto"
             Height="Auto"

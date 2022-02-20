@@ -66,6 +66,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Scripts\CursorStateMachine.cs" />
+    <Compile Include="UserContols\AlgorithPathResult.xaml.cs">
+      <DependentUpon>AlgorithPathResult.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserContols\ColorPicker.xaml.cs">
       <DependentUpon>ColorPicker.xaml</DependentUpon>
     </Compile>
@@ -117,6 +120,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="UserContols\AlgorithPathResult.xaml" />
     <Page Include="UserContols\ColorPicker.xaml" />
     <Page Include="UserContols\Edge.xaml" />
     <Page Include="UserContols\GraphCanvas.xaml" />
