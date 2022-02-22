@@ -38,18 +38,26 @@
                     Value="Italic"
             />
         </Style>
+        <Style TargetType="Line">
+            <Style.Triggers>
+                <DataTrigger 
+                    Binding="{Binding Model.IsDirected}"
+                    Value="True">
+                    <Setter Property="StrokeEndLineCap" Value="Triangle" />
+                </DataTrigger>
+                <DataTrigger 
+                    Binding="{Binding Model.IsDirected}"
+                    Value="False">
+                    <Setter Property="StrokeEndLineCap" Value="Square" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
-    <Grid ClipToBounds="True">
-            <TextBlock
-                    x:Name="TextBlock"
-                    ClipToBounds="True"
-                    Text="{Binding Model.EdgeName}"
-                    HorizontalAlignment="Center" VerticalAlignment="Bottom" 
-                    TextAlignment="Center"
-                    />
+    <Grid ClipToBounds="True"
+          MouseLeftButtonDown="Line_OnMouseUp">
             <Line Stroke="Black"
-                  StrokeEndLineCap="Triangle"
                   StrokeLineJoin="Round"
+                  StrokeThickness="6"
                   Fill="Black"
                   x:Name="Line"
                   ClipToBounds="True"
@@ -65,15 +73,63 @@
                 TargetNullValue=50, FallbackValue=50}"
                   Y2="{Binding Model.EndPoint.Y,
                 Mode=OneWay,
-                TargetNullValue=50, FallbackValue=50}"
-            />
+                TargetNullValue=50, FallbackValue=50}">
+            </Line>
+            <Popup
+            x:Name="popup" StaysOpen="False" Focusable="True" Placement="MousePoint">
+            <Border BorderBrush="Honeydew" CornerRadius="2,2,2,2" BorderThickness="2,2,2,2">
+
+                <StackPanel Background="#F9F9F9" Height="450" Width="250"                
+                    >
+                    <UniformGrid HorizontalAlignment="Center" Columns="2">
+                        <Label
+                                Foreground="#000000"
+                                Content="Ребро : " />
+                    </UniformGrid>
+                    <UniformGrid Columns="2">
+                        <TextBlock Text="Имя : "/>
+                        <TextBox Focusable="True"
+                            Text="{Binding Model.EdgeName, Mode = TwoWay}"
+                            />
+                    </UniformGrid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock HorizontalAlignment="Center"
+                                Text="Вес"/>
+                        <TextBox HorizontalAlignment="Center"
+                                       Grid.Row="0" Grid.Column = "1" 
+                                       Text="{Binding Model.Weight,
+                                       TargetNullValue = 1, FallbackValue= 1 }"/>
+                        <CheckBox Grid.Row="1" Grid.Column="0" 
+                                  Content="Ориентированный"
+                                    IsChecked="{
+                                    Binding 
+                                    Model.IsDirected,
+                                   Mode=TwoWay}"/>
+                        <TextBlock HorizontalAlignment="Center"
+                                       Grid.Row = "2" Grid.Column="0" Grid.ColumnSpan="2" Text="Вершины"/>
+                        <ListBox x:Name="EdgesListBox" HorizontalAlignment="Center"
+                                     Grid.Row = "3"  Grid.ColumnSpan="2" Grid.Column="0">
+                            <ListBoxItem 
+                                Content="{Binding 
+                                Model.StartVertex.Name}"/>
+                            <ListBoxItem 
+                                Content="{Binding 
+                            Model.EndVertex.Name}"/>
+                        </ListBox>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Popup>
+
     </Grid>
-        <!--
-        <TextBlock
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Text="{Binding 
-                        Model.EdgeName, 
-                        TargetNullValue=NullEdge}"/>
-        !-->
 </UserControl>

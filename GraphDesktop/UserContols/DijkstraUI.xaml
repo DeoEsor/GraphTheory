@@ -1,29 +1,24 @@
-﻿<Window x:Class="GraphDesktop.UserContols.AlgorithPathResult"
+﻿<Window x:Class="GraphDesktop.UserContols.DijkstraUI"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:GraphDesktop.UserContols"
         mc:Ignorable="d"
-        d:DesignHeight="300" d:DesignWidth="300"
-        MinHeight="300" MinWidth="400"
-        MaxHeight="300" MaxWidth="400"
-        DataContext="{Binding 
-             RelativeSource={RelativeSource Self} }"
+        Title="DijkstraUI" Height="450" Width="800"
         Icon="../Resources/emblema_mai.ico"
-        >
+        DataContext="{Binding 
+        RelativeSource={RelativeSource Mode=Self}}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
         </Grid.RowDefinitions>
-        <TextBlock Text="Вершина начала :"/>
+        <TextBlock Text="Исходная Вершина :"/>
         <ComboBox 
             x:Name="StartList"
                 Grid.Column="0" Grid.Row="1" 
@@ -31,26 +26,9 @@
                  Width="100"
                  HorizontalContentAlignment="Center"
                  VerticalAlignment="Center" VerticalContentAlignment="Center"
-                 SelectionChanged="StartChanged"
-                 ItemsSource="{Binding Graph.Vertices}"
-        >
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}" Width="60"  />
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <TextBlock Grid.Column="0" Grid.Row="2"  Text="Вершина конца :"/>
-        <ComboBox
-            x:Name="EndList"
-            Grid.Column="0" Grid.Row="3" 
-                 Height="50"
-                 Width="100"
-                 HorizontalContentAlignment="Center"
-                 VerticalAlignment="Center" VerticalContentAlignment="Center"
-                 SelectionChanged="EndChanged"
-            ItemsSource="{Binding
-             AvailableEndVertexes}"
+                 SelectionChanged="StartList_OnSelectionChanged"
+                 ItemsSource="{Binding 
+                 Graph.Vertices}"
         >
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -61,16 +39,21 @@
         <TextBlock Grid.Column="1" Grid.Row="0" Text="Путь : "/>
         <ListBox
             x:Name="PathBox"
-            Grid.Column="1" Grid.Row="1"  Grid.RowSpan="3"
+            Grid.Column="1" Grid.Row="1" 
                  Height="200" Width="150"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                  >
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock 
-                        Text="{Binding 
-                        Path=Name}" />
+                    <WrapPanel>
+                        <TextBlock 
+                            Text="{Binding Key.Name}" />
+                        <TextBlock 
+                            Text=" Расстояние до от исходной вершины - " />
+                        <TextBlock 
+                            Text="{Binding Value}" />
+                    </WrapPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

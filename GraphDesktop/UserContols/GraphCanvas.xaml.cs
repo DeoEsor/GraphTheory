@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using GraphLib;
 // ReSharper disable HeapView.BoxingAllocation
 
@@ -40,6 +41,21 @@ namespace GraphDesktop.UserContols
 			InitializeComponent();
 			GraphLib.DrawGraph.Graph = Model;
 			Model.Edges.CollectionChanged += EdgesOnCollectionChanged;
+			var st = new ScaleTransform();
+			Canvas.RenderTransform = st;
+			Canvas.MouseWheel += (sender, e) =>
+			{
+				if (e.Delta > 0)
+				{
+					st.ScaleX *= 1.2;
+					st.ScaleY *= 1.2;
+				}
+				else
+				{
+					st.ScaleX /= 1.2;
+					st.ScaleY /= 1.2;
+				}
+			};
 		}
 		private void EdgesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
@@ -184,17 +200,17 @@ namespace GraphDesktop.UserContols
 				Graph.MatrixType.Incidence :
 				Model.MatrixT = Graph.MatrixType.Adjacency;
 			
-			UpdateMatrix(Model.GetMatrix());
+			UpdateDataTaMatrix(Model.GetMatrix());
 		}
 
-		void UpdateMatrix(int[,] matrix)
+		public DataTable UpdateDataTaMatrix(int[,] matrix)
 		{
 			
 			var dt = new DataTable();
 			if (matrix.Length == 0)
 			{
 				this.Matrix = dt.DefaultView;	
-				return;
+				return dt;
 			}
 			int rows = matrix.GetUpperBound(0) + 1;    // количество строк
 			int columns = matrix.Length / rows;
@@ -210,6 +226,7 @@ namespace GraphDesktop.UserContols
 				dt.Rows.Add(r);
 			}
 			this.Matrix = dt.DefaultView;
+			return dt;
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;

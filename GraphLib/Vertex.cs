@@ -57,19 +57,24 @@ namespace GraphLib
 			get
 			{
 				var list = new List<Vertex>();
-				foreach (var VARIABLE in _edges)
-					if(VARIABLE.StartVertex == this)
-						list.Add(VARIABLE.EndVertex);
+				foreach (var edge in _edges)
+					if(edge.StartVertex == this)
+						list.Add(edge.EndVertex);
 				return list;
 			}
 		}
 
-		public Edge EdgeWithVertex(Vertex other) //TODO List or Enumerate
+		public Edge EdgeWithVertex(Vertex other, bool oriented = true) 
+			//TODO List or Enumerate 
+			//TODO oriented check
 		{
-			foreach (var VARIABLE in _edges)
+			foreach (var edge in _edges)
+				if(
+					(!oriented && (edge.StartVertex == other || edge.EndVertex == other))
+					|| (oriented && edge.EndVertex == other)
+					)
+					return edge;
 			
-				if (VARIABLE.StartVertex == other || VARIABLE.EndVertex == other)
-					return VARIABLE;
 			return null;
 		}
 

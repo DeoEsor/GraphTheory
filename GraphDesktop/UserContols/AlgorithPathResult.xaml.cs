@@ -53,20 +53,21 @@ namespace GraphDesktop.UserContols
 		{
 			Start = (GraphLib.Vertex)StartList.SelectedItem;
 			AvailableEndVertexes = new ObservableCollection<GraphLib.Vertex>(Graph.Vertices.Where(s => s != Start));
+			EndList.ItemsSource = AvailableEndVertexes;
 		}
 		private void EndChanged(object sender, SelectionChangedEventArgs e)
 		{
 			End =(GraphLib.Vertex) EndList.SelectedItem;
-			try
-			{
-				GraphLib.GraphTasks.GraphTasks.BFS(Graph, Start, End, out List<GraphLib.Vertex> path);
-				Collection = new ObservableCollection<GraphLib.Vertex>(path);
-			}
-			catch
-			{
-				
-			}
 			
+			GraphLib.GraphTasks.GraphTasks.BFS(Graph, Start, End, out List<GraphLib.Vertex> path);
+			if (path != null)
+			{
+				Collection = new ObservableCollection<GraphLib.Vertex>(path);
+				PathBox.ItemsSource = Collection;
+			}
+			else
+				PathBox.ItemsSource = null;
+
 		}
 	}
 }

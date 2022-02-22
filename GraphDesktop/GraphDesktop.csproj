@@ -72,6 +72,9 @@
     <Compile Include="UserContols\ColorPicker.xaml.cs">
       <DependentUpon>ColorPicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserContols\DijkstraUI.xaml.cs">
+      <DependentUpon>DijkstraUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserContols\Edge.xaml.cs">
       <DependentUpon>Edge.xaml</DependentUpon>
     </Compile>
@@ -122,6 +125,7 @@
     </Page>
     <Page Include="UserContols\AlgorithPathResult.xaml" />
     <Page Include="UserContols\ColorPicker.xaml" />
+    <Page Include="UserContols\DijkstraUI.xaml" />
     <Page Include="UserContols\Edge.xaml" />
     <Page Include="UserContols\GraphCanvas.xaml" />
     <Page Include="UserContols\Vertex.xaml" />

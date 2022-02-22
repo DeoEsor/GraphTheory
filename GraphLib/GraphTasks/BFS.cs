@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
+using System.Linq;
 
 namespace GraphLib.GraphTasks
 {
@@ -24,9 +25,9 @@ namespace GraphLib.GraphTasks
             queue.Enqueue(s);
             (var used,var dist, var paretns) 
                 = ( new Dictionary<Vertex, bool>(), new Dictionary<Vertex, double>(), new Dictionary<Vertex, Vertex>());
-
-            used[s] = true;
-            paretns[s] = null;
+            
+            used.Add(s,  true);
+            paretns.Add(s, null);
 
             while (queue.Count != 0)
             {
@@ -34,17 +35,20 @@ namespace GraphLib.GraphTasks
                 
                 foreach (var to in graph[v])
                 {
-                    if (used[to]) continue;
+                    if (used.Keys.Contains(to) && used[to]) continue;
                     
-                    used[to] = true;
+                    used.Add(to , true);
                     queue.Enqueue(to);
-                    dist[to] = dist[v] + v.EdgeWithVertex(to).Weight;//Check
-                    paretns[to] = v;
+                    if (!dist.Keys.Contains(v))
+                        dist.Add(v, v.EdgeWithVertex(to).Weight);
+                    else
+                        dist.Add(to,dist[v] + v.EdgeWithVertex(to).Weight );//Check
+                    paretns.Add( to, v);
                     
                 }
             }
 
-            if (!used[f])
+            if (!used.Keys.Contains(f))
                 path = null;
             else
             {

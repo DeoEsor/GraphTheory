@@ -95,8 +95,6 @@ namespace GraphLib
             matrix = new Dictionary<Vertex, List<Vertex>>();
             foreach (var vertex in Vertices)
                 matrix.Add(vertex, vertex.GoingToVertexes);
-            var a =matrix[Vertices[0]][0].EdgeWithVertex(Vertices[0]).Weight;
-
         }
 
         /// <summary>

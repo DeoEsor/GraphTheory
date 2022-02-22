@@ -37,7 +37,7 @@ namespace GraphLib
 
 		public Point EndPoint => EndVertex.Point;
 
-		public bool IsDirected { get; set; }
+		public static bool IsDirected { get; set; } = true;
 		/// <summary>
 		/// V1 - out vertex (from)
 		/// V2 - in Vertex (to)

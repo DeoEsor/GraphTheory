@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,7 +53,14 @@
     <Compile Include="DrawGraph.cs" />
     <Compile Include="Edge.cs" />
     <Compile Include="Graph.cs" />
-    <Compile Include="GraphTask\BFS.cs" />
+    <Compile Include="GraphTasks\AStar.cs" />
+    <Compile Include="GraphTasks\BestFirstSearch.cs" />
+    <Compile Include="GraphTasks\BFS.cs" />
+    <Compile Include="GraphTasks\Coloring.cs" />
+    <Compile Include="GraphTasks\DFS.cs" />
+    <Compile Include="GraphTasks\Dijkstra.cs" />
+    <Compile Include="GraphTasks\GraphParametrs.cs" />
+    <Compile Include="GraphTasks\Validations.cs" />
     <Compile Include="History\Caretaker.cs" />
     <Compile Include="History\Memento.cs" />
     <Compile Include="History\Originator.cs" />
