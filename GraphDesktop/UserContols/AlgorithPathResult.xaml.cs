@@ -58,8 +58,11 @@ namespace GraphDesktop.UserContols
 		private void EndChanged(object sender, SelectionChangedEventArgs e)
 		{
 			End =(GraphLib.Vertex) EndList.SelectedItem;
-			
-			GraphLib.GraphTasks.GraphTasks.BFS(Graph, Start, End, out List<GraphLib.Vertex> path);
+			List<GraphLib.Vertex> path;
+			if (((string) AlgoBoxChoice.SelectedItem) == "BreadthFirst Search")
+				GraphLib.GraphTasks.GraphTasks.BFS(Graph, Start, End, out path);
+			else
+				path = GraphLib.GraphTasks.GraphTasks.BestFirstSearch(Graph, Start, End);
 			if (path != null)
 			{
 				Collection = new ObservableCollection<GraphLib.Vertex>(path);
