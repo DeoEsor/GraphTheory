@@ -110,8 +110,6 @@
                 <MenuItem Background="#C9535353" 
                           Header="BreadthFirst Search" Click="BFS"/>
                 <MenuItem Background="#C9535353" 
-                          Header="Best-First Search" Click="BFSSecond"/>
-                <MenuItem Background="#C9535353" 
                           Header="Dijkstra" Click="DjkstraChosen"/>
             </MenuItem>
             <MenuItem Header="Задания"  Click="Tasks"/>

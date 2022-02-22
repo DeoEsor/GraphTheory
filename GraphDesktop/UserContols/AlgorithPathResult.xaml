@@ -11,6 +11,7 @@
         DataContext="{Binding 
              RelativeSource={RelativeSource Self} }"
         Icon="../Resources/emblema_mai.ico"
+        Title="BFS"
         >
     <Grid>
         <Grid.ColumnDefinitions>
@@ -18,6 +19,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition />
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
@@ -74,5 +76,12 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <ComboBox
+            x:Name="AlgoBoxChoice"
+            Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                  Margin="100,20,100,15">
+            <ComboBoxItem Content="BreadthFirst Search"></ComboBoxItem>
+            <ComboBoxItem Content="Best-First Search"></ComboBoxItem>
+        </ComboBox>
     </Grid>
 </Window>
