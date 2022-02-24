@@ -59,7 +59,7 @@ namespace GraphDesktop.UserContols
 		{
 			End =(GraphLib.Vertex) EndList.SelectedItem;
 			List<GraphLib.Vertex> path;
-			if (((string) AlgoBoxChoice.SelectedItem) == "BreadthFirst Search")
+			if (((ComboBoxItem) AlgoBoxChoice.SelectedItem).Content == "BreadthFirst Search")
 				GraphLib.GraphTasks.GraphTasks.BFS(Graph, Start, End, out path);
 			else
 				path = GraphLib.GraphTasks.GraphTasks.BestFirstSearch(Graph, Start, End);

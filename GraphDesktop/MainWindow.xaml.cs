@@ -108,7 +108,7 @@ namespace GraphDesktop
 
 			using (StreamWriter swExtLogFile = new StreamWriter(dir + @"/"+ GraphCanvas.Model.Name + ".txt", true))
 			{
-				var dt = GraphCanvas.UpdateDataTaMatrix(GraphCanvas.Model.GetMatrix());
+				var dt = GraphCanvas.UpdateIncDataTaMatrix(GraphCanvas.Model.GetMatrix());
 
 				foreach (DataRow row in dt.Rows)
 				{

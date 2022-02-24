@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using GraphLib;
+using GraphLib.GraphTasks;
 // ReSharper disable HeapView.BoxingAllocation
 
 namespace GraphDesktop.UserContols
@@ -14,14 +15,14 @@ namespace GraphDesktop.UserContols
     public partial class GraphCanvas : UserControl, INotifyPropertyChanged
 	{
 		#region Variables && Properties
-
+		public static  RoutedCommand ShowAdjgrid { get; set; } = new RoutedCommand();
 		public bool IsDragging { get; set; }= false;
 
 		private Point lastPosition;
 		public Graph Model { get; set; } = new Graph();
 
 
-        //its mb optimized, but i'm too lazy for it
+		//its mb optimized, but i'm too lazy for it
         private object _matrix;
 		public object Matrix
 		{
@@ -33,11 +34,24 @@ namespace GraphDesktop.UserContols
 			}
 		}
 
+		public object AdjMatix
+		{
+			get => _adjMatix;
+			set
+			{
+				_adjMatix = value;
+				OnPropertyChanged();
+			}
+		}
+
 		public UserControl draggedItem;
+		private object _adjMatix;
   #endregion
 
 		public GraphCanvas()
 		{
+			ShowAdjgrid.InputGestures.Add(new KeyGesture(Key.N, ModifierKeys.Control));
+			CommandBindings.Add(new CommandBinding(ShowAdjgrid, MyCommandExecuted));
 			InitializeComponent();
 			GraphLib.DrawGraph.Graph = Model;
 			Model.Edges.CollectionChanged += EdgesOnCollectionChanged;
@@ -92,6 +106,8 @@ namespace GraphDesktop.UserContols
 
 			if (!Popup.IsOpen)
 				Popup.IsOpen = false;
+			DiametrData.Text = Model.GraphDiametr().ToString();
+			RadiusData.Text = Model.GraphRadius().ToString();
 			Popup.IsOpen = true;
 			MatrixChoice_SelectionChanged(null, null);
 			lastPosition = e.GetPosition(Canvas);
@@ -158,7 +174,7 @@ namespace GraphDesktop.UserContols
 			Canvas.SetLeft(draggedItem, point.X - draggedItem.Width / 2);
 			
 			vertex.Model.Point = 
-				new System.Drawing.Point( 
+				new System.Windows.Point( 
 					(int) (point.X - draggedItem.Width / 2),
 					(int)(point.Y - draggedItem.Height / 2)
 					);
@@ -200,32 +216,72 @@ namespace GraphDesktop.UserContols
 				Graph.MatrixType.Incidence :
 				Model.MatrixT = Graph.MatrixType.Adjacency;
 			
-			UpdateDataTaMatrix(Model.GetMatrix());
+			Matrix = UpdateIncDataTaMatrix(Model.GetMatrix());
+			
+			AdjMatix = UpdateAdjDataTaMatrix().DefaultView;
 		}
 
-		public DataTable UpdateDataTaMatrix(int[,] matrix)
+		public DataTable UpdateIncDataTaMatrix(int[,] matrix)
 		{
-			
+
 			var dt = new DataTable();
 			if (matrix.Length == 0)
+			{
+				this.Matrix = dt.DefaultView;
+				return dt;
+			}
+			int rows = matrix.GetUpperBound(0) + 1; // количество строк
+			int columns = matrix.Length / rows;
+
+			for (var i = 0; i < columns; i++)
+			{
+				dt.Columns.Add(new DataColumn(Model.Vertices[i].Name, typeof(int)));
+			}
+
+			for (var i = 0; i < rows; i++)
+			{
+				var r = dt.NewRow();
+				for (var j = 0; j < columns; j++)
+					r[j] = matrix[i, j];
+				dt.Rows.Add(r);
+			}
+
+			
+			return dt;
+		}
+		private void Grid1_LoadingRow(object sender, DataGridRowEventArgs e)
+		{
+			var id = e.Row.GetIndex();
+			if(id < Model.Vertices.Count)
+				e.Row.Header = Model.Vertices[id].Name;
+		}
+
+		public DataTable UpdateAdjDataTaMatrix()
+		{
+			var matrix = Model.FillAdjacencyMatrix();
+			var dt = new DataTable();
+			if (matrix.Count == 0)
 			{
 				this.Matrix = dt.DefaultView;	
 				return dt;
 			}
-			int rows = matrix.GetUpperBound(0) + 1;    // количество строк
-			int columns = matrix.Length / rows;
+			int rows = matrix.Values.Count;
+			int columns = matrix.Keys.Count;
 
 			for (var i = 0; i < columns; i++)
-				dt.Columns.Add(new DataColumn("c" + i, typeof(int)));
+				dt.Columns.Add(new DataColumn(Model.Vertices[i].Name, typeof(double)));
 
-			for (var i = 0; i < rows; i++)
+			foreach (var data in matrix)
 			{
-				var r = dt.NewRow();				
-				for (var j = 0; j < columns; j++)
-					r[j] = matrix[i,j];
+				var r = dt.NewRow();
+				foreach (var a in data.Value)
+				{
+					r[Model.Vertices.IndexOf(a.Key)] = a.Value;
+				}
 				dt.Rows.Add(r);
 			}
-			this.Matrix = dt.DefaultView;
+				
+			
 			return dt;
 		}
 
@@ -240,6 +296,11 @@ namespace GraphDesktop.UserContols
 			=> Canvas.SetTop(element, length);
 		public void SetElementLeft(UIElement element, int length)
 			=> Canvas.SetLeft(element, length);
+		private void MyCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+		{
+			MatrixAdjGrid.Visibility = MatrixAdjGrid.IsVisible ? Visibility.Hidden : Visibility.Visible;
+			this.UpdateLayout();
+		}
 	}
 }
 

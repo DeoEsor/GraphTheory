@@ -34,11 +34,14 @@
                  HorizontalContentAlignment="Center"
                  VerticalAlignment="Center" VerticalContentAlignment="Center"
                  SelectionChanged="StartChanged"
-                 ItemsSource="{Binding Graph.Vertices}"
+                 ItemsSource="{Binding
+                  Graph.Vertices}"
         >
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Name}" Width="60"  />
+                    <TextBlock 
+                        Text="{Binding Name}" 
+                        Width="60"  />
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>

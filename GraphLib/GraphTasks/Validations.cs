@@ -15,20 +15,10 @@ namespace GraphLib.GraphTasks
 		
 		public static bool IsIsomorphWith(this Graph graph, Graph other)
 		{
-			graph.FillAdjacencyMatrix(out var first);
-			graph.FillAdjacencyMatrix(out var second);
+			var first = graph.FillAdjacencyMatrix();
+			var second = graph.FillAdjacencyMatrix();
 
-			if (first.Length != second.Length 
-				|| (first.GetUpperBound(0) != second.GetUpperBound(0)
-				||  first.GetUpperBound(1) != second.GetUpperBound(1)))
-				return false;
-
-			int size = first.GetUpperBound(0);
-
-			for (int i = 0; i < first.GetUpperBound(0); i++)
-				for (int j = 0; j < first.GetUpperBound(1); j++)
-					if (first[i, j] != second[i, j])
-						return false;
+			//TODO
 			
 			return true;
 		}

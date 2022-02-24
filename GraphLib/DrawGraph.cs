@@ -66,7 +66,7 @@ namespace GraphLib
 
 		public static void DrawSelectedVertex(int x, int y) => _gr.DrawEllipse(_redPen, x - R, y - R, 2 * R, 2 * R);
 
-
+/*
 		public static void drawEdge(Vertex V1, Vertex V2, Edge E, int numberE)
 		{
 			if (E.StartVertex.Id == E.EndVertex.Id)
@@ -86,7 +86,8 @@ namespace GraphLib
 				DrawVertex(V2.Point.X, V2.Point.Y, (E.EndVertex.Id + 1).ToString());
 			}
 		}
+		
+*/
 		#endregion
-
 	}
 }

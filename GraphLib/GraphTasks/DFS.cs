@@ -7,9 +7,9 @@ namespace GraphLib.GraphTasks
 		public static void DFS(this Graph _graph, Vertex vertex,HashSet<Vertex> visited = null)
 		{
 			visited ??= new HashSet<Vertex>();
-			_graph.ReturnAdjacencyList(out var graph);
+			var graph = _graph.ReturnAdjacencyList();
 			visited.Add(vertex);
-			foreach (var vertexGoing in vertex.GoingToVertexes)
+			foreach (var vertexGoing in vertex.AchievableVertexes)
 				DFS(_graph,vertexGoing);
 			
 		}

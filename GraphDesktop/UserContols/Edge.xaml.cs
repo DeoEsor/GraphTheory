@@ -17,6 +17,27 @@ namespace GraphDesktop.UserContols
 		{
 			GraphCanvas = canvas;
 			Model = edge;
+			
+			
+			
+			/*if (Model.IsDirected)
+				Trianglepoints = new PointCollection()
+				{
+					new System.Windows.Point
+					(
+						Model.EndPoint.X - 25,
+						Model.EndPoint.Y - 15
+					),
+					Model.EndPoint,
+					new System.Windows.Point
+					(
+							
+						Model.EndPoint.X + 25,
+						Model.EndPoint.Y + 15
+					)
+						
+				};
+				*/
 			InitializeComponent();
 			Model.PropertyChanged += ModelOnPropertyChanged;
 			ModelOnPropertyChanged(null, new PropertyChangedEventArgs(nameof(GraphLib.Edge.VertexOnPropertyChanged)));
@@ -46,7 +67,7 @@ namespace GraphDesktop.UserContols
 			}
 		}
 
-		
+		private PointCollection Trianglepoints { get; set; } = null;
 
 		public string EdgeName { get => Model.EdgeName; set => Model.EdgeName = value; }
 
@@ -59,6 +80,7 @@ namespace GraphDesktop.UserContols
 		}
 		private void Line_OnMouseUp(object sender, MouseButtonEventArgs e)
 		{
+			GraphCanvas.Popup.IsOpen = false;
 			popup.IsOpen = true;
 		}
 	}

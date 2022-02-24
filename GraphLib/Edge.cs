@@ -35,9 +35,7 @@ namespace GraphLib
 			}
 		}
 
-		public Point EndPoint => EndVertex.Point;
-
-		public static bool IsDirected { get; set; } = true;
+		public System.Windows.Point EndPoint => EndVertex.Point;
 		/// <summary>
 		/// V1 - out vertex (from)
 		/// V2 - in Vertex (to)
@@ -69,13 +67,12 @@ namespace GraphLib
 		public void VertexOnPropertyChanged(object sender, PropertyChangedEventArgs e)
 			=> OnPropertyChanged();
 
-		public Point StartPoint => StartVertex.Point;
+		public System.Windows.Point StartPoint => StartVertex.Point;
 
 		#endregion
 
 		public Action OnDelete;
 		private double _weight = 1;
-		private bool _isDirected;
 		private Vertex _startVertex;
 		private Vertex _endVertex;
 
@@ -87,7 +84,7 @@ namespace GraphLib
 			EdgeName = Id.ToString();
 		}
 
-		public bool IsIn(Vertex sender) => sender == EndVertex;
+		public bool IsIn(Vertex sender) => sender == EndVertex || sender == StartVertex;
 
 		public void Delete()
 		{
@@ -102,5 +99,13 @@ namespace GraphLib
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
+		
+		public static bool operator >(Edge first, Edge other) => first.Weight > other.Weight;
+
+		public static bool operator<(Edge first, Edge other) => first.Weight < other.Weight;
+
+		public static bool operator==(Edge first, Edge other) => first.Id == other.Id;
+		
+		public static bool operator !=(Edge first, Edge other) => first.Id != other.Id;
 	}
 }

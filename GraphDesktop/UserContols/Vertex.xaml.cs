@@ -59,6 +59,7 @@ namespace GraphDesktop.UserContols
 			if (popup.IsOpen)
 				//popup redraw
 				popup.IsOpen = false;
+			VertexWeight.Text = Model.Weight.ToString();
 			popup.IsOpen = true;
 			OpenedPopup = popup;
 		}

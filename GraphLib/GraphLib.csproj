@@ -53,6 +53,7 @@
     <Compile Include="DrawGraph.cs" />
     <Compile Include="Edge.cs" />
     <Compile Include="Graph.cs" />
+    <Compile Include="GraphBase.cs" />
     <Compile Include="GraphTasks\AStar.cs" />
     <Compile Include="GraphTasks\BestFirstSearch.cs" />
     <Compile Include="GraphTasks\BFS.cs" />

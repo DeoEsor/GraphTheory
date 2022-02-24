@@ -52,16 +52,27 @@ namespace GraphLib.GraphTasks
 		{
 			double Radius = Double.PositiveInfinity;
 
-			foreach (var from in _graph.Vertices)
+			var matrix = _graph.FillAdjacencyMatrix();
+			for (int k = 0; k < matrix.Count; k++)
+				foreach (var i in _graph.Vertices)
+					foreach (var j in _graph.Vertices)
+						matrix[i][j] = 
+							Math.Min(
+									matrix[i][j],
+									matrix[i][_graph.Vertices[k]] + matrix[_graph.Vertices[k]][j]
+								);
+			double res = double.PositiveInfinity;
+			foreach (var i in _graph.Vertices)
 			{
-				var dist = Djkstra(_graph,from);
-				double Max = Double.NegativeInfinity;
-				
-				if (!double.IsPositiveInfinity(Max))
-					Radius = Math.Min(Radius, Max);
+				var max = double.NegativeInfinity;
+				foreach (var pair in matrix[i])
+					if (pair.Value != Double.PositiveInfinity && pair.Key != i)
+						max = Math.Max(max, pair.Value);
+				if (max != Double.NegativeInfinity)
+					res = Math.Min(max, res);
 			}
-
-			return Radius;
+				
+			return res;
 		}
 		
 		public static double GraphDiametr(this Graph _graph)
@@ -114,6 +125,6 @@ namespace GraphLib.GraphTasks
 			return VertexPowers;
 		}
 		
-		public static int VertexWeight(this Vertex v) => Djkstra(v.Graph, v).Values.Where(s => !double.IsPositiveInfinity(s)).Count();
+		public static int VertexWeight(this Vertex v) => Djkstra(v.Graph as Graph, v).Values.Where(s => !double.IsPositiveInfinity(s)).Count();
 	}
 }

@@ -75,6 +75,9 @@
                 Mode=OneWay,
                 TargetNullValue=50, FallbackValue=50}">
             </Line>
+            <Polygon
+                x:Name="Triangle"
+                Fill="Black"  />
             <Popup
             x:Name="popup" StaysOpen="False" Focusable="True" Placement="MousePoint">
             <Border BorderBrush="Honeydew" CornerRadius="2,2,2,2" BorderThickness="2,2,2,2">

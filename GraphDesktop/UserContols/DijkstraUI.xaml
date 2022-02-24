@@ -48,11 +48,15 @@
                 <DataTemplate>
                     <WrapPanel>
                         <TextBlock 
+                            Text="Расстояние до " />
+                        <TextBlock 
                             Text="{Binding Key.Name}" />
+                        
                         <TextBlock 
-                            Text=" Расстояние до от исходной вершины - " />
+                            Text=" - " />
                         <TextBlock 
-                            Text="{Binding Value}" />
+                            Text="{Binding 
+                            Value}" />
                     </WrapPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

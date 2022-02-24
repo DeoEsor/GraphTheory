@@ -79,7 +79,9 @@
                         </Grid.RowDefinitions>
                         <TextBlock HorizontalAlignment="Center"
                                 Text="Вес"/>
-                        <TextBlock HorizontalAlignment="Center"
+                        <TextBlock
+                            x:Name="VertexWeight"
+                            HorizontalAlignment="Center"
                                        Grid.Row="0" Grid.Column = "1" 
                                        Text="{Binding Model.Weight,
                                        TargetNullValue = 0, FallbackValue= 0 }"/>

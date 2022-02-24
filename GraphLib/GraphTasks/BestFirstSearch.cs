@@ -23,10 +23,10 @@ namespace GraphLib.GraphTasks
                 {
                     Vertex v = vertexes.Dequeue();
 
-                    List<Vertex> curVerts = v.GoingToVertexes;
+                    List<Vertex> curVerts = v.AchievableVertexes;
 
                     foreach (var vertex in curVerts)
-                    {;
+                    {
                         if (visited.Contains(vertex)) continue;
                         
                         visited.Add(vertex);

@@ -7,11 +7,13 @@ namespace GraphLib.GraphTasks
 
 	public static partial class GraphTasks
 	{
+		
+		//REDO to non-oriented
 		public static Dictionary<Vertex, double>  Djkstra(Graph _graph, Vertex Start)
 		{
 			var dist = new Dictionary<Vertex, double>();
 	
-			_graph.ReturnAdjacencyList(out Dictionary<Vertex, List<Vertex>> graph);
+			var graph =_graph.ReturnAdjacencyList();
 
 			var used = new HashSet<Vertex>();	
 	

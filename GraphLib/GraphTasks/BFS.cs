@@ -19,7 +19,7 @@ namespace GraphLib.GraphTasks
         /// <returns>есть ли путь</returns>
         public static void BFS(Graph _graph, Vertex s, Vertex f, out List<Vertex> path)
         {
-            _graph.ReturnAdjacencyList(out Dictionary<Vertex, List<Vertex>> graph);
+            Dictionary<Vertex, List<Vertex>> graph = _graph.ReturnAdjacencyList();
 
             var queue = new Queue<Vertex>();
             queue.Enqueue(s);

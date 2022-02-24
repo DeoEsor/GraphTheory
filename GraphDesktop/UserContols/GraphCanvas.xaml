@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local = 'clr-namespace:GraphDesktop.UserContols'
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              Height="Auto"
@@ -44,7 +45,13 @@
                     Value="Bold"/>
         </Style>
     </UserControl.Resources>
-    <Canvas
+    <UserControl.InputBindings>
+            <KeyBinding Modifiers="Alt"
+                        Key="H"
+                        Command="{Binding ShowAdjgrid}" />
+    </UserControl.InputBindings>
+    <Grid>
+        <Canvas
             MouseLeftButtonDown="UIElement_OnMouseDown"
             x:Name="Canvas" 
             x:FieldModifier="public"
@@ -52,148 +59,161 @@
             Width="Auto"
             Height="Auto"
             ClipToBounds="True">
-        <Popup x:Name="Popup"
-               StaysOpen="False" 
-               Focusable="True" 
-               PlacementTarget="{Binding ElementName=Canvas}"
-               Placement="MousePoint">
-            <Border BorderBrush="Honeydew" BorderThickness="2,2,2,2">
-                <StackPanel Background="#F9F9F9"  Width="250" VerticalAlignment="Stretch" >
-                    <TextBox HorizontalAlignment="Center" Text="{Binding Model.Name, Mode=TwoWay}"/>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <UniformGrid HorizontalAlignment="Center" Columns="2">
-                            <TextBlock TextAlignment="Center"
-                                           FontWeight="Medium"
-                                            Text="Матрица"/>
-                            <ComboBox x:Name="MatrixChoice" 
-                                      Height="20" Width="140" 
-                                      VerticalAlignment="Center"
-                                      SelectedIndex="0" 
-                                      SelectionChanged="MatrixChoice_SelectionChanged">
-                                <TextBlock>Инцидентности</TextBlock>
-                                <TextBlock>Смежности</TextBlock>
-                            </ComboBox>
-                        </UniformGrid>
-                        <DataGrid
-                                Grid.Row="1"
-                                x:Name="MatrixGrid" 
-                                AutoGenerateColumns="True"  IsReadOnly="True"
-                                ItemsSource="{Binding Matrix}" 
-                                Height="250" Width="Auto"
-                                HeadersVisibility="All"
-                                CanUserAddRows="False" CanUserDeleteRows="False">
-                            <DataGrid.RowHeaderStyle>
-                                <Style TargetType="DataGridRowHeader">
-                                    <Setter Property="Width" Value="30"/>
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate>
-                                                <Label Content="{Binding Name}"
-                                                       HorizontalAlignment="Center"
-                                                       VerticalAlignment="Center"
-                                                FontSize="10"
-                                                Margin="-4"/>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </DataGrid.RowHeaderStyle>
-                        </DataGrid>
-                    </Grid>
-                    <Grid VerticalAlignment="Stretch" Margin="10,50,10,10" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Button 
-                            Background="#525252"
-                            Height="50" Click="AddElement" Margin="0,0,10,0">
-                            <Button.Style>
-                                <Style TargetType="{x:Type Button}">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type Button}">
-                                                <Border x:Name="Border" Background="{TemplateBinding Background}">
-                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                                                      TextBlock.TextAlignment="Center">
-                                                        <ContentPresenter.Resources>
-                                                            <Style TargetType="{x:Type TextBlock}">
-                                                                <Setter Property="TextWrapping" Value="Wrap"/>
-                                                            </Style>
-                                                        </ContentPresenter.Resources>
-                                                    </ContentPresenter>
-                                                </Border>
-                                                <ControlTemplate.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Background" Value="#757575" TargetName="Border" />
-                                                    </Trigger>
-                                                </ControlTemplate.Triggers>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </Button.Style>
-                            <Button.Content>
-                                <TextBlock FontSize="11" FontWeight="Medium"
-                                           TextAlignment="Center"
-                                           Foreground="#FFFFFF" Text="Добавить      вершину" TextWrapping="Wrap" />
-                            </Button.Content>
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="5"/>
-                                </Style>
-                            </Button.Resources>
-                        </Button>
-                        <Button  Click="Clear" Margin="10,0,0,0" Grid.Column="1"
-                                 Background="#525252">
-                            <Button.Style>
-                                <Style TargetType="{x:Type Button}">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type Button}">
-                                                <Border x:Name="Border" Background="{TemplateBinding Background}">
-                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                                                      TextBlock.TextAlignment="Center" 
-                                                                      >
-                                                        <ContentPresenter.Resources>
-                                                            <Style TargetType="{x:Type TextBlock}">
-                                                                <Setter Property="TextWrapping" Value="Wrap"/>
-                                                            </Style>
-                                                        </ContentPresenter.Resources>
-                                                    </ContentPresenter>
-                                                </Border>
-                                                <ControlTemplate.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Background" Value="#757575" TargetName="Border" />
-                                                    </Trigger>
-                                                </ControlTemplate.Triggers>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </Button.Style>
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="10"/>
-                                </Style>
-                            </Button.Resources>
-                            <Button.Content>
-                                <TextBlock 
-                                            TextAlignment="Center"
-                                            FontWeight="Medium"
-                                            FontSize="11"
-                                            Foreground="#FFFFFF" Text="Очистить              граф" TextWrapping="Wrap" />
-                            </Button.Content>
-                        </Button>
-                    </Grid>
-                </StackPanel>
-            </Border>
-        </Popup>
-    </Canvas>
+        
+            <Popup x:Name="Popup"
+                   StaysOpen="False" 
+                   Focusable="True" 
+                   PlacementTarget="{Binding ElementName=Canvas}"
+                   Placement="MousePoint">
+                <Border BorderBrush="Honeydew" BorderThickness="2,2,2,2">
+                    <StackPanel Background="#F9F9F9"  Width="250" VerticalAlignment="Stretch" >
+                        <TextBox HorizontalAlignment="Center" Text="{Binding Model.Name, Mode=TwoWay}"/>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <UniformGrid HorizontalAlignment="Center" Columns="2">
+                                <TextBlock TextAlignment="Center"
+                                               FontWeight="Medium"
+                                                Text="Матрица"/>
+                                <ComboBox x:Name="MatrixChoice" 
+                                          Height="20" Width="140" 
+                                          VerticalAlignment="Center"
+                                          SelectedIndex="0" 
+                                          SelectionChanged="MatrixChoice_SelectionChanged">
+                                    <TextBlock>Инцидентности</TextBlock>
+                                    <TextBlock>Смежности</TextBlock>
+                                </ComboBox>
+                            </UniformGrid>
+                            <DataGrid
+                                    Grid.Row="1"
+                                    x:Name="MatrixGrid" 
+                                    AutoGenerateColumns="True"  IsReadOnly="True"
+                                    ItemsSource="{Binding Matrix}"
+                                    LoadingRow="Grid1_LoadingRow"
+                                    Height="250" Width="Auto"
+                                    HeadersVisibility="All"
+                                    CanUserAddRows="False" CanUserDeleteRows="False">
+                               
+                            </DataGrid>
+                            <Expander Grid.Row="2">
+                                <UniformGrid 
+                                    Columns ="2">
+                                    <TextBlock Text="Диаметр :"/>
+                                    <TextBlock x:Name = "DiametrData"/>
+                                    
+                                    <TextBlock Text="Радиус"/>
+                                    <TextBlock x:Name="RadiusData"/>
+                                    
+                                </UniformGrid>
+                            </Expander>
+                        </Grid>
+                        <Grid VerticalAlignment="Stretch" Margin="10,50,10,10" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Button 
+                                Background="#525252"
+                                Height="50" Click="AddElement" Margin="0,0,10,0">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                                                          TextBlock.TextAlignment="Center">
+                                                            <ContentPresenter.Resources>
+                                                                <Style TargetType="{x:Type TextBlock}">
+                                                                    <Setter Property="TextWrapping" Value="Wrap"/>
+                                                                </Style>
+                                                            </ContentPresenter.Resources>
+                                                        </ContentPresenter>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Background" Value="#757575" TargetName="Border" />
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Content>
+                                    <TextBlock FontSize="11" FontWeight="Medium"
+                                               TextAlignment="Center"
+                                               Foreground="#FFFFFF" Text="Добавить      вершину" TextWrapping="Wrap" />
+                                </Button.Content>
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="5"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+                            <Button  Click="Clear" Margin="10,0,0,0" Grid.Column="1"
+                                     Background="#525252">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                                                          TextBlock.TextAlignment="Center" 
+                                                                          >
+                                                            <ContentPresenter.Resources>
+                                                                <Style TargetType="{x:Type TextBlock}">
+                                                                    <Setter Property="TextWrapping" Value="Wrap"/>
+                                                                </Style>
+                                                            </ContentPresenter.Resources>
+                                                        </ContentPresenter>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Background" Value="#757575" TargetName="Border" />
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="10"/>
+                                    </Style>
+                                </Button.Resources>
+                                <Button.Content>
+                                    <TextBlock 
+                                                TextAlignment="Center"
+                                                FontWeight="Medium"
+                                                FontSize="11"
+                                                Foreground="#FFFFFF" Text="Очистить              граф" TextWrapping="Wrap" />
+                                </Button.Content>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </Popup>
+        </Canvas>
+        <CheckBox IsChecked="{Binding IsOriented}"
+                  />
+        <DataGrid
+            x:Name="MatrixAdjGrid"
+            AutoGenerateColumns="True"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            CanUserAddRows="False" CanUserDeleteRows="False"
+            ItemsSource="{Binding AdjMatix}" 
+            LoadingRow="Grid1_LoadingRow"
+            Height="250" Width="Auto"
+            HeadersVisibility="All">
+            
+        </DataGrid>
+    </Grid>
 </UserControl>
