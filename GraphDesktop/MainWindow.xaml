@@ -108,9 +108,24 @@
             </MenuItem>
             <MenuItem Header="Задачи теории графов">
                 <MenuItem Background="#C9535353" 
-                          Header="BreadthFirst Search" Click="BFS"/>
+                          Header="BFS" Click="BFS"/>
                 <MenuItem Background="#C9535353" 
-                          Header="Dijkstra" Click="DjkstraChosen"/>
+                          Header="Дейкстра/ A*" Click="DjkstraChosen"/>
+                <MenuItem Background="#C9535353" 
+                          Header="Раскраска" Click="Coloring"/>
+                <MenuItem Background="#C9535353" 
+                          Header="Задача о цикле" Click="CircleTask"/>
+                <MenuItem Background="#C9535353" 
+                          Header="Дополнение графа" Click="AdjencyGraph"/>
+                <MenuItem Background="#C9535353" 
+                          Header="Минимальное островное дерево" 
+                          Click="Kruskal"/>
+                <MenuItem Background="#C9535353" 
+                          Header="Изоморфизм" 
+                          Click="Isomorph"/>
+                <MenuItem Background="#C9535353" 
+                          Header="Связность" 
+                          Click="Linking"/>
             </MenuItem>
             <MenuItem Header="Задания"  Click="Tasks"/>
             <MenuItem 

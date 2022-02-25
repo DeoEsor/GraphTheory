@@ -5,68 +5,60 @@ namespace GraphLib.GraphTasks
 	public static partial class GraphTasks
 	{
 
-		public static Dictionary<Vertex, double> AStar(Graph graph, Vertex s, Vertex f)
+		public static (List<Vertex>, double) AStar(Graph graph, Vertex s, Vertex f, Heuristics heuristics = null)
 		{
-			List<Vertex> unvisited = new List<Vertex>(graph.Vertices);
-            Dictionary<Vertex, Vertex> VertWithParent = new Dictionary<Vertex, Vertex>();
-            var visited = new HashSet<Vertex>();
+            if (heuristics == null)
+                heuristics = new Heuristics();
 
-            visited.Add(s);
-            /*
-            while (unvisited.Count > 0)
-            {
-                Vertex curVert = unvisited.Min();
-                unvisited.Remove(curVert);
-                visited.Add( curVert);
+			var path = new List<Vertex>();
 
-                List<Edge> connectedEdges = new List<Edge>(curVert.Edges);
+			var queue = new PrioQueue<Vertex, double>();
+			var camefrom = new Dictionary<Vertex,Vertex>();
+			var costsofar = new Dictionary<Vertex, double>();
+			
+			queue.Enqueue(s, 0);
+			camefrom.Add(s, null);
+			costsofar.Add(s, 0);
+			
+			while (!queue.IsEmpty())
+			{
+				Vertex v = queue.Dequeue();
 
-                while (connectedEdges.Count > 0)
-                {
-                    var e = connectedEdges.Min(); // Picking edge with the less weight
-                    connectedEdges.Remove(e);
+				if (v == f)
+					break;
+				foreach (var next in v.AchievableVertexes)
+				{
+					double newcost = costsofar[v] + v.EdgeWithVertex(next).Weight;
 
-                    Vertex obsVert = e.EndVertex; // Taking vertex on the end of this edge
+					if (!costsofar.Keys.Contains(next) || newcost < costsofar[next])
+					{
+						costsofar[next] = newcost;
+						queue.Enqueue(next, newcost + heuristics.CurrentHeuristic(next, f));
+						
+						if (camefrom.Keys.Contains(next))
+							camefrom[next] = v;
+						else
+							camefrom.Add(next, v);
+					}
 
-                    double Length = curVert.Length + e.Weight; 
-                    double h = heuristicPathLength(obsVert, f);
+				}
+			}
+			
+			if (!camefrom.Keys.Contains(f))
+				path = null;
+			else
+			{
+				path = new List<Vertex>();
+				for(Vertex v = f; v != null; v = camefrom[v])
+					path.Add(v);
+                
+				path.Reverse();
+			}
+			double dist = 0;
+			for (int i = 1; i < path?.Count; i++)
+				dist += path[i - 1].EdgeWithVertex(path[i]).Weight;
 
-                    if (!visited.Contains(obsVert))
-                    {
-                        Vertex v = unvisited.Find(x => x == obsVert);
-                        Vertex existingVert = v is null ? newVert : v;
-                        if (v is null)
-                        {
-                            unvisited.Add(existingVert);
-                            VertWithParent.Add(existingVert, curVert);
-                        }
-                        if (newVert.CompareTo(existingVert) < 0)
-                        {
-                            existingVert.H = h; existingVert.Length = Length;
-                            VertWithParent[existingVert] = curVert;
-                        }
-
-                        if (obsVert == f)
-                        {
-                            Dictionary<Vertex, double> retDict = new Dictionary<Vertex, double>();
-                            retDict.Add(obsVert, existingVert.Weight);
-                            Vertex rootVert = VertWithParent[existingVert];
-                            var a = VertWithParent;
-                            while (rootVert != s)
-                            {
-                                retDict.Add(rootVert, rootVert.Weight);
-                                rootVert = VertWithParent[rootVert];
-                            }
-                            retDict.Add(rootVert, rootVert.Weight);
-
-                            return retDict;
-                        }
-                    }
-                }
-
-            }
-                */
-            return null;
+			return (path, dist);
 		}
 	}
 }

@@ -201,8 +201,6 @@
                 </Border>
             </Popup>
         </Canvas>
-        <CheckBox IsChecked="{Binding IsOriented}"
-                  />
         <DataGrid
             x:Name="MatrixAdjGrid"
             AutoGenerateColumns="True"

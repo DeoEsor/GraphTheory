@@ -7,8 +7,6 @@ namespace GraphLib.GraphTasks
 
 	public static partial class GraphTasks
 	{
-		
-		//REDO to non-oriented
 		public static Dictionary<Vertex, double>  Djkstra(Graph _graph, Vertex Start)
 		{
 			var dist = new Dictionary<Vertex, double>();
@@ -34,7 +32,7 @@ namespace GraphLib.GraphTasks
 					break;
 				used.Add(v);
 				foreach (var to in graph[v])
-					if (dist[v] + v.EdgeWithVertex(to).Weight < dist[to])
+					if (v.EdgeWithVertex(to) != null  && dist[v] + v.EdgeWithVertex(to).Weight < dist[to])
 						dist[to] = dist[v] + v.EdgeWithVertex(to).Weight;
 			}
 			return dist;

@@ -22,7 +22,7 @@ namespace GraphLib.GraphTasks
 				for (int i = 0; i < _graph.Vertices.Count; i++)
 					a.Add(0);
 		
-				RecursiveHuynya(_graph, ref a);
+				Recursive(_graph, ref a);
 
 				for (int i = 0; i < BuddaStColoring.Count; i++)
 					colors.Add(_graph.Vertices[i], BuddaStColoring[i]);	
@@ -30,7 +30,7 @@ namespace GraphLib.GraphTasks
 				ChromoNumber = BuddaStColoring.Distinct().Count();
 			}
 
-			internal static void RecursiveHuynya(Graph graph, ref List<int> colors, int depth = 0)
+			internal static void Recursive(Graph graph, ref List<int> colors, int depth = 0)
 			{
 				if (depth == colors.Count)
 				{
@@ -45,7 +45,7 @@ namespace GraphLib.GraphTasks
 				for (int i = 0; i < colors.Count; i++)
 				{
 					colors[depth] = i;
-					RecursiveHuynya(graph, ref colors, depth + 1);
+					Recursive(graph, ref colors, depth + 1);
 				}
 			
 			}

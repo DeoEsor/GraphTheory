@@ -50,18 +50,12 @@ namespace GraphLib.GraphTasks
 		
 		public static double GraphRadius(this Graph _graph)
 		{
-			double Radius = Double.PositiveInfinity;
+			var Radius = Double.PositiveInfinity;
 
-			var matrix = _graph.FillAdjacencyMatrix();
-			for (int k = 0; k < matrix.Count; k++)
-				foreach (var i in _graph.Vertices)
-					foreach (var j in _graph.Vertices)
-						matrix[i][j] = 
-							Math.Min(
-									matrix[i][j],
-									matrix[i][_graph.Vertices[k]] + matrix[_graph.Vertices[k]][j]
-								);
-			double res = double.PositiveInfinity;
+			
+			FloydAlgo(_graph, out var matrix);
+			
+			var res = double.PositiveInfinity;
 			foreach (var i in _graph.Vertices)
 			{
 				var max = double.NegativeInfinity;
@@ -74,7 +68,19 @@ namespace GraphLib.GraphTasks
 				
 			return res;
 		}
-		
+		public static void FloydAlgo(this Graph _graph, out Dictionary<Vertex, Dictionary<Vertex, double>> matrix)
+		{
+			matrix = _graph.FillAdjacencyMatrix();
+			for (int k = 0; k < matrix.Count; k++)
+				foreach (var i in _graph.Vertices)
+					foreach (var j in _graph.Vertices)
+						matrix[i][j] =
+							Math.Min(
+								matrix[i][j],
+								matrix[i][_graph.Vertices[k]] + matrix[_graph.Vertices[k]][j]
+							);
+		}
+
 		public static double GraphDiametr(this Graph _graph)
 		{
 			double Diametr = Double.NegativeInfinity;

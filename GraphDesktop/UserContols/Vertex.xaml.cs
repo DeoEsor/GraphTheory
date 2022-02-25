@@ -7,6 +7,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using GraphLib;
+using GraphLib.GraphTasks;
 
 namespace GraphDesktop.UserContols
 {
@@ -32,9 +33,16 @@ namespace GraphDesktop.UserContols
 			ColorPicker.OnChosenColorChanged += () => Button.Background = ColorPicker.ChosenColor;
 			
 		}
-		
-		
-		
+
+		public Vertex(GraphCanvas canvas, GraphLib.Vertex v)
+		{
+			Model = v;
+			owner = canvas;
+			InitializeComponent();
+			ColorPicker.OnChosenColorChanged += () => Button.Background = ColorPicker.ChosenColor;
+			
+		}
+
 #nullable enable 
 		public static Popup? OpenedPopup { get; set; }= null;
 #nullable disable
@@ -60,6 +68,10 @@ namespace GraphDesktop.UserContols
 				//popup redraw
 				popup.IsOpen = false;
 			VertexWeight.Text = Model.Weight.ToString();
+			PowerData.Text = 
+				GraphCanvas.Model
+				.VertexPower()[Model]
+				.ToString();
 			popup.IsOpen = true;
 			OpenedPopup = popup;
 		}
@@ -74,10 +86,8 @@ namespace GraphDesktop.UserContols
 		{
 			GraphCanvas.Model.Vertices.Remove(Model);
 			GraphCanvas.Canvas.Children.Remove(this);
-			foreach (var edge in Edges)
-			{
-				
-			}
+			foreach (GraphLib.Edge edge in EdgesListBox.ItemsSource)
+				edge.Delete();
 		}
 		
 		private void Popup_OnLostFocus(object sender, RoutedEventArgs e) => OpenedPopup = null;
@@ -97,9 +107,7 @@ namespace GraphDesktop.UserContols
 		}
 		private void Delete(object sender, RoutedEventArgs e)
 		{
-			owner.Canvas.Children.Remove(this);
-
-			owner.Model.Vertices.Remove(Model);
+			Model.DeleteVertexCommand.Execute(Model);
 		}
 
 		#region Local func

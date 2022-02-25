@@ -14,7 +14,7 @@ namespace GraphLib
     public class Graph : GraphBase
     {
         
-        public bool IsOriented { get; set; } = true;
+        public bool IsOriented { get => Edges.Where(edge => edge.IsDirected).Count() != 0; }
         public Caretaker Caretaker { get; set; } = new Caretaker();
 
         #region Enums
@@ -49,7 +49,9 @@ namespace GraphLib
             {
                 var addmatrix = new Dictionary<Vertex, double>();
                 foreach (var to in vertex.AchievableVertexes)
-                    addmatrix.Add(to, vertex.EdgeWithVertex(to).Weight);
+                    if (!addmatrix.ContainsKey(to) && vertex.EdgeWithVertex(to) != null)
+                        addmatrix.Add(to, vertex.EdgeWithVertex(to).Weight);
+                    
                 
                 foreach (var somevertex in Vertices)
                 {
@@ -95,12 +97,10 @@ namespace GraphLib
             for (var i = 0; i < Edges.Count; i++)
             {
                 matrix[Edges[i].StartVertex.Id, i] = 1;
-                matrix[Edges[i].EndVertex.Id, i] = 1;
+                matrix[Edges[i].EndVertex.Id  , i] = 1;
             }
         }
         #endregion
-
-        public override event PropertyChangedEventHandler PropertyChanged;
 
         public override object Clone()
         {

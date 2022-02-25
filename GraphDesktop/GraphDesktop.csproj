@@ -66,14 +66,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Scripts\CursorStateMachine.cs" />
-    <Compile Include="UserContols\AlgorithPathResult.xaml.cs">
-      <DependentUpon>AlgorithPathResult.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserContols\ColorPicker.xaml.cs">
       <DependentUpon>ColorPicker.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserContols\DijkstraUI.xaml.cs">
-      <DependentUpon>DijkstraUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserContols\Edge.xaml.cs">
       <DependentUpon>Edge.xaml</DependentUpon>
@@ -89,6 +83,27 @@
     </Compile>
     <Compile Include="Windows\AboutProgram.xaml.cs">
       <DependentUpon>AboutProgram.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AdjencyGraph.xaml.cs">
+      <DependentUpon>AdjencyGraph.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AlgorithPathResult.xaml.cs">
+      <DependentUpon>AlgorithPathResult.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Coloring.xaml.cs">
+      <DependentUpon>Coloring.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DijkstraUI.xaml.cs">
+      <DependentUpon>DijkstraUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Isomorphism.xaml.cs">
+      <DependentUpon>Isomorphism.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Kruskal.xaml.cs">
+      <DependentUpon>Kruskal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Linking.xaml.cs">
+      <DependentUpon>Linking.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Tasks.xaml.cs">
       <DependentUpon>Tasks.xaml</DependentUpon>
@@ -123,14 +138,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserContols\AlgorithPathResult.xaml" />
     <Page Include="UserContols\ColorPicker.xaml" />
-    <Page Include="UserContols\DijkstraUI.xaml" />
     <Page Include="UserContols\Edge.xaml" />
     <Page Include="UserContols\GraphCanvas.xaml" />
     <Page Include="UserContols\Vertex.xaml" />
     <Page Include="Windows\AboutAuthors.xaml" />
     <Page Include="Windows\AboutProgram.xaml" />
+    <Page Include="Windows\AdjencyGraph.xaml" />
+    <Page Include="Windows\AlgorithPathResult.xaml" />
+    <Page Include="Windows\Coloring.xaml" />
+    <Page Include="Windows\DijkstraUI.xaml" />
+    <Page Include="Windows\Isomorphism.xaml" />
+    <Page Include="Windows\Kruskal.xaml" />
+    <Page Include="Windows\Linking.xaml" />
     <Page Include="Windows\Tasks.xaml" />
   </ItemGroup>
   <ItemGroup>

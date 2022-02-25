@@ -4,8 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using GraphLib;
-
-namespace GraphDesktop.UserContols
+namespace GraphDesktop.Windows
 {
 	public partial class AlgorithPathResult : Window
 	{
@@ -14,6 +13,7 @@ namespace GraphDesktop.UserContols
 			Graph = graph;
 			Collection = null;
 			InitializeComponent();
+			
 		}
 
 		private Graph _graph;

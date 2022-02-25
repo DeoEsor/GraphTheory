@@ -8,80 +8,17 @@ namespace GraphLib
 	/// <summary>
 	/// Ребер
 	/// </summary>
-	public class Edge : INotifyPropertyChanged
+	public sealed class Edge : EdgeBase
 	{
 		#region Properties & Variables
-		public int Id;
-
-		public string name;
-
-		public double Weight
-		{
-			get => _weight;
-			set
-			{
-				_weight = value;
-				OnPropertyChanged();
-			}
-		}
-
-		public string EdgeName
-		{
-			get => name;
-			set
-			{
-				name = value;
-				OnPropertyChanged();
-			}
-		}
-
-		public System.Windows.Point EndPoint => EndVertex.Point;
-		/// <summary>
-		/// V1 - out vertex (from)
-		/// V2 - in Vertex (to)
-		/// </summary>
-		public Vertex StartVertex
-		{
-			get => _startVertex;
-			set
-			{
-				if (_startVertex != null)
-					_startVertex.PropertyChanged -= VertexOnPropertyChanged;
-				_startVertex = value;
-				_startVertex.PropertyChanged += VertexOnPropertyChanged;
-				OnPropertyChanged();
-			}
-		}
-		public Vertex EndVertex
-		{
-			get => _endVertex;
-			set
-			{
-				if (_endVertex != null)
-					_endVertex.PropertyChanged -= VertexOnPropertyChanged;
-				_endVertex = value;
-				_endVertex.PropertyChanged += VertexOnPropertyChanged;
-				OnPropertyChanged();
-			}
-		}
-		public void VertexOnPropertyChanged(object sender, PropertyChangedEventArgs e)
-			=> OnPropertyChanged();
-
-		public System.Windows.Point StartPoint => StartVertex.Point;
-
 		#endregion
-
-		public Action OnDelete;
-		private double _weight = 1;
-		private Vertex _startVertex;
-		private Vertex _endVertex;
 
 		internal Edge(int id, Vertex v1, Vertex v2 = null)
 		{
 			this.Id = id;
 			this.StartVertex = v1;
 			this.EndVertex = v2;
-			EdgeName = Id.ToString();
+			Name = Id.ToString();
 		}
 
 		public bool IsIn(Vertex sender) => sender == EndVertex || sender == StartVertex;
@@ -93,19 +30,5 @@ namespace GraphLib
 			OnDelete?.Invoke();
 		}
 
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-		}
-		
-		public static bool operator >(Edge first, Edge other) => first.Weight > other.Weight;
-
-		public static bool operator<(Edge first, Edge other) => first.Weight < other.Weight;
-
-		public static bool operator==(Edge first, Edge other) => first.Id == other.Id;
-		
-		public static bool operator !=(Edge first, Edge other) => first.Id != other.Id;
 	}
 }

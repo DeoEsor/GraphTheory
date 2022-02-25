@@ -60,22 +60,37 @@ namespace GraphLib
 				var list = new List<Vertex>();
 				foreach (var edge in _edges)
 				{
-					if (edge.StartVertex == this && edge.EndVertex != this)
+					if (
+							(edge.IsDirected && edge.StartVertex == this && edge.EndVertex != this)
+							||
+							(!edge.IsDirected &&
+								(edge.StartVertex == this && edge.EndVertex != this || 
+									edge.StartVertex != this && edge.EndVertex == this)
+							)
+						)
 						list.Add(edge.EndVertex);
 				}
 				return list;
 			}
 		}
-		
 
-		public Edge EdgeWithVertex(Vertex other)
+
+		public Edge EdgeWithVertex(Vertex other) => EdgesWithVertex(other).Min();
+
+		public List<Edge> EdgesWithVertex(Vertex other)
 		{
 			var result = new List<Edge>();
 			foreach (var edge in _edges)
-				if(edge.StartVertex == this && edge.EndVertex == other)
+				if(
+					(edge.IsDirected && edge.StartVertex == this && edge.EndVertex == other)
+					||
+						(!edge.IsDirected &&
+							(edge.StartVertex == this && edge.EndVertex == other || 
+								edge.StartVertex == other && edge.EndVertex == this))
+					)
 					result.Add(edge);
 			
-			return result.Min();
+			return result;
 		}
 
 		Random _random = new Random();

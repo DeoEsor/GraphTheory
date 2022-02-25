@@ -52,9 +52,20 @@ namespace GraphDesktop.UserContols
 		{
 			ShowAdjgrid.InputGestures.Add(new KeyGesture(Key.N, ModifierKeys.Control));
 			CommandBindings.Add(new CommandBinding(ShowAdjgrid, MyCommandExecuted));
-			InitializeComponent();
+			
 			GraphLib.DrawGraph.Graph = Model;
 			Model.Edges.CollectionChanged += EdgesOnCollectionChanged;
+			Model.Vertices.CollectionChanged += VerticesOnCollectionChanged;
+			
+			InitializeComponent();
+			
+			Zoom();
+
+			Model.PropertyChanged += (object o, PropertyChangedEventArgs args) => AdjMatix = UpdateAdjDataTaMatrix().DefaultView;
+		}
+		private void Zoom()
+		{
+
 			var st = new ScaleTransform();
 			Canvas.RenderTransform = st;
 			Canvas.MouseWheel += (sender, e) =>
@@ -70,6 +81,27 @@ namespace GraphDesktop.UserContols
 					st.ScaleY /= 1.2;
 				}
 			};
+		}
+		private void VerticesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			switch (e.Action)
+			{
+				case NotifyCollectionChangedAction.Add:
+					if (e.NewItems[0] is GraphLib.Vertex vertex)
+					{
+						var edge = new Vertex(this, vertex);
+						Canvas.Children.Add(edge);	
+					}
+					break;
+				case NotifyCollectionChangedAction.Remove:
+					break;
+				case NotifyCollectionChangedAction.Replace:
+					break;
+				case NotifyCollectionChangedAction.Reset:
+					break;
+				case NotifyCollectionChangedAction.Move:
+					break;
+			}
 		}
 		private void EdgesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
@@ -128,7 +160,7 @@ namespace GraphDesktop.UserContols
 			Popup.IsOpen = false;
 
 			var vertex = CreateVertex();
-
+			vertex.Model.Point = new Point( Mouse.GetPosition(this).X, Mouse.GetPosition(this).Y);
 			Canvas.SetLeft(vertex, Mouse.GetPosition(this).X);
 			Canvas.SetTop(vertex, Mouse.GetPosition(this).Y);
 			Canvas.Children.Add(vertex);
@@ -209,17 +241,7 @@ namespace GraphDesktop.UserContols
         #endregion
 
         private void MatrixChoice_SelectionChanged(object sender, SelectionChangedEventArgs e)
-		{
-			
-			Model.MatrixT =
-				MatrixChoice.SelectedIndex == 0 ? 
-				Graph.MatrixType.Incidence :
-				Model.MatrixT = Graph.MatrixType.Adjacency;
-			
-			Matrix = UpdateIncDataTaMatrix(Model.GetMatrix());
-			
-			AdjMatix = UpdateAdjDataTaMatrix().DefaultView;
-		}
+			=> Matrix = UpdateIncDataTaMatrix(Model.GetMatrix());
 
 		public DataTable UpdateIncDataTaMatrix(int[,] matrix)
 		{
@@ -230,19 +252,19 @@ namespace GraphDesktop.UserContols
 				this.Matrix = dt.DefaultView;
 				return dt;
 			}
-			int rows = matrix.GetUpperBound(0) + 1; // количество строк
+			int rows = matrix.GetUpperBound(0) + 1;
 			int columns = matrix.Length / rows;
 
 			for (var i = 0; i < columns; i++)
-			{
-				dt.Columns.Add(new DataColumn(Model.Vertices[i].Name, typeof(int)));
-			}
+				if(i < Model.Vertices.Count)
+					dt.Columns.Add(new DataColumn(Model.Vertices[i].Name, typeof(int)));
 
 			for (var i = 0; i < rows; i++)
 			{
 				var r = dt.NewRow();
 				for (var j = 0; j < columns; j++)
-					r[j] = matrix[i, j];
+					if(j < Model.Vertices.Count)
+						r[j] = matrix[i, j];
 				dt.Rows.Add(r);
 			}
 

@@ -101,11 +101,20 @@
                                                             Width="4"
                                                             Height="4"
                                                             Fill="Black"  Margin="0,0,10,0"/>
-                                        <TextBlock Grid.Column="1" Text="{Binding EdgeName, FallbackValue=0}"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding Name, FallbackValue=0}"/>
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
+                        
+                        <Expander Grid.Column="0" Grid.Row="3">
+                            <UniformGrid 
+                                Columns ="2">
+                                <TextBlock Text="Степень :"/>
+                                <TextBlock x:Name = "PowerData"/>
+                                    
+                            </UniformGrid>
+                        </Expander>
                     </Grid>
                     <Label Margin="0,20,0,0"
                         HorizontalAlignment="Center" Content="Цвета"/>

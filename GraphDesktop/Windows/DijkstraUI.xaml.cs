@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using GraphLib;
-
-namespace GraphDesktop.UserContols
+namespace GraphDesktop.Windows
 {
 	public partial class DijkstraUI : Window
 	{
@@ -21,6 +19,10 @@ namespace GraphDesktop.UserContols
 						Graph,
 						Start = (GraphLib.Vertex) StartList.SelectedItem 
 						);
+		private void AlgoListChanged(object sender, SelectionChangedEventArgs e)
+		{
+			//GraphLib.GraphTasks.GraphTasks.AStar( )
+		}
 	}
 }
 

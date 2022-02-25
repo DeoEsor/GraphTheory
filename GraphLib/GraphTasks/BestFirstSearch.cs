@@ -1,59 +1,127 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 namespace GraphLib.GraphTasks
 {
     public static partial class GraphTasks
     {
-	    public static List<Vertex> BestFirstSearch(Graph graph, Vertex start, Vertex target)
-            {
-                var vertexes = new Queue<Vertex>();
-                var RouteVertsForVert = new Dictionary<Vertex, Vertex>();
-                var visited = new HashSet<Vertex>();
+	    public static List<Vertex> BestFirstSearch(Graph _graph, Vertex s, Vertex f, Heuristics heuristics = null)
+		{
+			if (heuristics == null)
+				heuristics = new Heuristics();
+			Dictionary<Vertex, List<Vertex>> graph = _graph.ReturnAdjacencyList();
 
-                if (start == target)
-                {
-                    List<Vertex> ret = new List<Vertex>();
-                    ret.Add(start);
-                    return ret;
-                }
+			var path = new List<Vertex>();
 
-                visited.Add( start);
-                vertexes.Enqueue(start);
-                while (vertexes.Count > 0)
-                {
-                    Vertex v = vertexes.Dequeue();
+			var queue = new PrioQueue<Vertex,double>();
+			queue.Enqueue(s,0);
 
-                    List<Vertex> curVerts = v.AchievableVertexes;
+			var used = new Dictionary<Vertex, bool>();
+			var dist = new Dictionary<Vertex, double>();
+			var paretns = new Dictionary<Vertex, Vertex>();
+            
+			used.Add(s,  true);
+			paretns.Add(s, null);
 
-                    foreach (var vertex in curVerts)
-                    {
-                        if (visited.Contains(vertex)) continue;
-                        
-                        visited.Add(vertex);
-                        vertexes.Enqueue(vertex);
+			while (!queue.IsEmpty())
+			{
+				Vertex v = queue.Dequeue();
+                
+				foreach (var to in graph[v])
+				{
+					if (used.Keys.Contains(to) && used[to]) continue;
+                    
+					used.Add(to , true);
+					queue.Enqueue(to, heuristics.CurrentHeuristic(to,f));
+					if (!dist.Keys.Contains(v))
+						dist.Add(v, v.EdgeWithVertex(to).Weight);
+					else
+						dist.Add(to,dist[v] + v.EdgeWithVertex(to).Weight );
+					paretns.Add( to, v);
+                    
+				}
+			}
 
-                        RouteVertsForVert.Add(vertex, v);
+			if (!used.Keys.Contains(f))
+				path = null;
+			else
+			{
+				path = new List<Vertex>();
+				for(Vertex v = f; v != null; v = paretns[v])
+					path.Add(v);
+                
+				path.Reverse();
+			}
 
-                        if (vertex != target) continue;
-                        
-                        List<Vertex> retList = new List<Vertex>();
-                        retList.Add(vertex);
+			return path;
+		}
 
-                        Vertex prevVert = RouteVertsForVert[vertex];
+		public class PrioQueue<T, V>
+			where T : class 
+		
+		{
+			int total_size;
+			SortedDictionary<V, Queue<T>> storage;
 
-                        while (prevVert != start)
-                        {
-                            retList.Add(prevVert);
-                            prevVert = RouteVertsForVert[prevVert];
-                        }
+			public PrioQueue ()
+			{
+				this.storage = new SortedDictionary<V, Queue<T>> ();
+				this.total_size = 0;
+			}
 
-                        retList.Add(prevVert);
+			public bool IsEmpty () => total_size == 0;
+			
 
-                        return retList;   
-                    }
-                }
+			public T Dequeue ()
+			{
+				if (IsEmpty ()) 
+				
+					throw new Exception ("Please check that priorityQueue is not empty before dequeing");
+				else
+					foreach (Queue<T> q in storage.Values)
+						if (q.Count > 0) 
+						{
+							total_size--;
+							return q.Dequeue ();
+						}
 
-                return null;
-            }
+				Debug.Assert(false,"not supposed to reach here. problem with changing total_size");
+
+				return null; 
+			}
+
+			// same as above, except for peek.
+
+			public T Peek ()
+			{
+				if (IsEmpty ())
+					throw new Exception ("Please check that priorityQueue is not empty before peeking");
+				else
+					foreach (Queue<T> q in storage.Values)
+						if (q.Count > 0)
+							return q.Peek ();
+
+				Debug.Assert(false,"not supposed to reach here. problem with changing total_size");
+
+				return null; // not supposed to reach here.
+			}
+
+			public T Dequeue (V prio)
+			{
+				total_size--;
+				return storage[prio].Dequeue ();
+			}
+
+			public void Enqueue (T item, V prio)
+			{
+				if (!storage.ContainsKey (prio))
+					storage.Add (prio, new Queue<T> ());
+				
+				storage[prio].Enqueue (item);
+				total_size++;
+			}
+		}
     }
 }

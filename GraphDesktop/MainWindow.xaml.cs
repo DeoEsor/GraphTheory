@@ -62,10 +62,6 @@ namespace GraphDesktop
 			
 			aboutProgram.Show();
 		}
-		private void BFSSecond(object sender, RoutedEventArgs e)
-		{
-			throw new NotImplementedException();
-		}
 		private void DjkstraChosen(object sender, RoutedEventArgs e)
 		{
 			DijkstraUI aboutProgram = new DijkstraUI(GraphCanvas.Model);
@@ -162,6 +158,48 @@ namespace GraphDesktop
 		private void RedoAction(object sender, RoutedEventArgs e)
 		{
 			
+		}
+		private void Coloring(object sender, RoutedEventArgs e)
+		{
+			Coloring aboutProgram = new Coloring(GraphCanvas.Model);
+			aboutProgram.Owner = this;
+			
+			aboutProgram.Show();
+		}
+		private void CircleTask(object sender, RoutedEventArgs e)
+		{
+			Coloring aboutProgram = new Coloring(GraphCanvas.Model);
+			aboutProgram.Owner = this;
+			
+			aboutProgram.Show();
+		}
+		private void AdjencyGraph(object sender, RoutedEventArgs e)
+		{
+			var aboutProgram = new AdjencyGraph(GraphCanvas.Model);
+			aboutProgram.Owner = this;
+			
+			aboutProgram.Show();
+		}
+		private void Kruskal(object sender, RoutedEventArgs e)
+		{
+			Kruskal aboutProgram = new Kruskal(GraphCanvas.Model);
+			aboutProgram.Owner = this;
+			
+			aboutProgram.Show();
+		}
+		private void Isomorph(object sender, RoutedEventArgs e)
+		{
+			Isomorphism aboutProgram = new Isomorphism(GraphCanvas.Model);
+			aboutProgram.Owner = this;
+			
+			aboutProgram.Show();
+		}
+		private void Linking(object sender, RoutedEventArgs e)
+		{
+			Linking aboutProgram = new Linking(GraphCanvas.Model);
+			aboutProgram.Owner = this;
+			
+			aboutProgram.Show();
 		}
 	}
 }

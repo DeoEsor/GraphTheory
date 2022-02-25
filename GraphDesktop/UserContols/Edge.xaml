@@ -38,46 +38,48 @@
                     Value="Italic"
             />
         </Style>
-        <Style TargetType="Line">
-            <Style.Triggers>
-                <DataTrigger 
-                    Binding="{Binding Model.IsDirected}"
-                    Value="True">
-                    <Setter Property="StrokeEndLineCap" Value="Triangle" />
-                </DataTrigger>
-                <DataTrigger 
-                    Binding="{Binding Model.IsDirected}"
-                    Value="False">
-                    <Setter Property="StrokeEndLineCap" Value="Square" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
     </UserControl.Resources>
     <Grid ClipToBounds="True"
           MouseLeftButtonDown="Line_OnMouseUp">
-            <Line Stroke="Black"
-                  StrokeLineJoin="Round"
-                  StrokeThickness="6"
-                  Fill="Black"
-                  x:Name="Line"
-                  ClipToBounds="True"
-                  X1="{Binding
+        <Path
+            x:Name="Path"
+            Stroke="Black" StrokeThickness="3">
+            <Path.Data>
+                <PathGeometry>
+                    <PathGeometry.Figures>
+                        <PathFigure x:Name="StartPointArc"
+                                    StartPoint="40,100">
+                            <ArcSegment
+                                x:Name="EndPointArc"
+                                Point="200,100" Size="1 1"/>
+                        </PathFigure>
+                    </PathGeometry.Figures>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
+        
+        <Line Stroke="Black"
+              StrokeLineJoin="Round"
+              StrokeThickness="10"
+              Fill="Black"
+              StrokeEndLineCap="Triangle"
+              StrokeStartLineCap="Triangle"
+              x:Name="Line"
+              ClipToBounds="True"
+              X1="{Binding
                 Model.StartPoint.X,
                 Mode=OneWay,
                 TargetNullValue=20, FallbackValue=20}"
-                  Y1="{Binding Model.StartPoint.Y,
+              Y1="{Binding Model.StartPoint.Y,
                 Mode=OneWay,
                 TargetNullValue=20, FallbackValue=20}"
-                  X2="{Binding Model.EndPoint.X,
+              X2="{Binding Model.EndPoint.X,
                 Mode=OneWay,
                 TargetNullValue=50, FallbackValue=50}"
-                  Y2="{Binding Model.EndPoint.Y,
+              Y2="{Binding Model.EndPoint.Y,
                 Mode=OneWay,
                 TargetNullValue=50, FallbackValue=50}">
             </Line>
-            <Polygon
-                x:Name="Triangle"
-                Fill="Black"  />
             <Popup
             x:Name="popup" StaysOpen="False" Focusable="True" Placement="MousePoint">
             <Border BorderBrush="Honeydew" CornerRadius="2,2,2,2" BorderThickness="2,2,2,2">
@@ -92,7 +94,7 @@
                     <UniformGrid Columns="2">
                         <TextBlock Text="Имя : "/>
                         <TextBox Focusable="True"
-                            Text="{Binding Model.EdgeName, Mode = TwoWay}"
+                            Text="{Binding Model.Name, Mode = TwoWay}"
                             />
                     </UniformGrid>
                     <Grid>

@@ -20,8 +20,6 @@ namespace GraphLib.Commands.VertexCommands
 
             base.Execute(parameter);
             Graph.CreateEdge(Vertex, vertex);
-            if (!Graph.IsOriented)
-                Graph.CreateEdge(vertex, Vertex);
         }
         public override void Undo()
         {

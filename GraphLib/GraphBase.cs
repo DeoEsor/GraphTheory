@@ -14,7 +14,7 @@ namespace GraphLib
 		public enum GraphType : sbyte { Oriented, NonOriented }
 		public string Name { get; set; } = "Unnamed";
 		public ObservableCollection<Edge> Edges { get; internal set; } = new ObservableCollection<Edge>();
-		public ObservableCollection<Vertex> Vertices { get; internal set; } = new ObservableCollection<Vertex>();
+		public ObservableCollection<Vertex> Vertices { get;  set; } = new ObservableCollection<Vertex>();
 		public int[,] GetMatrix()
 		{
 			int[,] matrix;
@@ -46,7 +46,16 @@ namespace GraphLib
 		{
 			Vertex result;
 			Vertices.Add(result = new Vertex(this, _verticalid++, new System.Windows.Point(x, y)));
+			result.PropertyChanged += PropertyChanged;
+			OnPropertyChanged();
 			return result;
+		}
+		public Vertex CreateVertex(Vertex a)
+		{
+			Vertices.Add( a );
+			a.PropertyChanged += PropertyChanged;
+			OnPropertyChanged();
+			return a;
 		}
 		public Edge CreateEdge(Vertex x, Vertex y)
 		{
@@ -54,6 +63,8 @@ namespace GraphLib
 			Edges.Add(res = new Edge(_edgeid++, x, y));
 			x.Edges.Add(res); 
 			y.Edges.Add(res);
+			res.PropertyChanged += PropertyChanged;;
+			OnPropertyChanged();
 			return res;
 		}
 		public void ClearGraph()
@@ -62,6 +73,7 @@ namespace GraphLib
 			Vertices.Clear();
 			_edgeid = 0;
 			_verticalid = 0;
+			OnPropertyChanged();
 		}
 		public virtual event PropertyChangedEventHandler PropertyChanged;
 		private void OnPropertyChanged([CallerMemberName] string propertyName = null)
