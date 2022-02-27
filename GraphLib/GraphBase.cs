@@ -13,7 +13,7 @@ namespace GraphLib
 		public enum MatrixType : sbyte { Adjacency, Incidence }
 		public enum GraphType : sbyte { Oriented, NonOriented }
 		public string Name { get; set; } = "Unnamed";
-		public ObservableCollection<Edge> Edges { get; internal set; } = new ObservableCollection<Edge>();
+		public ObservableCollection<Edge> Edges { get;  set; } = new ObservableCollection<Edge>();
 		public ObservableCollection<Vertex> Vertices { get;  set; } = new ObservableCollection<Vertex>();
 		public int[,] GetMatrix()
 		{

@@ -34,10 +34,10 @@ namespace GraphLib.GraphTasks
 			{
 				if (depth == colors.Count)
 				{
-					if (CheckColoring(graph, colors) && colors.Max() < _minimalcoloring)
+					if (CheckColoring(graph, colors) && colors.Distinct().Count() < _minimalcoloring)
 					{
 							BuddaStColoring = new List<int>( colors);
-							_minimalcoloring = colors.Max();
+							_minimalcoloring = colors.Distinct().Count();
 					} 
 					return;
 				}

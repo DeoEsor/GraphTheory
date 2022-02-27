@@ -5,15 +5,16 @@ namespace GraphLib.GraphTasks
 	public static partial class GraphTasks
 	{
 
-		public static List < (Vertex,Vertex) > Kruskal(Graph graph)
+		public static Graph Kruskal(Graph graph)
 		{
 			int m;
 			List<  Edge > g = new List<Edge>(); // вес - вершина 1 - вершина 2
 			Dictionary<Vertex, int> tree_id  = new Dictionary<Vertex, int>();
-			List < (Vertex,Vertex) > res = new List<(Vertex, Vertex)>();
-
+			List < Edge > res = new List<Edge>();
+			var gra = new Graph();
 			double cost = 0;
-			
+			foreach (var VARIABLE in graph.Vertices)
+				gra.CreateVertex(new Vertex(gra, VARIABLE.Id, VARIABLE.Point));
 
 			foreach (var VARIABLE in graph.Edges)
 				g.Add(VARIABLE);
@@ -32,14 +33,17 @@ namespace GraphLib.GraphTasks
 				if (tree_id[a] != tree_id[b])
 				{
 					cost += l;
-					res.Add ((a, b));
+					res.Add (a.EdgeWithVertex(b));
 					int old_id = tree_id[b],  new_id = tree_id[a];
 					foreach (var vertex in graph.Vertices)
 						if (tree_id[vertex] == old_id)
 							tree_id[vertex] = new_id;
 				}
 			}
-			return res;
+
+			foreach (var edge in res)
+				gra.CreateEdge(gra.FindVertexByID(edge.StartVertex.Id), gra.FindVertexByID(edge.EndVertex.Id));
+			return gra;
 		}
 	}
 	

@@ -1,0 +1,11 @@
+C:\Users\Rulia\source\repos\GraphTheory\GraphTests\bin\Debug\GraphTests.dll
+C:\Users\Rulia\source\repos\GraphTheory\GraphTests\bin\Debug\GraphTests.pdb
+C:\Users\Rulia\source\repos\GraphTheory\GraphTests\bin\Debug\GraphLib.dll
+C:\Users\Rulia\source\repos\GraphTheory\GraphTests\bin\Debug\nunit.framework.dll
+C:\Users\Rulia\source\repos\GraphTheory\GraphTests\bin\Debug\GraphLib.pdb
+C:\Users\Rulia\source\repos\GraphTheory\GraphTests\bin\Debug\nunit.framework.xml
+C:\Users\Rulia\source\repos\GraphTheory\GraphTests\obj\Debug\GraphTests.csprojAssemblyReference.cache
+C:\Users\Rulia\source\repos\GraphTheory\GraphTests\obj\Debug\GraphTests.csproj.CoreCompileInputs.cache
+C:\Users\Rulia\source\repos\GraphTheory\GraphTests\obj\Debug\GraphTests.csproj.CopyComplete
+C:\Users\Rulia\source\repos\GraphTheory\GraphTests\obj\Debug\GraphTests.dll
+C:\Users\Rulia\source\repos\GraphTheory\GraphTests\obj\Debug\GraphTests.pdb
