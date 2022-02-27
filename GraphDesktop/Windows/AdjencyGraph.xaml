@@ -6,9 +6,20 @@
         xmlns:local="clr-namespace:GraphDesktop.Windows"
         xmlns:userContols="clr-namespace:GraphDesktop.UserContols"
         mc:Ignorable="d"
-        Title="AdjencyGraph" Height="450" Width="800">
+        Title="AdjencyGraph" Height="450" Width="800"
+        >
     <Grid>
+        <UniformGrid>
+            <CheckBox x:Name="IsFullCheckbox" 
+                      Content="Исходный полный" 
+                      IsEnabled="False"/>
+        
+            <ListView 
+                ItemsSource="{Binding Graph.Edges}" 
+            />
+        </UniformGrid>
         <userContols:GraphCanvas
-            x:Name="GraphCanvas"/>
+            x:Name="GraphCanvas"
+            />
     </Grid>
 </Window>

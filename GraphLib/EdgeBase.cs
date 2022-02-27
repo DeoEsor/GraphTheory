@@ -7,13 +7,13 @@ namespace GraphLib
 {
 	public abstract class EdgeBase : INotifyPropertyChanged, IStartEndVertexHolder, IEquatable<EdgeBase>, IComparable
 	{
-		protected int Id;
+		internal int Id;
 		private string name;
 		public Action OnDelete;
 		private double _weight = 1;
 		private Vertex _startVertex;
 		private Vertex _endVertex;
-		private bool _isDirected = false;
+		private bool _isDirected = true;
 		public virtual event PropertyChangedEventHandler PropertyChanged;
 		public System.Windows.Point EndPoint => EndVertex.Point;
 		public System.Windows.Point StartPoint => StartVertex.Point;

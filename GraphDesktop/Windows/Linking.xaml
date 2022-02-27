@@ -7,9 +7,17 @@
         mc:Ignorable="d"
         Title="Linking" Height="450" Width="800">
     <UniformGrid>
-        <CheckBox x:Name="linq" HorizontalAlignment="Center" Content="Связный"/>
-        <CheckBox x:Name="weak" HorizontalAlignment="Center" Content="Слабо-связный"/>
-        <CheckBox x:Name="Strong" HorizontalAlignment="Center" Content="Сильно-связный"/>
+        <CheckBox
+            IsEnabled="False"
+            x:Name="linq" HorizontalAlignment="Center" Content="Связный"/>
+        <CheckBox
+            IsEnabled="False"
+            x:Name="weak" HorizontalAlignment="Center" Content="Слабо-связный"/>
+        <CheckBox
+            IsEnabled="False"
+            x:Name="Strong" 
+            HorizontalAlignment="Center" 
+            Content="Сильно-связный"/>
         <TextBlock Text="Количество компонент"/>
         <TextBlock Text="0" x:Name="Count"/>
         <ListView x:Name="View"/>

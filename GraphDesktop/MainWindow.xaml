@@ -66,11 +66,14 @@
                 </MenuItem.Resources>
                 <MenuItem Background="#C9535353"  Header="Импорт" >
                     <MenuItem Background="#C9535353" Header="Матрицы инцидентности" 
-                              UseLayoutRounding="False" />
+                              UseLayoutRounding="False" 
+                              Click="IncLoad"/>
                     <MenuItem Background="#C9535353" Header="Матрицы смежности"
-                              UseLayoutRounding="False" />
-                    <MenuItem Background="#C9535353" Header="Списком вершин и ребер" UseLayoutRounding
-                              ="False" />
+                              UseLayoutRounding="False" 
+                              Click="AdjLoad"/>
+                    <MenuItem Background="#C9535353" Header="Списком вершин и ребер" 
+                              UseLayoutRounding="False" 
+                              Click="FileLoad"/>
                 </MenuItem>
                 <MenuItem Background="#C9535353"
                           Header="Сохранить как"
@@ -85,6 +88,11 @@
                         Header="Матрицу смежности"
                         UseLayoutRounding="False" 
                         Click="SaveAdjMatrix"/>
+                    <MenuItem 
+                        Background="#C9535353"
+                        Header="Файл"
+                        UseLayoutRounding="False" 
+                        Click="SaveGraphFile"/>
                     <MenuItem
                         Background="#C9535353"
                         Header="PNG"
@@ -108,24 +116,26 @@
             </MenuItem>
             <MenuItem Header="Задачи теории графов">
                 <MenuItem Background="#C9535353" 
-                          Header="BFS" Click="BFS"/>
+                          Header="Алгоритмы поиска пути" Click="BFS"/>
                 <MenuItem Background="#C9535353" 
-                          Header="Дейкстра/ A*" Click="DjkstraChosen"/>
+                          Header="Дейкстра" Click="DjkstraChosen"/>
                 <MenuItem Background="#C9535353" 
                           Header="Раскраска" Click="Coloring"/>
+                <!--
                 <MenuItem Background="#C9535353" 
                           Header="Задача о цикле" Click="CircleTask"/>
-                <MenuItem Background="#C9535353" 
-                          Header="Дополнение графа" Click="AdjencyGraph"/>
-                <MenuItem Background="#C9535353" 
-                          Header="Минимальное островное дерево" 
-                          Click="Kruskal"/>
+                -->
                 <MenuItem Background="#C9535353" 
                           Header="Изоморфизм" 
                           Click="Isomorph"/>
                 <MenuItem Background="#C9535353" 
                           Header="Связность" 
                           Click="Linking"/>
+                <MenuItem Background="#C9535353" 
+                          Header="Дополнение графа" Click="AdjencyGraph"/>
+                <MenuItem Background="#C9535353" 
+                          Header="Минимальное островное дерево" 
+                          Click="Kruskal"/>
             </MenuItem>
             <MenuItem Header="Задания"  Click="Tasks"/>
             <MenuItem 

@@ -154,7 +154,8 @@
                                 </Style>
                             </Button.Style>
                             <Button.ContextMenu>
-                                <ContextMenu x:Name="ContextMenu">
+                                <ContextMenu
+                                    x:Name="ContextMenu">
                                     <MenuItem Header="Вершины" 
                                               ItemsSource="{Binding GraphCanvas.Model.Vertices}"
                                               Click="MenuItem_OnClick">

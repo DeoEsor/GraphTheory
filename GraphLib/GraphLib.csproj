@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MathNet.Numerics, Version=5.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\MathNet.Numerics.5.0.0-alpha10\lib\net48\MathNet.Numerics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -49,7 +53,9 @@
     <Compile Include="Commands\GraphCommands\GraphClearCommand.cs" />
     <Compile Include="Commands\VertexCommand.cs" />
     <Compile Include="Commands\VertexCommands\AddEdge.cs" />
+    <Compile Include="Commands\VertexCommands\AddVertex.cs" />
     <Compile Include="Commands\VertexCommands\DeleteVertex.cs" />
+    <Compile Include="CustomGraphHolder\CustomHolderFile.cs" />
     <Compile Include="DrawGraph.cs" />
     <Compile Include="Edge.cs" />
     <Compile Include="EdgeBase.cs" />
@@ -79,6 +85,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\GraphCommands\" />
+    <Folder Include="GraphTasks\SubAlgorithms" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

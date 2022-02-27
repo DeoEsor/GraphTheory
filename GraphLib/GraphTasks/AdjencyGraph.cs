@@ -1,4 +1,5 @@
-﻿namespace GraphLib.GraphTasks
+﻿using System;
+namespace GraphLib.GraphTasks
 {
 	public static partial class GraphTasks
 	{
@@ -7,13 +8,14 @@
 			var adj = graph.FillAdjacencyMatrix();
 			var adjgraph = new Graph();
 			foreach (var vertex in graph.Vertices)
-			{
-				adjgraph.CreateVertex(0, 0);
-				
-			}
+				adjgraph.CreateVertex(
+					(int)vertex.Point.X,
+					(int)vertex.Point.Y
+					);
+			
 			foreach (var pair in adj)
 				foreach (var par in pair.Value)
-					if (par.Value == double.PositiveInfinity)
+					if (double.IsPositiveInfinity(par.Value))
 						adjgraph.CreateEdge
 						(
 							adjgraph.Vertices[graph.Vertices.IndexOf(pair.Key)],

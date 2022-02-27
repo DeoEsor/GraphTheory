@@ -1,28 +1,44 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using GraphDesktop.Annotations;
 using Point = System.Drawing.Point;
 // ReSharper disable PossibleLossOfFraction
 
 namespace GraphDesktop.UserContols
 {
-	public partial class Edge : UserControl
+	public partial class Edge : UserControl, INotifyPropertyChanged
 	{
 		public bool isArc { get; set; } = false;
+		public Visibility LineVisibility
+		{
+			get => _lineVisibility;
+			set
+			{
+				_lineVisibility = value;
+				OnPropertyChanged();
+			}
+		}
+		public Visibility ArcVisibility
+		{
+			get => _arcVisibility;
+			set
+			{
+				_arcVisibility = value;
+				OnPropertyChanged();
+			}
+		}
 		public Edge(GraphCanvas canvas, GraphLib.Edge edge )
 		{
 			GraphCanvas = canvas;
 			Model = edge;
-			
-			InitializeComponent();
-			Model.PropertyChanged += ModelOnPropertyChanged;
-			
 			
 			if (Model.
 				StartVertex.EdgesWithVertex(Model.EndVertex)
@@ -30,18 +46,24 @@ namespace GraphDesktop.UserContols
 				.Any()
 			)
 			{
-				Line.Visibility = Visibility.Collapsed;
-				Path.Visibility = Visibility.Visible;
+				LineVisibility = Visibility.Hidden;
+				ArcVisibility = Visibility.Visible;
 				isArc = true;
 			}
 			else
 			{
-				Path.Visibility = Visibility.Collapsed;
+				LineVisibility = Visibility.Visible;
+				ArcVisibility = Visibility.Hidden;
 			}
+				
+			
+			InitializeComponent();
+			Model.PropertyChanged += ModelOnPropertyChanged;
+			
 			ModelOnPropertyChanged(null, new PropertyChangedEventArgs(nameof(GraphLib.Edge.VertexOnPropertyChanged)));
 			ModelOnPropertyChanged(null, new PropertyChangedEventArgs(nameof(GraphLib.Edge.IsDirected)));
-			UpdateLayout();
 			Model.OnDelete += () => canvas.Canvas.Children.Remove(this);
+			OnPropertyChanged();
 		}
 		
 		private void ModelOnPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -52,8 +74,9 @@ namespace GraphDesktop.UserContols
 			{
 				if(isArc)
 				{
-					StartPointArc.StartPoint =  new System.Windows.Point( Model.EndPoint.X + 25, Model.EndPoint.Y + 50);
-					EndPointArc.Point = new System.Windows.Point( Model.EndPoint.X + 25, Model.EndPoint.Y + 50);
+					StartPointArc.StartPoint=  new System.Windows.Point( Model.StartVertex.Point.X + 25, Model.StartVertex.Point.Y + 50);
+					EndPointArc.Point = new System.Windows.Point( Model.EndVertex.Point.X + 25, Model.EndVertex.Point.Y + 50);
+					ArcVisibility = Visibility.Visible;
 				}
 				else
 				{
@@ -63,6 +86,7 @@ namespace GraphDesktop.UserContols
 					Line.Y2 = Model.EndPoint.Y + 50;
 				}
 			}
+			UpdateLayout();
 			if (e.PropertyName == nameof(GraphLib.Edge.IsDirected))
 				Line.StrokeStartLineCap = Model.IsDirected ? PenLineCap.Square : PenLineCap.Triangle ;
 		}
@@ -83,8 +107,10 @@ namespace GraphDesktop.UserContols
 		public string EdgeName { get => Model.Name; set => Model.Name = value; }
 
 		public GraphCanvas GraphCanvas;
+		private Visibility _lineVisibility = Visibility.Visible;
+		private Visibility _arcVisibility = Visibility.Visible;
 
-		public void Delete()
+		public void Delete(object sender, RoutedEventArgs routedEventArgs)
 		{
 			GraphCanvas.Canvas.Children.Remove(this);
 			Model.Delete();
@@ -93,6 +119,12 @@ namespace GraphDesktop.UserContols
 		{
 			GraphCanvas.Popup.IsOpen = false;
 			popup.IsOpen = true;
+		}
+		public event PropertyChangedEventHandler PropertyChanged;
+		[NotifyPropertyChangedInvocator]
+		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 	}
 }

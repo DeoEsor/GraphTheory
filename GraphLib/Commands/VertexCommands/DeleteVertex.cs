@@ -18,8 +18,8 @@ namespace GraphLib.Commands.VertexCommands
 
             base.Execute(parameter);
 
-            foreach (var edge in Vertex.Edges)
-                edge.Delete();
+            for (int i = 0; i < vertex.Edges.Count; i++)
+                vertex.Edges[i].Delete();
 
             vertex.Graph.Vertices.Remove(vertex);
 

@@ -8,7 +8,9 @@
         mc:Ignorable="d"
         Title="Isomorphism" Height="450" Width="800">
     <Grid>
-        <CheckBox Content="Изоморфен с основным" x:Name="CheckBox"/>
+        <CheckBox
+            IsEnabled="False"
+            Content="Изоморфен с основным" x:Name="CheckBox"/>
         <userContols:GraphCanvas x:Name="Canvas"/>
     </Grid>
 </Window>

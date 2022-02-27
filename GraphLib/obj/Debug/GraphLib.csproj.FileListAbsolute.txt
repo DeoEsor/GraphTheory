@@ -10,3 +10,6 @@ C:\Users\nickj\Desktop\some_code\GraphTheory\GraphLib\obj\Debug\GraphLib.csproj.
 C:\Users\nickj\Desktop\some_code\GraphTheory\GraphLib\obj\Debug\GraphLib.dll
 C:\Users\nickj\Desktop\some_code\GraphTheory\GraphLib\obj\Debug\GraphLib.pdb
 C:\Users\Rulia\source\repos\GraphTheory\GraphLib\obj\Debug\GraphLib.csprojAssemblyReference.cache
+C:\Users\Rulia\source\repos\GraphTheory\GraphLib\bin\Debug\MathNet.Numerics.dll
+C:\Users\Rulia\source\repos\GraphTheory\GraphLib\bin\Debug\MathNet.Numerics.xml
+C:\Users\Rulia\source\repos\GraphTheory\GraphLib\obj\Debug\GraphLib.csproj.CopyComplete

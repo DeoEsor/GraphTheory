@@ -43,6 +43,7 @@
           MouseLeftButtonDown="Line_OnMouseUp">
         <Path
             x:Name="Path"
+            Visibility="{Binding ArcVisibility}"
             Stroke="Black" StrokeThickness="3">
             <Path.Data>
                 <PathGeometry>
@@ -60,6 +61,7 @@
         
         <Line Stroke="Black"
               StrokeLineJoin="Round"
+              Visibility="{Binding LineVisibility}"
               StrokeThickness="10"
               Fill="Black"
               StrokeEndLineCap="Triangle"
@@ -107,6 +109,7 @@
                             <RowDefinition />
                             <RowDefinition />
                             <RowDefinition />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
                         <TextBlock HorizontalAlignment="Center"
                                 Text="Вес"/>
@@ -121,16 +124,20 @@
                                     Model.IsDirected,
                                    Mode=TwoWay}"/>
                         <TextBlock HorizontalAlignment="Center"
-                                       Grid.Row = "2" Grid.Column="0" Grid.ColumnSpan="2" Text="Вершины"/>
-                        <ListBox x:Name="EdgesListBox" HorizontalAlignment="Center"
-                                     Grid.Row = "3"  Grid.ColumnSpan="2" Grid.Column="0">
-                            <ListBoxItem 
-                                Content="{Binding 
-                                Model.StartVertex.Name}"/>
-                            <ListBoxItem 
-                                Content="{Binding 
-                            Model.EndVertex.Name}"/>
-                        </ListBox>
+                                   Grid.Row = "2" Grid.Column="0" 
+                                   Text="Начальная вершина"/>
+                        <TextBlock HorizontalAlignment="Center"
+                                   Grid.Row = "2" Grid.Column="1" 
+                                   Text="{Binding Model.StartVertex.Name }"/>
+                        <TextBlock HorizontalAlignment="Center"
+                                   Grid.Row = "3" Grid.Column="0" 
+                                   Text="Конечная вершина"/>
+                        <TextBlock HorizontalAlignment="Center"
+                                   Grid.Row = "3" Grid.Column="1"
+                                   Text="{Binding Model.EndVertex.Name}"/>
+                        <Button Grid.Row = "4" Grid.Column="0" Grid.ColumnSpan="2" Content="Удалить вершину"
+                                Click="Delete"/>
+                        
                     </Grid>
                 </StackPanel>
             </Border>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 namespace GraphLib.GraphTasks
 {
 	public partial class GraphTasks
@@ -28,7 +29,47 @@ namespace GraphLib.GraphTasks
 		
 		public static bool IsIsomorphWith(this Graph graph, Graph other)
 		{
-			var first = graph.FillAdjacencyMatrix();
+			if (graph.Vertices.Count == other.Vertices.Count && other.Vertices.Count == 0)
+				return true;
+			if (graph.Vertices.Count != other.Vertices.Count)
+				return false;
+			var a = graph.AdjencyMatrix();
+			var b = other.AdjencyMatrix();
+
+			var perm = new List<int>();
+			for (int i = 0; i < graph.Vertices.Count; i++)
+				perm.Add(i);
+
+			var allperm = GetPermutations(perm, perm.Count);
+
+			foreach (var curperm in allperm)
+				if (Match(in a, in b, curperm.ToList()))
+					return true;
+
+			return false;
+			
+			static IEnumerable<IEnumerable<T>>
+				GetPermutations<T>(IEnumerable<T> list, int length)
+			{
+				if (length == 1) return list.Select(t => new T[] { t });
+
+				return GetPermutations(list, length - 1)
+					.SelectMany(t => list.Where(e => !t.Contains(e)),
+						(t1, t2) => t1.Concat(new T[] { t2 }));
+			}
+			bool Match(in List<List<int>>  a, in List<List<int>>  b, List<int> perm)
+			{
+
+				for (int i = 0; i < a.Count; i++)
+					for (int j = 0; j < a.Count; j++)
+						if (a[i][j] != b[perm[i]][perm[j]])
+							return false;
+
+				return true;
+			}
+		}
+		/*
+		 * var first = graph.FillAdjacencyMatrix();
 			var second = other.FillAdjacencyMatrix();
 
 			if (first.Count != second.Count)
@@ -46,18 +87,19 @@ namespace GraphLib.GraphTasks
 				secondStrings.Add(GetRowAsStringWithoutWeighs(second[other.Vertices[i]]));
 			}
 
-			firstStrings.Sort(); secondStrings.Sort();
+			firstStrings.Sort(); 
+			secondStrings.Sort();
 			bool iso = true;
 			for (int i = 0; i < size; ++i)
 			{
-				iso = iso && firstStrings[i] == secondStrings[i];
+				iso &= string.Equals(firstStrings[i], secondStrings[i]);
 				if (!iso)
 					break;
 			}
 
 
 			return iso;;
-		}
+		 */
 
 		public static string GetRowAsStringWithoutWeighs(Dictionary<Vertex,double> row)
 		{

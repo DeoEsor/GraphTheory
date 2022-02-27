@@ -126,5 +126,8 @@ namespace GraphLib
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
+
+		public override string ToString()
+			=> this.Id.ToString() + "(" + Point.X.ToString() + "," + Point.Y.ToString() + ")";
 	}
 }

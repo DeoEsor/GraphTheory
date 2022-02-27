@@ -29,3 +29,4 @@ C:\Users\nickj\Desktop\some_code\GraphTheory\VartumyanGraphTheory\obj\Debug\Vart
 C:\Users\nickj\Desktop\some_code\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.pdb
 C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.csprojAssemblyReference.cache
 C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.Forms.MatrixInputForm.resources
+C:\Users\Rulia\source\repos\GraphTheory\VartumyanGraphTheory\obj\Debug\VartumyanGraphTheory.UserControl.Vertex.resources

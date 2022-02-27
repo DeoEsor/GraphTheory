@@ -33,18 +33,6 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <TextBlock Grid.Column="0" Text="Алгоритм"
-                   Margin="0,80,0,0"/>
-        <ComboBox Grid.Column="0"
-            Margin="0,120,0,0"
-            Height="50"
-            Width="100"
-            HorizontalContentAlignment="Center"
-            VerticalAlignment="Top" VerticalContentAlignment="Center"
-            SelectionChanged="AlgoListChanged">
-            <ComboBoxItem Content="Дейкстра"/>
-            <ComboBoxItem Content="AStar"/>
-        </ComboBox>
         <TextBlock Grid.Column="1" Grid.Row="0" Text="Путь : "/>
         <ListBox
             x:Name="PathBox"

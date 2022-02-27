@@ -8,8 +8,8 @@ namespace GraphLib
 	public abstract class GraphBase : INotifyPropertyChanged, IGraph, ICloneable
 	{
 		public MatrixType MatrixT = MatrixType.Incidence;
-		private int _edgeid = 0;
-		private int _verticalid = 0;
+		internal int _edgeid = 0;
+		internal int _verticalid = 0;
 		public enum MatrixType : sbyte { Adjacency, Incidence }
 		public enum GraphType : sbyte { Oriented, NonOriented }
 		public string Name { get; set; } = "Unnamed";

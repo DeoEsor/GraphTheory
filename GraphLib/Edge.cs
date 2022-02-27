@@ -10,8 +10,6 @@ namespace GraphLib
 	/// </summary>
 	public sealed class Edge : EdgeBase
 	{
-		#region Properties & Variables
-		#endregion
 
 		internal Edge(int id, Vertex v1, Vertex v2 = null)
 		{
@@ -29,6 +27,17 @@ namespace GraphLib
 			EndVertex?.Edges.Remove(this);
 			OnDelete?.Invoke();
 		}
+
+		public override string ToString()
+			=> 
+				this.Id.ToString() +
+				"(" +
+				this.Weight.ToString() + 
+				"," +
+				this.StartVertex.Id.ToString() +
+				"," +
+				this.EndVertex.Id.ToString() +
+				")";
 
 	}
 }

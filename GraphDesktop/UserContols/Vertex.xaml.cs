@@ -27,20 +27,17 @@ namespace GraphDesktop.UserContols
 			}
 		}
 
-		public Vertex()
-		{
-			InitializeComponent();
-			ColorPicker.OnChosenColorChanged += () => Button.Background = ColorPicker.ChosenColor;
-			
-		}
-
 		public Vertex(GraphCanvas canvas, GraphLib.Vertex v)
 		{
 			Model = v;
 			owner = canvas;
 			InitializeComponent();
-			ColorPicker.OnChosenColorChanged += () => Button.Background = ColorPicker.ChosenColor;
 			
+			EdgesListBox.ItemsSource = Model.Edges;
+			NameVertex = Model.Id.ToString();
+			Height = 50;
+			Width = 50;
+			ColorPicker.OnChosenColorChanged += () => Button.Background = ColorPicker.ChosenColor;
 		}
 
 #nullable enable 
@@ -84,10 +81,11 @@ namespace GraphDesktop.UserContols
 
 		public void Delete()
 		{
-			GraphCanvas.Model.Vertices.Remove(Model);
-			GraphCanvas.Canvas.Children.Remove(this);
+			
 			foreach (GraphLib.Edge edge in EdgesListBox.ItemsSource)
 				edge.Delete();
+			GraphCanvas.Model.Vertices.Remove(Model);
+			GraphCanvas.Canvas.Children.Remove(this);
 		}
 		
 		private void Popup_OnLostFocus(object sender, RoutedEventArgs e) => OpenedPopup = null;

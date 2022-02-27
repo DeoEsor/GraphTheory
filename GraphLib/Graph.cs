@@ -62,7 +62,7 @@ namespace GraphLib
                     }
 
                     if (!addmatrix.ContainsKey(somevertex))
-                        addmatrix.Add(somevertex, Double.PositiveInfinity);
+                        addmatrix.Add(somevertex, double.PositiveInfinity);
                 }
                 matrix.Add(vertex, addmatrix);
             }
@@ -105,6 +105,28 @@ namespace GraphLib
         public override object Clone()
         {
             return new Graph(this);
+        }
+
+        public Vertex FindVertexByID(int id)
+        {
+            foreach (var vertex in Vertices)
+                if (vertex.Id == id)
+                    return vertex;
+            return null;
+        }
+
+        public List<List<int>> AdjencyMatrix()
+        {
+            var res = new List<List<int>>();
+            var adj = FillAdjacencyMatrix();
+            foreach (var i in Vertices)
+            {
+                var b = new List<int>();
+                foreach (var j in Vertices)
+                    b.Add(double.IsPositiveInfinity(adj[i][j]) ? 0 : 1);
+                res.Add(b);
+            }
+            return res;
         }
     }
 }

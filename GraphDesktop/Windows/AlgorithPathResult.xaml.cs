@@ -13,7 +13,9 @@ namespace GraphDesktop.Windows
 			Graph = graph;
 			Collection = null;
 			InitializeComponent();
-			
+			DistText.Visibility = Visibility.Hidden;
+			DistResult.Visibility = Visibility.Hidden;
+			UpdateLayout();
 		}
 
 		private Graph _graph;
@@ -54,15 +56,29 @@ namespace GraphDesktop.Windows
 			Start = (GraphLib.Vertex)StartList.SelectedItem;
 			AvailableEndVertexes = new ObservableCollection<GraphLib.Vertex>(Graph.Vertices.Where(s => s != Start));
 			EndList.ItemsSource = AvailableEndVertexes;
+			EndList.SelectedIndex = -1;
 		}
 		private void EndChanged(object sender, SelectionChangedEventArgs e)
 		{
+			
+			DistText.Visibility = Visibility.Hidden;
+			DistResult.Visibility = Visibility.Hidden;
+			
 			End =(GraphLib.Vertex) EndList.SelectedItem;
 			List<GraphLib.Vertex> path;
-			if (((ComboBoxItem) AlgoBoxChoice.SelectedItem).Content == "BreadthFirst Search")
+			if (((ComboBoxItem) AlgoBoxChoice.SelectedItem).Content.ToString() == "BreadthFirst Search")
 				GraphLib.GraphTasks.GraphTasks.BFS(Graph, Start, End, out path);
-			else
+			else if (((ComboBoxItem)AlgoBoxChoice.SelectedItem).Content.ToString() == "Best-First Search")
 				path = GraphLib.GraphTasks.GraphTasks.BestFirstSearch(Graph, Start, End);
+			else
+			{
+				var a = GraphLib.GraphTasks.GraphTasks.AStar(Graph, Start, End);
+				path = a.Item1;
+				
+				DistText.Visibility = Visibility.Visible;
+				DistResult.Visibility = Visibility.Visible;
+				DistResult.Text = a.Item2.ToString();
+			}
 			if (path != null)
 			{
 				Collection = new ObservableCollection<GraphLib.Vertex>(path);
@@ -70,7 +86,6 @@ namespace GraphDesktop.Windows
 			}
 			else
 				PathBox.ItemsSource = null;
-
 		}
 	}
 }

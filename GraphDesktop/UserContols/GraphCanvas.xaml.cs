@@ -1,4 +1,6 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Runtime.CompilerServices;
@@ -16,13 +18,44 @@ namespace GraphDesktop.UserContols
 	{
 		#region Variables && Properties
 		public static  RoutedCommand ShowAdjgrid { get; set; } = new RoutedCommand();
+
+		public Dictionary<GraphLib.Vertex, UIElement> Vertexes = new Dictionary<GraphLib.Vertex, UIElement>();
+		public Dictionary<GraphLib.Edge, UIElement> Edges = new Dictionary<GraphLib.Edge, UIElement>();
 		public bool IsDragging { get; set; }= false;
 
-		private Point lastPosition;
-		public Graph Model { get; set; } = new Graph();
+		private Point? lastPosition = null;
+		private Point? popupopenpos = null;
 
+		private Graph model = new Graph();
+		
+		public Graph Model
+		{
+			get => model;
+			set
+			{
+				model.Edges.CollectionChanged -= EdgesOnCollectionChanged;
+				model.Vertices.CollectionChanged -= VerticesOnCollectionChanged;
+				model.PropertyChanged -= ModelOnPropertyChanged;
+				model = value;
+				model.Edges.CollectionChanged += EdgesOnCollectionChanged;
+				model.Vertices.CollectionChanged += VerticesOnCollectionChanged;
+				model.PropertyChanged += ModelOnPropertyChanged;
+				var a = new List<GraphLib.Vertex>();
+				var b = new List<GraphLib.Edge>();
+				foreach (var vertex in model.Vertices)
+					a.Add(vertex);
+				Model.Vertices.Clear();
+				foreach (var vertex in a)
+					Model.Vertices.Add(vertex);
 
-		//its mb optimized, but i'm too lazy for it
+				foreach (var edge in model.Edges)
+					b.Add(edge);
+				Model.Edges.Clear();
+				foreach (var edge in b)
+					Model.Edges.Add(edge);
+			}
+		}
+		
         private object _matrix;
 		public object Matrix
 		{
@@ -52,36 +85,20 @@ namespace GraphDesktop.UserContols
 		{
 			ShowAdjgrid.InputGestures.Add(new KeyGesture(Key.N, ModifierKeys.Control));
 			CommandBindings.Add(new CommandBinding(ShowAdjgrid, MyCommandExecuted));
-			
-			GraphLib.DrawGraph.Graph = Model;
+
 			Model.Edges.CollectionChanged += EdgesOnCollectionChanged;
 			Model.Vertices.CollectionChanged += VerticesOnCollectionChanged;
+			Model.PropertyChanged += ModelOnPropertyChanged;
 			
 			InitializeComponent();
 			
 			Zoom();
-
-			Model.PropertyChanged += (object o, PropertyChangedEventArgs args) => AdjMatix = UpdateAdjDataTaMatrix().DefaultView;
 		}
-		private void Zoom()
+		private void ModelOnPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
-
-			var st = new ScaleTransform();
-			Canvas.RenderTransform = st;
-			Canvas.MouseWheel += (sender, e) =>
-			{
-				if (e.Delta > 0)
-				{
-					st.ScaleX *= 1.2;
-					st.ScaleY *= 1.2;
-				}
-				else
-				{
-					st.ScaleX /= 1.2;
-					st.ScaleY /= 1.2;
-				}
-			};
+			AdjMatix = UpdateAdjDataTaMatrix().DefaultView;
 		}
+
 		private void VerticesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
 			switch (e.Action)
@@ -89,11 +106,50 @@ namespace GraphDesktop.UserContols
 				case NotifyCollectionChangedAction.Add:
 					if (e.NewItems[0] is GraphLib.Vertex vertex)
 					{
-						var edge = new Vertex(this, vertex);
-						Canvas.Children.Add(edge);	
+						var vertexui = new Vertex(this, vertex);
+						double lengthx = 0, lengthy = 0;
+						if (lastPosition != null)
+						{
+							lengthx= Mouse.GetPosition(this).X;
+							lengthy = Mouse.GetPosition(this).Y;	
+						}
+						else
+						{
+							lengthx = vertex.Point.X;
+							lengthy = vertex.Point.Y;
+						}
+						Canvas.SetTop(vertexui, lengthx);
+						Canvas.SetLeft(vertexui, lengthy);
+						if (!Vertexes.ContainsKey(vertex))
+							Vertexes.Add(vertex, vertexui);
+						else
+						{
+							Canvas.Children.Remove(Vertexes[vertex]);
+							Vertexes[vertex] = vertexui;
+						}
+						vertexui.Height = 50;
+						vertexui.Width = 50;
+						Canvas.Children.Add(vertexui);
+						vertexui.PreviewMouseLeftButtonUp += btn_PreviewMouseLeftButtonUp;
+						vertexui.PreviewMouseLeftButtonDown += btn_PreviewMouseLeftButtonDown;
+						vertexui.PreviewMouseMove += btn_PreviewMouseMove;
 					}
 					break;
 				case NotifyCollectionChangedAction.Remove:
+					if (e.OldItems[0] is GraphLib.Vertex vertexr)
+					{
+						if (Vertexes.ContainsKey(vertexr))
+						{
+							var a = Vertexes[vertexr];
+							a.PreviewMouseLeftButtonUp -= btn_PreviewMouseLeftButtonUp;
+							a.PreviewMouseLeftButtonDown -= btn_PreviewMouseLeftButtonDown;
+							a.PreviewMouseMove -= btn_PreviewMouseMove;
+							Vertexes[vertexr].Visibility = Visibility.Hidden;
+							Canvas.Children.Remove(Vertexes[vertexr]);
+							Vertexes.Remove(vertexr);
+							UpdateLayout();
+						}
+					}
 					break;
 				case NotifyCollectionChangedAction.Replace:
 					break;
@@ -108,13 +164,24 @@ namespace GraphDesktop.UserContols
 			switch (e.Action)
 			{
 				case NotifyCollectionChangedAction.Add:
-					if (e.NewItems[0] is GraphLib.Edge edgedata)
+					if ( !(e.NewItems[0] is GraphLib.Edge edgedata)) return;
+					var edge = new Edge(this, edgedata);
+					if (!Edges.ContainsKey(edgedata))
+						Edges.Add(edgedata, edge);
+					else
 					{
-						var edge = new Edge(this, edgedata);
-						Canvas.Children.Add(edge);	
+						Canvas.Children.Remove(Edges[edgedata]);
+						Edges[edgedata] = edge;
 					}
+					Canvas.Children.Add(edge);
 					break;
 				case NotifyCollectionChangedAction.Remove:
+					if ( !(e.OldItems[0] is GraphLib.Edge edger)) return;
+					if (Edges.ContainsKey(edger))
+					{
+						Edges.Remove(edger);
+						Canvas.Children.Remove(Edges[edger]);
+					}
 					break;
 				case NotifyCollectionChangedAction.Replace:
 					break;
@@ -142,7 +209,7 @@ namespace GraphDesktop.UserContols
 			RadiusData.Text = Model.GraphRadius().ToString();
 			Popup.IsOpen = true;
 			MatrixChoice_SelectionChanged(null, null);
-			lastPosition = e.GetPosition(Canvas);
+			lastPosition = Mouse.GetPosition(this);
 		}
 
 		#region Button events
@@ -159,23 +226,18 @@ namespace GraphDesktop.UserContols
 		{
 			Popup.IsOpen = false;
 
-			var vertex = CreateVertex();
-			vertex.Model.Point = new Point( Mouse.GetPosition(this).X, Mouse.GetPosition(this).Y);
-			Canvas.SetLeft(vertex, Mouse.GetPosition(this).X);
-			Canvas.SetTop(vertex, Mouse.GetPosition(this).Y);
-			Canvas.Children.Add(vertex);
+			Model.CreateVertex((int)lastPosition.Value.X, (int)lastPosition.Value.Y);
 		}
   #endregion
 
 		#region Drag logic
 		public void btn_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
-			if (sender is Vertex vertex)
-			{
-				IsDragging = true;
-				draggedItem = vertex;
-				lastPosition = e.GetPosition(Canvas);
-			}
+			if (!(sender is Vertex vertex)) return;
+			
+			IsDragging = true;
+			draggedItem = vertex;
+			lastPosition = e.GetPosition(Canvas);
 		}
 
 		private void btn_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -213,32 +275,6 @@ namespace GraphDesktop.UserContols
 		}
   #endregion
 
-		#region Local Functions
-
-		Vertex CreateVertex()
-		{
-			var model = Model.CreateVertex(
-				(int)(lastPosition.X   -  25), 
-				(int) (lastPosition.Y  - 25)
-				);
-
-			Vertex vertex1 = new Vertex
-			{
-				Height = 50,
-				Width = 50,
-				Model = model,
-				GraphCanvas = this,
-			};
-
-			vertex1.EdgesListBox.ItemsSource = vertex1.Model.Edges;
-			vertex1.NameVertex = vertex1.Model.Id.ToString();
-
-			vertex1.PreviewMouseLeftButtonUp += btn_PreviewMouseLeftButtonUp;
-			vertex1.PreviewMouseLeftButtonDown += btn_PreviewMouseLeftButtonDown;
-			vertex1.PreviewMouseMove += btn_PreviewMouseMove;
-			return vertex1;
-		}
-        #endregion
 
         private void MatrixChoice_SelectionChanged(object sender, SelectionChangedEventArgs e)
 			=> Matrix = UpdateIncDataTaMatrix(Model.GetMatrix());
@@ -297,9 +333,8 @@ namespace GraphDesktop.UserContols
 			{
 				var r = dt.NewRow();
 				foreach (var a in data.Value)
-				{
-					r[Model.Vertices.IndexOf(a.Key)] = a.Value;
-				}
+					r[Model.Vertices.IndexOf(a.Key)] = double.IsPositiveInfinity(a.Value) ? 0 : a.Value;
+				
 				dt.Rows.Add(r);
 			}
 				
@@ -310,9 +345,7 @@ namespace GraphDesktop.UserContols
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		void OnPropertyChanged([CallerMemberName] string propertyName = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-		}
+			=> PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
 		public void SetElementTop(UIElement element, int length)
 			=> Canvas.SetTop(element, length);
@@ -322,6 +355,25 @@ namespace GraphDesktop.UserContols
 		{
 			MatrixAdjGrid.Visibility = MatrixAdjGrid.IsVisible ? Visibility.Hidden : Visibility.Visible;
 			this.UpdateLayout();
+		}
+		
+		private void Zoom()
+		{
+			var st = new ScaleTransform();
+			Canvas.RenderTransform = st;
+			Canvas.MouseWheel += (sender, e) =>
+			{
+				if (e.Delta > 0)
+				{
+					st.ScaleX *= 1.2;
+					st.ScaleY *= 1.2;
+				}
+				else
+				{
+					st.ScaleX /= 1.2;
+					st.ScaleY /= 1.2;
+				}
+			};
 		}
 	}
 }
