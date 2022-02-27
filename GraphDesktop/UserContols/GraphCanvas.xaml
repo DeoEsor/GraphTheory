@@ -206,12 +206,15 @@
             AutoGenerateColumns="True"
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom"
-            CanUserAddRows="False" CanUserDeleteRows="False"
-            ItemsSource="{Binding AdjMatix}" 
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            ItemsSource=
+            "{Binding AdjMatix}" 
             LoadingRow="Grid1_LoadingRow"
             Height="250" Width="Auto"
-            HeadersVisibility="All">
-            
-        </DataGrid>
+            HeadersVisibility="All"
+            SelectionMode="Single"
+            CellEditEnding="MatrixAdjGrid_OnCellEditEnding"
+        />
     </Grid>
 </UserControl>

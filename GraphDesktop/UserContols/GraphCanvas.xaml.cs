@@ -67,7 +67,7 @@ namespace GraphDesktop.UserContols
 			}
 		}
 
-		public object AdjMatix
+		public DataView AdjMatix
 		{
 			get => _adjMatix;
 			set
@@ -78,7 +78,7 @@ namespace GraphDesktop.UserContols
 		}
 
 		public UserControl draggedItem;
-		private object _adjMatix;
+		private DataView _adjMatix;
   #endregion
 
 		public GraphCanvas()
@@ -93,6 +93,7 @@ namespace GraphDesktop.UserContols
 			InitializeComponent();
 			
 			Zoom();
+			
 		}
 		private void ModelOnPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
@@ -327,7 +328,7 @@ namespace GraphDesktop.UserContols
 			int columns = matrix.Keys.Count;
 
 			for (var i = 0; i < columns; i++)
-				dt.Columns.Add(new DataColumn(Model.Vertices[i].Name, typeof(double)));
+				dt.Columns.Add(new DataColumn( Model.Vertices[i].Name, typeof(double)));
 
 			foreach (var data in matrix)
 			{
@@ -374,6 +375,21 @@ namespace GraphDesktop.UserContols
 					st.ScaleY /= 1.2;
 				}
 			};
+		}
+		private void MatrixAdjGrid_OnCellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+		{
+			GraphLib.Edge edge;
+			if ((edge = Model
+				.Vertices[MatrixAdjGrid.Items.IndexOf(MatrixAdjGrid.CurrentItem)].
+				EdgeWithVertex(Model.Vertices[e.Column.DisplayIndex])) == null)
+			{
+				Model.CreateEdge(Model
+					.Vertices[MatrixAdjGrid.Items.IndexOf(MatrixAdjGrid.CurrentItem)], Model.Vertices[e.Column.DisplayIndex])
+					.Weight = Convert.ToDouble(((TextBox) e.EditingElement).Text);
+			}
+			else
+				edge.Weight = Convert.ToDouble(((TextBox) e.EditingElement).Text);
+
 		}
 	}
 }

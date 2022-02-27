@@ -3,3 +3,12 @@ C:\Users\nickj\Desktop\some_code\GraphTheory\GraphLib\bin\Release\GraphLib.pdb
 C:\Users\nickj\Desktop\some_code\GraphTheory\GraphLib\obj\Release\GraphLib.csproj.CoreCompileInputs.cache
 C:\Users\nickj\Desktop\some_code\GraphTheory\GraphLib\obj\Release\GraphLib.dll
 C:\Users\nickj\Desktop\some_code\GraphTheory\GraphLib\obj\Release\GraphLib.pdb
+C:\Users\Rulia\source\repos\GraphTheory\GraphLib\bin\Release\GraphLib.dll
+C:\Users\Rulia\source\repos\GraphTheory\GraphLib\bin\Release\GraphLib.pdb
+C:\Users\Rulia\source\repos\GraphTheory\GraphLib\bin\Release\MathNet.Numerics.dll
+C:\Users\Rulia\source\repos\GraphTheory\GraphLib\bin\Release\MathNet.Numerics.xml
+C:\Users\Rulia\source\repos\GraphTheory\GraphLib\obj\Release\GraphLib.csprojAssemblyReference.cache
+C:\Users\Rulia\source\repos\GraphTheory\GraphLib\obj\Release\GraphLib.csproj.CoreCompileInputs.cache
+C:\Users\Rulia\source\repos\GraphTheory\GraphLib\obj\Release\GraphLib.csproj.CopyComplete
+C:\Users\Rulia\source\repos\GraphTheory\GraphLib\obj\Release\GraphLib.dll
+C:\Users\Rulia\source\repos\GraphTheory\GraphLib\obj\Release\GraphLib.pdb

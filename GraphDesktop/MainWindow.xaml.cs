@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -60,24 +61,24 @@ namespace GraphDesktop
 			else return;
 			GraphCanvas.Model.ClearGraph();
 			var strings = DataFromFile(FilePath);
-			var b = strings[0].Split(' ', '|');
+			var b = strings[0].Split(' ', '|', '\n', '\t').Where(s => s!= String.Empty).ToArray();
 			for (int i = 0; i < b.Length; i++)
 				GraphCanvas.Model.CreateVertex
 				(
-					new Random().Next(20, (int)(GraphCanvas.Width - 80)),
-					new Random().Next(20, (int)(GraphCanvas.Height - 80))
+					new Random().Next(20, 500),
+					new Random().Next(20, 80)
 				);
 			foreach (var str in strings)
 			{
-				b = str.Split(' ', '|');
+				b = str.Split(' ', '|', '\n', '\t').Where(s => s!= String.Empty).ToArray();
 				for (int i = 0; i < b.Length; i++)
 				{
-					double w;
-					if ((w = Convert.ToDouble(b[i])) == 0) continue;
+					int w;
+					if ((w = Convert.ToInt32(b[i])) == 0) continue;
 					var z =GraphCanvas.Model.CreateEdge(
 						GraphCanvas.Model.Vertices[strings.IndexOf(str)],
 						GraphCanvas.Model.Vertices[i]);
-					z.Weight = w;
+					z.Weight = (double)w;
 				}
 			}
 		}
@@ -150,7 +151,7 @@ namespace GraphDesktop
 			if (!Directory.Exists(dir))
 				Directory.CreateDirectory(dir);
 
-			using (StreamWriter swExtLogFile = new StreamWriter(dir + @"/"+ GraphCanvas.Model.Name + ".txt", true))
+			using (StreamWriter swExtLogFile = new StreamWriter(dir + @"/"+ GraphCanvas.Model.Name + ".txt", false))
 			{
 				var dt =
 					type == GraphBase.MatrixType.Incidence ?
